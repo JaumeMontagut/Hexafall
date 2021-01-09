@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SelectPlatform : MonoBehaviour
 {
-    public PlayerVars playerComponent;
+    public PlayerVars playerVars;
     public PlayerMove playerMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerComponent = GetComponent<PlayerVars>();
+        playerVars = GetComponent<PlayerVars>();
         playerMove = GetComponent<PlayerMove>();
     }
 
@@ -32,7 +32,7 @@ public class SelectPlatform : MonoBehaviour
                     //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
 
 
-                    foreach(GameObject adjacentHexagon in playerComponent.currentHexagon.GetComponent<Platform>().adjacentPlatforms)
+                    foreach(GameObject adjacentHexagon in playerVars.currentPlatform.GetComponent<Platform>().adjacentPlatforms)
                     {
                         if(adjacentHexagon == hitInfo.transform.gameObject)
                         {
@@ -43,8 +43,20 @@ public class SelectPlatform : MonoBehaviour
                             {
                                 print("Player moved succesfully!!");
 
-                                //Update the currentHexagon of the player
-                                playerComponent.currentHexagon = adjacentHexagon;
+                                //check if its path and if it's not, active the player falling.
+                                if (adjacentHexagon.GetComponent<Platform>().isPath)
+                                {
+                                    //Update the currentHexagon of the player
+                                    playerVars.currentPlatform = adjacentHexagon;
+
+                                }
+                                else
+                                {
+                                    playerVars.ActivateFalling();
+
+                                }
+
+
                             }
 
                             else
