@@ -150,13 +150,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 136363857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2010647572}
-  - {fileID: 724058640}
-  - {fileID: 390269905}
+  adjacentPlatforms:
+  - {fileID: 724058639}
+  - {fileID: 2010647567}
+  - {fileID: 390269904}
+  isPath: 1
 --- !u!4 &136363859
 Transform:
   m_ObjectHideFlags: 0
@@ -274,12 +275,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 370087218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 532190127}
-  - {fileID: 390269905}
+  adjacentPlatforms:
+  - {fileID: 390269904}
+  - {fileID: 532190126}
+  isPath: 0
 --- !u!65 &370087221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -369,15 +371,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 390269904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 512734501}
-  - {fileID: 2010647572}
-  - {fileID: 136363858}
-  - {fileID: 532190127}
-  - {fileID: 370087220}
+  adjacentPlatforms:
+  - {fileID: 2010647567}
+  - {fileID: 136363857}
+  - {fileID: 512734496}
+  - {fileID: 532190126}
+  - {fileID: 370087218}
+  isPath: 0
 --- !u!4 &390269906
 Transform:
   m_ObjectHideFlags: 0
@@ -517,16 +520,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 471964181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1228848721}
-  - {fileID: 474673711}
-  - {fileID: 2044941989}
-  - {fileID: 2056144300}
-  - {fileID: 1795009514}
-  - {fileID: 1443301442}
+  adjacentPlatforms:
+  - {fileID: 2044941984}
+  - {fileID: 2056144299}
+  - {fileID: 1228848716}
+  - {fileID: 474673706}
+  - {fileID: 1795009513}
+  - {fileID: 1443301437}
+  isPath: 1
 --- !u!65 &471964183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -704,16 +708,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 474673706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 471964182}
-  - {fileID: 704254453}
-  - {fileID: 2056144300}
-  - {fileID: 1455192769}
-  - {fileID: 1443301442}
-  - {fileID: 1851681938}
+  adjacentPlatforms:
+  - {fileID: 2056144299}
+  - {fileID: 1455192764}
+  - {fileID: 471964181}
+  - {fileID: 704254452}
+  - {fileID: 1443301437}
+  - {fileID: 1851681937}
+  isPath: 1
 --- !u!1 &491720572
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,14 +748,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 491720572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 976465747}
-  - {fileID: 576538871}
-  - {fileID: 625395030}
-  - {fileID: 1189038867}
+  adjacentPlatforms:
+  - {fileID: 976465742}
+  - {fileID: 576538870}
+  - {fileID: 625395029}
+  - {fileID: 1189038862}
+  isPath: 1
 --- !u!4 &491720574
 Transform:
   m_ObjectHideFlags: 0
@@ -928,16 +934,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 512734496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1851681938}
-  - {fileID: 390269905}
-  - {fileID: 704254453}
-  - {fileID: 2010647572}
-  - {fileID: 2070364617}
-  - {fileID: 532190127}
+  adjacentPlatforms:
+  - {fileID: 704254452}
+  - {fileID: 2010647567}
+  - {fileID: 1851681937}
+  - {fileID: 390269904}
+  - {fileID: 2070364616}
+  - {fileID: 532190126}
+  isPath: 1
 --- !u!1 &532190126
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,14 +974,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 532190126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2070364617}
-  - {fileID: 370087220}
-  - {fileID: 512734501}
-  - {fileID: 390269905}
+  adjacentPlatforms:
+  - {fileID: 512734496}
+  - {fileID: 390269904}
+  - {fileID: 2070364616}
+  - {fileID: 370087218}
+  isPath: 0
 --- !u!65 &532190128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1078,14 +1086,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 576538870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 491720573}
-  - {fileID: 2095757645}
-  - {fileID: 1189038867}
-  - {fileID: 582414158}
+  adjacentPlatforms:
+  - {fileID: 491720572}
+  - {fileID: 2095757644}
+  - {fileID: 1189038862}
+  - {fileID: 582414153}
+  isPath: 1
 --- !u!4 &576538872
 Transform:
   m_ObjectHideFlags: 0
@@ -1263,16 +1272,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 582414153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1189038867}
-  - {fileID: 1899694991}
-  - {fileID: 576538871}
-  - {fileID: 2095757645}
-  - {fileID: 1654111302}
-  - {fileID: 724058640}
+  adjacentPlatforms:
+  - {fileID: 576538870}
+  - {fileID: 2095757644}
+  - {fileID: 1189038862}
+  - {fileID: 1899694986}
+  - {fileID: 1654111301}
+  - {fileID: 724058639}
+  isPath: 1
 --- !u!1 &592084586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,15 +1312,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 592084586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1751786275}
-  - {fileID: 2073594718}
-  - {fileID: 2051160701}
-  - {fileID: 1259323530}
-  - {fileID: 2044941989}
+  adjacentPlatforms:
+  - {fileID: 1751786270}
+  - {fileID: 2073594717}
+  - {fileID: 2051160696}
+  - {fileID: 1259323529}
+  - {fileID: 2044941984}
+  isPath: 0
 --- !u!65 &592084588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1414,16 +1425,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 625395029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2051160701}
-  - {fileID: 1189038867}
-  - {fileID: 976465747}
-  - {fileID: 491720573}
-  - {fileID: 2056144300}
-  - {fileID: 1455192769}
+  adjacentPlatforms:
+  - {fileID: 976465742}
+  - {fileID: 491720572}
+  - {fileID: 2051160696}
+  - {fileID: 1189038862}
+  - {fileID: 2056144299}
+  - {fileID: 1455192764}
+  isPath: 0
 --- !u!4 &625395031
 Transform:
   m_ObjectHideFlags: 0
@@ -1527,13 +1539,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 668135316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1758274740}
-  - {fileID: 1465160212}
-  - {fileID: 1795009514}
+  adjacentPlatforms:
+  - {fileID: 1465160211}
+  - {fileID: 1795009513}
+  - {fileID: 1758274739}
+  isPath: 0
 --- !u!65 &668135318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1637,16 +1650,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 704254452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 474673711}
-  - {fileID: 2010647572}
-  - {fileID: 1455192769}
-  - {fileID: 1654111302}
-  - {fileID: 1851681938}
-  - {fileID: 512734501}
+  adjacentPlatforms:
+  - {fileID: 1455192764}
+  - {fileID: 1654111301}
+  - {fileID: 474673706}
+  - {fileID: 2010647567}
+  - {fileID: 1851681937}
+  - {fileID: 512734496}
+  isPath: 0
 --- !u!4 &704254454
 Transform:
   m_ObjectHideFlags: 0
@@ -1750,15 +1764,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 724058639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 582414158}
-  - {fileID: 1899694991}
-  - {fileID: 1654111302}
-  - {fileID: 2010647572}
-  - {fileID: 136363858}
+  adjacentPlatforms:
+  - {fileID: 582414153}
+  - {fileID: 1899694986}
+  - {fileID: 1654111301}
+  - {fileID: 2010647567}
+  - {fileID: 136363857}
+  isPath: 0
 --- !u!4 &724058641
 Transform:
   m_ObjectHideFlags: 0
@@ -1936,14 +1951,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 976465742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2073594718}
-  - {fileID: 491720573}
-  - {fileID: 2051160701}
-  - {fileID: 625395030}
+  adjacentPlatforms:
+  - {fileID: 2073594717}
+  - {fileID: 491720572}
+  - {fileID: 2051160696}
+  - {fileID: 625395029}
+  isPath: 1
 --- !u!1 &1034665399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,14 +2104,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1135730562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1758274740}
-  - {fileID: 2070364617}
-  - {fileID: 1443301442}
-  - {fileID: 1851681938}
+  adjacentPlatforms:
+  - {fileID: 1443301437}
+  - {fileID: 1851681937}
+  - {fileID: 1758274739}
+  - {fileID: 2070364616}
+  isPath: 0
 --- !u!65 &1135730564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2273,16 +2290,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1189038862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 625395030}
-  - {fileID: 582414158}
-  - {fileID: 491720573}
-  - {fileID: 576538871}
-  - {fileID: 1455192769}
-  - {fileID: 1654111302}
+  adjacentPlatforms:
+  - {fileID: 491720572}
+  - {fileID: 576538870}
+  - {fileID: 625395029}
+  - {fileID: 582414153}
+  - {fileID: 1455192764}
+  - {fileID: 1654111301}
+  isPath: 0
 --- !u!1 &1228848716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,15 +2404,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228848716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 471964182}
-  - {fileID: 1259323530}
-  - {fileID: 2044941989}
-  - {fileID: 1465160212}
-  - {fileID: 1795009514}
+  adjacentPlatforms:
+  - {fileID: 1259323529}
+  - {fileID: 2044941984}
+  - {fileID: 471964181}
+  - {fileID: 1465160211}
+  - {fileID: 1795009513}
+  isPath: 0
 --- !u!1 &1259323529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,13 +2443,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259323529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 592084587}
-  - {fileID: 2044941989}
-  - {fileID: 1228848721}
+  adjacentPlatforms:
+  - {fileID: 592084586}
+  - {fileID: 2044941984}
+  - {fileID: 1228848716}
+  isPath: 0
 --- !u!65 &1259323531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2644,16 +2664,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443301437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1795009514}
-  - {fileID: 1851681938}
-  - {fileID: 471964182}
-  - {fileID: 474673711}
-  - {fileID: 1758274740}
-  - {fileID: 1135730563}
+  adjacentPlatforms:
+  - {fileID: 471964181}
+  - {fileID: 474673706}
+  - {fileID: 1795009513}
+  - {fileID: 1851681937}
+  - {fileID: 1758274739}
+  - {fileID: 1135730562}
+  isPath: 0
 --- !u!1 &1455192764
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,16 +2778,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455192764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2056144300}
-  - {fileID: 1654111302}
-  - {fileID: 625395030}
-  - {fileID: 1189038867}
-  - {fileID: 474673711}
-  - {fileID: 704254453}
+  adjacentPlatforms:
+  - {fileID: 625395029}
+  - {fileID: 1189038862}
+  - {fileID: 2056144299}
+  - {fileID: 1654111301}
+  - {fileID: 474673706}
+  - {fileID: 704254452}
+  isPath: 0
 --- !u!1 &1465160211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,13 +2818,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1465160211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1795009514}
-  - {fileID: 1228848721}
-  - {fileID: 668135317}
+  adjacentPlatforms:
+  - {fileID: 1228848716}
+  - {fileID: 1795009513}
+  - {fileID: 668135316}
+  isPath: 0
 --- !u!65 &1465160213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2871,7 +2894,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465160211}
   m_LocalRotation: {x: -0, y: -0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: -10.71, y: 0, z: -15.469999}
+  m_LocalPosition: {x: -10.71, y: 0, z: -15.4}
   m_LocalScale: {x: 3.9127, y: 3.9127, z: 3.9127}
   m_Children: []
   m_Father: {fileID: 2120680886}
@@ -2978,16 +3001,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1654111301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1455192769}
-  - {fileID: 724058640}
-  - {fileID: 1189038867}
-  - {fileID: 582414158}
-  - {fileID: 704254453}
-  - {fileID: 2010647572}
+  adjacentPlatforms:
+  - {fileID: 1189038862}
+  - {fileID: 582414153}
+  - {fileID: 1455192764}
+  - {fileID: 724058639}
+  - {fileID: 704254452}
+  - {fileID: 2010647567}
+  isPath: 0
 --- !u!4 &1654111303
 Transform:
   m_ObjectHideFlags: 0
@@ -3165,12 +3189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1751786270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2073594718}
-  - {fileID: 592084587}
+  adjacentPlatforms:
+  - {fileID: 2073594717}
+  - {fileID: 592084586}
+  isPath: 0
 --- !u!1 &1758274739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,14 +3225,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1758274739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 668135317}
-  - {fileID: 1135730563}
-  - {fileID: 1795009514}
-  - {fileID: 1443301442}
+  adjacentPlatforms:
+  - {fileID: 1795009513}
+  - {fileID: 1443301437}
+  - {fileID: 668135316}
+  - {fileID: 1135730562}
+  isPath: 0
 --- !u!65 &1758274741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3311,16 +3337,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1795009513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1465160212}
-  - {fileID: 1443301442}
-  - {fileID: 1228848721}
-  - {fileID: 471964182}
-  - {fileID: 668135317}
-  - {fileID: 1758274740}
+  adjacentPlatforms:
+  - {fileID: 1228848716}
+  - {fileID: 471964181}
+  - {fileID: 1465160211}
+  - {fileID: 1443301437}
+  - {fileID: 668135316}
+  - {fileID: 1758274739}
+  isPath: 0
 --- !u!4 &1795009515
 Transform:
   m_ObjectHideFlags: 0
@@ -3516,16 +3543,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851681937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1443301442}
-  - {fileID: 512734501}
-  - {fileID: 474673711}
-  - {fileID: 704254453}
-  - {fileID: 1135730563}
-  - {fileID: 2070364617}
+  adjacentPlatforms:
+  - {fileID: 474673706}
+  - {fileID: 704254452}
+  - {fileID: 1443301437}
+  - {fileID: 512734496}
+  - {fileID: 1135730562}
+  - {fileID: 2070364616}
+  isPath: 1
 --- !u!4 &1851681939
 Transform:
   m_ObjectHideFlags: 0
@@ -3703,13 +3731,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1899694986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2095757645}
-  - {fileID: 582414158}
-  - {fileID: 724058640}
+  adjacentPlatforms:
+  - {fileID: 2095757644}
+  - {fileID: 582414153}
+  - {fileID: 724058639}
+  isPath: 0
 --- !u!1 &1974561333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,7 +3773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb515c67d8113df499edaa67d75bf7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerComponent: {fileID: 0}
+  playerVars: {fileID: 0}
   playerMove: {fileID: 0}
 --- !u!114 &1974561335
 MonoBehaviour:
@@ -3758,7 +3787,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fe0ca50d7849d4d9a8dba3d246f495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHexagon: {fileID: 582414158}
+  startingPlatform: {fileID: 582414153}
+  currentPlatform: {fileID: 0}
+  surfacePos: 4.2
+  playerMove: {fileID: 0}
   mainPlayer: 1
 --- !u!136 &1974561336
 CapsuleCollider:
@@ -3829,8 +3861,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974561333}
   m_LocalRotation: {x: -0, y: -0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: 18.59, y: 3.41, z: 16.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 18.34, y: 4.21, z: 16.9}
+  m_LocalScale: {x: 1.447368, y: 1.447368, z: 1.447368}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -3847,6 +3879,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe06a63d398ffc4eb1fe9077d2744a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToFall: 1
+  timeFalling: 0
+  fallDistance: 10
+  playerVars: {fileID: 0}
 --- !u!1 &2010647567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,16 +3986,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2010647567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 704254453}
-  - {fileID: 136363858}
-  - {fileID: 1654111302}
-  - {fileID: 724058640}
-  - {fileID: 512734501}
-  - {fileID: 390269905}
+  adjacentPlatforms:
+  - {fileID: 1654111301}
+  - {fileID: 724058639}
+  - {fileID: 704254452}
+  - {fileID: 136363857}
+  - {fileID: 512734496}
+  - {fileID: 390269904}
+  isPath: 1
 --- !u!1 &2044941984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,16 +4100,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044941984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1259323530}
-  - {fileID: 2056144300}
-  - {fileID: 592084587}
-  - {fileID: 2051160701}
-  - {fileID: 1228848721}
-  - {fileID: 471964182}
+  adjacentPlatforms:
+  - {fileID: 592084586}
+  - {fileID: 2051160696}
+  - {fileID: 1259323529}
+  - {fileID: 2056144299}
+  - {fileID: 1228848716}
+  - {fileID: 471964181}
+  isPath: 1
 --- !u!1 &2051160696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4176,16 +4214,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2051160696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 592084587}
-  - {fileID: 2073594718}
-  - {fileID: 976465747}
-  - {fileID: 2044941989}
-  - {fileID: 2056144300}
-  - {fileID: 625395030}
+  adjacentPlatforms:
+  - {fileID: 2073594717}
+  - {fileID: 976465742}
+  - {fileID: 592084586}
+  - {fileID: 625395029}
+  - {fileID: 2044941984}
+  - {fileID: 2056144299}
+  isPath: 1
 --- !u!1 &2051513307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,16 +4290,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2056144299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 2044941989}
-  - {fileID: 1455192769}
-  - {fileID: 2051160701}
-  - {fileID: 625395030}
-  - {fileID: 471964182}
-  - {fileID: 474673711}
+  adjacentPlatforms:
+  - {fileID: 2051160696}
+  - {fileID: 625395029}
+  - {fileID: 2044941984}
+  - {fileID: 1455192764}
+  - {fileID: 471964181}
+  - {fileID: 474673706}
+  isPath: 0
 --- !u!4 &2056144301
 Transform:
   m_ObjectHideFlags: 0
@@ -4364,14 +4404,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070364616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1135730563}
-  - {fileID: 532190127}
-  - {fileID: 1851681938}
-  - {fileID: 512734501}
+  adjacentPlatforms:
+  - {fileID: 1851681937}
+  - {fileID: 512734496}
+  - {fileID: 1135730562}
+  - {fileID: 532190126}
+  isPath: 0
 --- !u!65 &2070364618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4475,14 +4516,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073594717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 1751786275}
-  - {fileID: 976465747}
-  - {fileID: 2051160701}
-  - {fileID: 592084587}
+  adjacentPlatforms:
+  - {fileID: 1751786270}
+  - {fileID: 976465742}
+  - {fileID: 592084586}
+  - {fileID: 2051160696}
+  isPath: 0
 --- !u!65 &2073594719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4586,13 +4628,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2095757644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d028a1ce2288e34eacc5524234de4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21305de467f269c45833fdbd1220abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentHexagons:
-  - {fileID: 576538871}
-  - {fileID: 582414158}
-  - {fileID: 1899694991}
+  adjacentPlatforms:
+  - {fileID: 576538870}
+  - {fileID: 582414153}
+  - {fileID: 1899694986}
+  isPath: 0
 --- !u!4 &2095757646
 Transform:
   m_ObjectHideFlags: 0

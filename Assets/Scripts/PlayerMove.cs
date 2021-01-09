@@ -43,6 +43,10 @@ public class PlayerMove : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y - (fallDistance * Time.deltaTime), transform.position.z);
 
+        Color colorMaterial = playerVars.currentPlatform.GetComponent<Renderer>().material.color; 
+        playerVars.currentPlatform.GetComponent<Renderer>().material.color = new Color(colorMaterial.r, colorMaterial.g, colorMaterial.b, 0.0f); ;
+
+
         if (timeFalling >= timeToFall)
         {
             Respawn();
