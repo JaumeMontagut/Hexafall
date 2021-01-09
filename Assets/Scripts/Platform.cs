@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hexagon : MonoBehaviour
+public class Platform : MonoBehaviour
 {
-    public Hexagon[] adjacentHexagons;
+    public GameObject[] adjacentPlatforms;
 
 
     // Start is called before the first frame update

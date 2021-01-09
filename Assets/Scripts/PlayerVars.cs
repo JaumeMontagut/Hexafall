@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
-    public Hexagon currentHexagon;
+    public GameObject currentHexagon;
     public bool mainPlayer; // If the player Game object is the current player of this machine. 
     // Start is called before the first frame update
     void Start()

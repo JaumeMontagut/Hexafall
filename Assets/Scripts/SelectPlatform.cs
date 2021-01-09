@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectHexagon : MonoBehaviour
+public class SelectPlatform : MonoBehaviour
 {
     public PlayerVars playerComponent;
     public PlayerMove playerMove;
@@ -26,17 +26,17 @@ public class SelectHexagon : MonoBehaviour
             RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
-                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Hexagon"))
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Platform"))
                 {
                     //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
                     //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
 
 
-                    foreach(Hexagon adjacentHexagon in playerComponent.currentHexagon.adjacentHexagons)
+                    foreach(GameObject adjacentHexagon in playerComponent.currentHexagon.GetComponent<Platform>().adjacentPlatforms)
                     {
-                        if(adjacentHexagon.gameObject == hitInfo.transform.gameObject)
+                        if(adjacentHexagon == hitInfo.transform.gameObject)
                         {
-                            print("It's an available hexagon!!");
+                            print("It's an available platform!!");
 
                             //Try to move the player to the new hexagon.
                             if (playerMove.Move(hitInfo.transform.position))
@@ -48,7 +48,7 @@ public class SelectHexagon : MonoBehaviour
                             }
 
                             else
-                                print("ERROR: Problem when trying to move the player to the new hexagon!");
+                                print("ERROR: Problem when trying to move the player to the new platform!");
 
                             break;
 
@@ -59,31 +59,5 @@ public class SelectHexagon : MonoBehaviour
                 }
             }
         }
-
-
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Mouse is down");
-
-            RaycastHit hitInfo = new RaycastHit();
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            if (hit)
-            {
-                Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-                if (hitInfo.transform.gameObject.tag == "Construction")
-                {
-                    Debug.Log("It's working!");
-                }
-                else
-                {
-                    Debug.Log("nopz");
-                }
-            }
-            else
-            {
-                Debug.Log("No hit");
-            }
-            Debug.Log("Mouse is down");
-        }*/
     }
 }
