@@ -160,7 +160,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 1
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &136363859
 Transform:
   m_ObjectHideFlags: 0
@@ -287,7 +289,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &370087221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -389,7 +393,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &390269906
 Transform:
   m_ObjectHideFlags: 0
@@ -542,7 +548,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &471964183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -733,7 +741,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &491720572
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +784,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &491720574
 Transform:
   m_ObjectHideFlags: 0
@@ -965,7 +977,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &532190126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1020,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &532190128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1121,7 +1137,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &576538872
 Transform:
   m_ObjectHideFlags: 0
@@ -1312,7 +1330,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 1
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &592084586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1374,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &592084588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1471,7 +1493,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &625395031
 Transform:
   m_ObjectHideFlags: 0
@@ -1585,7 +1609,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &668135318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1702,7 +1728,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &704254454
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,7 +1846,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &724058641
 Transform:
   m_ObjectHideFlags: 0
@@ -2007,7 +2037,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1034665399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2195,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &1135730564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2354,7 +2388,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1228848716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,7 +2506,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1259323529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2548,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &1259323531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2914,7 +2954,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1455192764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,7 +3073,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1465160211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,7 +3115,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &1465160213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3260,7 +3306,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &1654111303
 Transform:
   m_ObjectHideFlags: 0
@@ -3447,7 +3495,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1758274739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,7 +3538,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &1758274741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3605,7 +3657,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &1795009515
 Transform:
   m_ObjectHideFlags: 0
@@ -3814,7 +3868,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &1851681939
 Transform:
   m_ObjectHideFlags: 0
@@ -4002,7 +4058,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &1974561333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4259,7 +4317,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &2044941984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,7 +4436,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &2051160696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,7 +4555,9 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!1 &2051513307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4572,7 +4636,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &2056144301
 Transform:
   m_ObjectHideFlags: 0
@@ -4687,7 +4753,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &2070364618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4802,7 +4870,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!65 &2073594719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4916,7 +4986,9 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
-  alphaValue: 0.9
+  alphaReducedValue: 0.9
+  waitToStartFadingAlpha: 0.8
+  totalTimeFadingAlpha: 1
 --- !u!4 &2095757646
 Transform:
   m_ObjectHideFlags: 0
