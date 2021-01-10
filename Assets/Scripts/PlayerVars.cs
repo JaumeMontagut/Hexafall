@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
-    [HideInInspector]
-    public GameObject startingPlatform;
+    [HideInInspector] public GameObject startingPlatform;
 
-    [ShowOnly]
-    public GameObject currentPlatform;
+    [ShowOnly] public GameObject currentPlatform;
     
     public float surfacePos;
     public bool mainPlayer; // If the player Game object is the current player of this machine.
@@ -37,6 +35,9 @@ public class PlayerVars : MonoBehaviour
     {
         playerMove.timeFalling = 0.0f;
         falling = true;
+
+        currentPlatform.GetComponent<Platform>().ReduceAlpha();
+        currentPlatform.GetComponent<Platform>().StartRestoringAlphaWithFade();
     }
 
     public void DesactivateFalling()

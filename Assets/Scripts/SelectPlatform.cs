@@ -44,6 +44,9 @@ public class SelectPlatform : MonoBehaviour
                                 {
                                     print("Player moved succesfully!!");
 
+                                    //Update the currentHexagon of the player
+                                    playerVars.currentPlatform = adjacentHexagon;
+
                                     //check if its path and if it's not, active the player falling.
                                     if (!adjacentHexagon.GetComponent<Platform>().isPath)
                                     {
@@ -51,8 +54,7 @@ public class SelectPlatform : MonoBehaviour
 
                                     }
 
-                                    //Update the currentHexagon of the player
-                                    playerVars.currentPlatform = adjacentHexagon;
+
 
                                 }
 
