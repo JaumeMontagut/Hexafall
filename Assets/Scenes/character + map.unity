@@ -237,6 +237,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136363857}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &217037830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217037831}
+  - component: {fileID: 217037832}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &217037831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217037830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.187817, y: 3.0168877, z: 9.133552}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &217037832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217037830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d53c0a5c4a5c264881e9d40ad875642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerTurn: 0
+  timeBetweenTurns: 2
+  timerToReduceTime: 0
+  timeToReduceTimeBetweenTurns: 20
+  TimeReduced: 0.5
+  minTimeBetweeTurns: 0.5
 --- !u!1 &370087218
 GameObject:
   m_ObjectHideFlags: 0
@@ -4111,6 +4160,7 @@ MonoBehaviour:
   currentPlatform: {fileID: 0}
   surfacePos: 4.2
   mainPlayer: 1
+  moved: 0
 --- !u!136 &1974561336
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,17 +11,28 @@ public class PlayerMove : MonoBehaviour
     [ShowOnly] public float timeFalling = 0.0f;
 
     private PlayerVars playerVars;
+    private MapManager mapManager;
 
     // Start is called before the first frame update
     void Start()
     {
         playerVars = GetComponent<PlayerVars>();
+
+        mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+        if (mapManager == null)
+        {
+            Debug.LogError("Can't find the gameobject 'MapManager', check there is a gameObject with the NAME 'MapManager' to be able to find that gameobject!");
+
+            //Exit the game if can't find the MapManager... Althought, it will crash without it. -shrug-
+            EditorApplication.isPlaying = false;
+            return;
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
-        timeFalling += Time.deltaTime;
 
         if (playerVars.falling)
         {
@@ -35,6 +47,7 @@ public class PlayerMove : MonoBehaviour
         bool ret = false;
 
         transform.position = new Vector3(destination.x, transform.position.y, destination.z);
+        playerVars.moved = true;
         ret = true;
 
 
@@ -43,6 +56,8 @@ public class PlayerMove : MonoBehaviour
 
     public void Fall()
     {
+        timeFalling += Time.deltaTime;
+
         transform.position = new Vector3(transform.position.x, transform.position.y - (fallDistance * Time.deltaTime), transform.position.z);
 
 
@@ -55,12 +70,10 @@ public class PlayerMove : MonoBehaviour
 
     public void Respawn()
     {
-        //Restore the alpha of the wrong platform wich the player falls.
-        
-
         //Move to the starting platform and assign it as the current platform.
-        transform.position = new Vector3(playerVars.startingPlatform.transform.position.x, playerVars.surfacePos, playerVars.startingPlatform.transform.position.z);
-        playerVars.currentPlatform = playerVars.startingPlatform;
+        GameObject startingPlatform = mapManager.startingPlatform;
+        transform.position = new Vector3(startingPlatform.transform.position.x, playerVars.surfacePos, startingPlatform.transform.position.z);
+        playerVars.currentPlatform = startingPlatform;
     }
 
     

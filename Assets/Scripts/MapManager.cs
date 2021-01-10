@@ -9,12 +9,9 @@ public class MapManager : MonoBehaviour
     public GameObject[] allPlatforms;
     public float starAltitude = 0.0f;
 
-    [ShowOnly]
-    public GameObject startingPlatform;
-    [ShowOnly]
-    public GameObject endingPlatform;
-    [ShowOnly]
-    public GameObject star;
+    [ShowOnly] public GameObject startingPlatform;
+    [ShowOnly] public GameObject endingPlatform;
+    [ShowOnly] public GameObject star;
 
 
     private GameObject player;
@@ -119,11 +116,11 @@ public class MapManager : MonoBehaviour
 
         playerVars = player.GetComponent<PlayerVars>();
 
-        //Set the starting platform to the player.
-        playerVars.startingPlatform = startingPlatform;
-
-        //move the player to the starting platform
+        //move the player to the starting platform.
         player.transform.position = new Vector3(startingPlatform.transform.position.x, playerVars.surfacePos, startingPlatform.transform.position.z);
+
+        //Set the starting platform to the current platform for the player.
+        playerVars.currentPlatform = startingPlatform;
     }
 
 

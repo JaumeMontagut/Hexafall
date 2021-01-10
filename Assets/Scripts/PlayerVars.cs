@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
-    [HideInInspector] public GameObject startingPlatform;
-
     [ShowOnly] public GameObject currentPlatform;
     
     public float surfacePos;
@@ -18,11 +16,11 @@ public class PlayerVars : MonoBehaviour
     {
         get; private set; 
     }
+    [ShowOnly] public bool moved = false;
     // Start is called before the first frame update
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
-        currentPlatform = startingPlatform;
     }
 
     // Update is called once per frame
@@ -42,8 +40,9 @@ public class PlayerVars : MonoBehaviour
 
     public void DesactivateFalling()
     {
-        
+        playerMove.timeFalling = 0.0f;
         falling = false;
+        
     }
 
 }
