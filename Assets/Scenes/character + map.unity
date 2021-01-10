@@ -160,6 +160,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 1
+  alphaValue: 0.9
 --- !u!4 &136363859
 Transform:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &370087221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -387,6 +389,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &390269906
 Transform:
   m_ObjectHideFlags: 0
@@ -539,6 +542,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &471964183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -729,6 +733,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &491720572
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +774,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &491720574
 Transform:
   m_ObjectHideFlags: 0
@@ -959,6 +965,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &532190126
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1006,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &532190128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1113,6 +1121,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &576538872
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,6 +1312,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 1
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &592084586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1354,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &592084588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1460,6 +1471,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &625395031
 Transform:
   m_ObjectHideFlags: 0
@@ -1573,6 +1585,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &668135318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1689,6 +1702,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &704254454
 Transform:
   m_ObjectHideFlags: 0
@@ -1804,6 +1818,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &724058641
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,6 +2007,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1034665399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2163,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &1135730564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2337,6 +2354,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1228848716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,6 +2470,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1259323529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,6 +2510,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &1259323531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2688,7 +2708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295654421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.187817, y: 6.16, z: 8.9}
+  m_LocalPosition: {x: 14.187817, y: 6.16, z: -9.24}
   m_LocalScale: {x: 2.8424, y: 2.8424, z: 2.8424}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2894,6 +2914,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1455192764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,6 +3031,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1465160211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,6 +3071,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &1465160213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3237,6 +3260,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &1654111303
 Transform:
   m_ObjectHideFlags: 0
@@ -3423,6 +3447,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1758274739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,6 +3488,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &1758274741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3579,6 +3605,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &1795009515
 Transform:
   m_ObjectHideFlags: 0
@@ -3739,7 +3766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841285185}
   m_LocalRotation: {x: 0.40821785, y: -0.23456964, z: 0.10938166, w: 0.87542623}
-  m_LocalPosition: {x: -0.0000009536743, y: 3, z: -0.0000009536743}
+  m_LocalPosition: {x: -0.0000009536743, y: 3, z: -46.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3787,6 +3814,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &1851681939
 Transform:
   m_ObjectHideFlags: 0
@@ -3974,6 +4002,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &1974561333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,7 +4122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974561333}
   m_LocalRotation: {x: -0, y: -0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: 18.34, y: 4.21, z: 25.44}
+  m_LocalPosition: {x: 18.34, y: 4.21, z: -10.69}
   m_LocalScale: {x: 1.447368, y: 1.447368, z: 1.447368}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4230,6 +4259,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &2044941984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4346,6 +4376,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &2051160696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,6 +4493,7 @@ MonoBehaviour:
   isPath: 1
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!1 &2051513307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4540,6 +4572,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &2056144301
 Transform:
   m_ObjectHideFlags: 0
@@ -4654,6 +4687,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &2070364618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4768,6 +4802,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!65 &2073594719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4881,6 +4916,7 @@ MonoBehaviour:
   isPath: 0
   isStart: 0
   isEnd: 0
+  alphaValue: 0.9
 --- !u!4 &2095757646
 Transform:
   m_ObjectHideFlags: 0

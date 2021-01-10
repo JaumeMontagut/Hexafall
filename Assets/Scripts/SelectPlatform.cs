@@ -20,50 +20,52 @@ public class SelectPlatform : MonoBehaviour
         //Idea: Need a manager of turns that activate this component when the turns start.
         //      Desactivate this component when select a new Hexagon and move
 
-
-        if (Input.GetMouseButtonDown(0)) // Maybe this may be GetMouseButtonUp ??
+        if (!playerVars.falling) //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
         {
-            RaycastHit hitInfo = new RaycastHit();
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
+            if (Input.GetMouseButtonDown(0)) // Maybe this may be GetMouseButtonUp ??
             {
-                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Platform"))
+                RaycastHit hitInfo = new RaycastHit();
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
                 {
-                    //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
-                    //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
-
-
-                    foreach(GameObject adjacentHexagon in playerVars.currentPlatform.GetComponent<Platform>().adjacentPlatforms)
+                    if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Platform"))
                     {
-                        if(adjacentHexagon == hitInfo.transform.gameObject)
+                        //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
+                        //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
+
+
+                        foreach (GameObject adjacentHexagon in playerVars.currentPlatform.GetComponent<Platform>().adjacentPlatforms)
                         {
-                            print("It's an available platform!!");
-
-                            //Try to move the player to the new hexagon.
-                            if (playerMove.Move(hitInfo.transform.position))
+                            if (adjacentHexagon == hitInfo.transform.gameObject)
                             {
-                                print("Player moved succesfully!!");
+                                print("It's an available platform!!");
 
-                                //check if its path and if it's not, active the player falling.
-                                if (!adjacentHexagon.GetComponent<Platform>().isPath)
+                                //Try to move the player to the new hexagon.
+                                if (playerMove.Move(hitInfo.transform.position))
                                 {
-                                    playerVars.ActivateFalling();
+                                    print("Player moved succesfully!!");
+
+                                    //check if its path and if it's not, active the player falling.
+                                    if (!adjacentHexagon.GetComponent<Platform>().isPath)
+                                    {
+                                        playerVars.ActivateFalling();
+
+                                    }
+
+                                    //Update the currentHexagon of the player
+                                    playerVars.currentPlatform = adjacentHexagon;
 
                                 }
 
-                                //Update the currentHexagon of the player
-                                playerVars.currentPlatform = adjacentHexagon;
+                                else
+                                    print("ERROR: Problem when trying to move the player to the new platform!");
+
+                                break;
 
                             }
-
-                            else
-                                print("ERROR: Problem when trying to move the player to the new platform!");
-
-                            break;
-
                         }
+
+
                     }
-
-
                 }
             }
         }

@@ -9,6 +9,8 @@ public class Platform : MonoBehaviour
     public bool isStart = false;
     public bool isEnd = false;
 
+    [Range(0.0f, 1.0f)]
+    public float alphaValue = 0.0f;
 
 
     // Start is called before the first frame update
