@@ -6,6 +6,9 @@ public class Platform : MonoBehaviour
 {
     public GameObject[] adjacentPlatforms;
     public bool isPath = false;
+    public bool isStart = false;
+    public bool isEnd = false;
+
 
 
     // Start is called before the first frame update

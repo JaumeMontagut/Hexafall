@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SelectPlatform : MonoBehaviour
 {
-    public PlayerVars playerVars;
-    public PlayerMove playerMove;
+    private PlayerVars playerVars;
+    private PlayerMove playerMove;
 
     // Start is called before the first frame update
     void Start()

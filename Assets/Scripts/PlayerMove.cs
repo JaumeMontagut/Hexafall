@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float timeToFall = 1.0f;
-    public float timeFalling = 0.0f;
     public float fallDistance = 2.0f;
 
-    public PlayerVars playerVars;
+    [ShowOnly]
+    public float timeFalling = 0.0f;
+
+    private PlayerVars playerVars;
     // Start is called before the first frame update
     void Start()
     {

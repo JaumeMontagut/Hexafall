@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject startingPlatform;
 
-    [ShowOnlyAttribute]
+    [ShowOnly]
     public GameObject currentPlatform;
     
     public float surfacePos;
-
-    [HideInInspector]
-    public PlayerMove playerMove;
-
     public bool mainPlayer; // If the player Game object is the current player of this machine.
+
+    private PlayerMove playerMove;
+
     public bool falling 
     {
         get; private set; 
