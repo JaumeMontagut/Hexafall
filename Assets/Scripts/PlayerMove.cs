@@ -24,7 +24,9 @@ public class PlayerMove : MonoBehaviour
             Debug.LogError("Can't find the gameobject 'MapManager', check there is a gameObject with the NAME 'MapManager' to be able to find that gameobject!");
 
             //Exit the game if can't find the MapManager... Althought, it will crash without it. -shrug-
+#if UNITY_EDITOR
             EditorApplication.isPlaying = false;
+#endif
             return;
 
         }

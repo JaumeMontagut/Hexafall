@@ -16,6 +16,8 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
 
     //RoomMenu
     [SerializeField] Text roomText;
+    [SerializeField] GameObject playerListContent;
+    [SerializeField] GameObject playerListItemPrefab;
 
     //FindRoomMenu
     [SerializeField] Transform roomListContent;
@@ -42,6 +44,8 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined lobby");
         MenuManager.Instance.OpenMenu("TitleMenu");
+        //TODO: Change it so players can add their own name
+        PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
 
     public void CreateRoom()
@@ -59,6 +63,11 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu("RoomMenu");
         roomText.text = PhotonNetwork.CurrentRoom.Name;
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            Instantiate(playerListItemPrefab, playerListContent.transform).GetComponent<PlayerListItem>().SetUp(player);
+        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -95,5 +104,10 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
         {
             Instantiate(roomListPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(room);
         }
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Instantiate(playerListItemPrefab, playerListContent.transform).GetComponent<PlayerListItem>().SetUp(newPlayer);
     }
 }

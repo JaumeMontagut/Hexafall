@@ -29,16 +29,6 @@ public class MapManager : MonoBehaviour
         SetStar();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
-
-
     private void SearchStartingAndEndingPlatforms()
     {
         ///All of the next section of the code it's only for check if everything is alright and EXIT the game if it's not.
@@ -73,8 +63,10 @@ public class MapManager : MonoBehaviour
             else
                 Debug.LogError("There is more than 1 start platform setted!!");
 
+#if UNITY_EDITOR
             //if there isn't the correct numbers of starting platform, EXIT the game. This is a case that we don't want to occur and continious the game!
             EditorApplication.isPlaying = false;
+#endif
 
         }
 
@@ -88,7 +80,9 @@ public class MapManager : MonoBehaviour
                 Debug.LogError("There is more than 1 end platform setted!!");
 
             //if there isn't the correct numbers of ending platform, EXIT the game. This is a case that we don't want to occur and continious the game!
+#if UNITY_EDITOR
             EditorApplication.isPlaying = false;
+#endif
             return;
 
         }
@@ -109,7 +103,9 @@ public class MapManager : MonoBehaviour
             Debug.LogError("Can't find the gameobject 'Player', check there is a player with the TAG 'Player' to be able to find that gameobject!");
 
             //Exit the game if can't find the player... Althought, it will crash without it. -shrug-
+#if UNITY_EDITOR      
             EditorApplication.isPlaying = false;
+#endif
             return;
 
         }
@@ -135,7 +131,9 @@ public class MapManager : MonoBehaviour
             Debug.LogError("Can't find the gameobject 'Star', check there is a gameObject with the NAME 'Star' to be able to find that gameobject!");
 
             //Exit the game if can't find the player... Althought, it will crash without it. -shrug-
+#if UNITY_EDITOR
             EditorApplication.isPlaying = false;
+#endif
             return;
 
         }

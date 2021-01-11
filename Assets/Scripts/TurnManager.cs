@@ -25,7 +25,9 @@ public class TurnManager : MonoBehaviour
             Debug.LogError("Can't find the gameobject 'Player', check there is a player with the TAG 'Player' to be able to find that gameobject!");
 
             //Exit the game if can't find the player... Althought, it will crash without it. -shrug-
+#if UNITY_EDITOR
             EditorApplication.isPlaying = false;
+#endif
             return;
 
         }
