@@ -18,6 +18,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     [SerializeField] Text roomText;
     [SerializeField] GameObject playerListContent;
     [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] GameObject startGameButton;
 
     //FindRoomMenu
     [SerializeField] Transform roomListContent;
@@ -38,6 +39,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connected to Master 2");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
@@ -46,6 +48,11 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("TitleMenu");
         //TODO: Change it so players can add their own name
         PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(1);
     }
 
     public void CreateRoom()
@@ -68,6 +75,13 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
         {
             Instantiate(playerListItemPrefab, playerListContent.transform).GetComponent<PlayerListItem>().SetUp(player);
         }
+
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
