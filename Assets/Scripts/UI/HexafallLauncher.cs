@@ -24,6 +24,9 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListPrefab;
 
+    //Game Scene
+    [HideInInspector] public const int gameScene = 1;//Matches the build number in the build panel
+
     private void Awake()
     {
         Instance = this;
@@ -52,7 +55,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(gameScene);
     }
 
     public void CreateRoom()
@@ -70,6 +73,11 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu("RoomMenu");
         roomText.text = PhotonNetwork.CurrentRoom.Name;
+
+        foreach (Transform child in playerListContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -116,7 +124,10 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
 
         foreach (RoomInfo room in roomList)
         {
-            Instantiate(roomListPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(room);
+            if (!room.RemovedFromList)
+            {
+                Instantiate(roomListPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(room);
+            }
         }
     }
 
