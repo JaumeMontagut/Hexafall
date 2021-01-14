@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public GameObject[] adjacentPlatforms;
+    public List<GameObject> adjacentPlatforms;
     public bool isPath = false;
     public bool isStart = false;
     public bool isEnd = false;
@@ -98,8 +98,8 @@ public class Platform : MonoBehaviour
         if (isPath)
         {
             Gizmos.color = Color.yellow;
-            Vector3 gizmosPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
-            Gizmos.DrawSphere(gizmosPos, 1);
+            Vector3 gizmosPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Gizmos.DrawSphere(gizmosPos, 0.2F);
         }
     }
 }

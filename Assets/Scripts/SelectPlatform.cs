@@ -20,7 +20,7 @@ public class SelectPlatform : MonoBehaviour
         //Idea: Need a manager of turns that activate this component when the turns start.
         //      Desactivate this component when select a new Hexagon and move
 
-        if (!playerVars.falling && !playerVars.moved) //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
+        if (!playerVars.falling && !playerVars.moving) //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
         {
             if (Input.GetMouseButtonDown(0)) // Maybe this may be GetMouseButtonUp ??
             {
@@ -38,24 +38,7 @@ public class SelectPlatform : MonoBehaviour
                             if (adjacentHexagon == hitInfo.transform.gameObject)
                             {
                                 //Try to move the player to the new hexagon.
-                                if (playerMove.Move(hitInfo.transform.position))
-                                {
-
-                                    //Update the currentHexagon of the player
-                                    playerVars.currentPlatform = adjacentHexagon;
-
-                                    //check if its path and if it's not, active the player falling.
-                                    if (!adjacentHexagon.GetComponent<Platform>().isPath)
-                                    {
-                                        playerVars.ActivateFalling();
-
-                                    }
-
-
-
-                                }
-
-                                else
+                                if(!playerMove.StartMoving(adjacentHexagon))
                                     print("ERROR: Problem when trying to move the player to the new platform!");
 
                                 break;

@@ -12,11 +12,15 @@ public class PlayerMove : MonoBehaviour
 
     private PlayerVars playerVars;
     private MapManager mapManager;
+    private Animator animator;
+    private Vector3 destination;
+    private GameObject nextPlatform;
 
     // Start is called before the first frame update
     void Start()
     {
         playerVars = GetComponent<PlayerVars>();
+        animator = GetComponent<Animator>();
 
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         if (mapManager == null)
@@ -40,19 +44,50 @@ public class PlayerMove : MonoBehaviour
         {
             Fall();
         }
+        if(playerVars.moving)
+        {
+            Moving();
+        }
     }
-
-    public bool Move(Vector3 destination)
+    public bool StartMoving(GameObject platform)
+    {
+        animator.SetTrigger("Jump");
+        nextPlatform = platform;
+        playerVars.ActiveMoving();
+        return true;
+    }
+    public void Moving()
+    {
+        
+        Vector3 moveVec = nextPlatform.transform.position - transform.position;
+        transform.position += moveVec.normalized * Time.deltaTime;
+        if(moveVec.sqrMagnitude <= 0.01)
+        {
+            EndMove();
+        }
+       
+    }
+    public bool EndMove()
     {
         ///Move the player to the new hexagon.
 
         bool ret = false;
 
-        transform.position = new Vector3(destination.x, transform.position.y, destination.z);
-        playerVars.moved = true;
+        transform.position = nextPlatform.transform.position;
+        playerVars.DesactivateMoving();
+
+        //Update the currentHexagon of the player
+        playerVars.currentPlatform = nextPlatform;
+
+        //check if its path and if it's not, active the player falling.
+        if (!nextPlatform.GetComponent<Platform>().isPath)
+        {
+            playerVars.ActivateFalling();
+        }
+
         ret = true;
 
-
+       
         return ret;
     }
 

@@ -41,7 +41,7 @@ public class TurnManager : MonoBehaviour
         if (timerTurn >= timeBetweenTurns)
         {
             //End of the turn
-            player.GetComponent<PlayerVars>().moved = false;
+           // player.GetComponent<PlayerVars>().moving = false;
 
 
             //reset timer

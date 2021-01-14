@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject[] allPlatforms;
+    public GameObject rootPlatforms;
     public float starAltitude = 0.0f;
 
     [ShowOnly] public GameObject startingPlatform;
@@ -39,8 +39,13 @@ public class MapManager : MonoBehaviour
         int endPlatforms = 0;
 
         //Check how much starting platforms and endign platforms are in the game setted.
-        foreach (GameObject currentPlatform in allPlatforms)
+        foreach (Transform currentPlatformTransform in rootPlatforms.transform)
         {
+            GameObject currentPlatform = currentPlatformTransform.gameObject;
+            if(currentPlatform.GetComponent<Platform>() == null)
+            {
+                Debug.LogError("GameObjacet name " + currentPlatform.name);
+            }
             if (currentPlatform.GetComponent<Platform>().isStart)
             {
                 ++startPlatforms;
