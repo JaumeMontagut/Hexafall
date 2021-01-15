@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
     private Vector3 destination;
     private GameObject nextPlatform;
-
+    float jumpStart = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,17 +54,31 @@ public class PlayerMove : MonoBehaviour
         animator.SetTrigger("Jump");
         nextPlatform = platform;
         playerVars.ActiveMoving();
+
+        // Set rotation
+        Vector3 moveVec = nextPlatform.transform.position - transform.position;
+        float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, angle, 0);
+        jumpStart = Time.time;
         return true;
     }
     public void Moving()
     {
         
         Vector3 moveVec = nextPlatform.transform.position - transform.position;
-        transform.position += moveVec.normalized * Time.deltaTime;
-        if(moveVec.sqrMagnitude <= 0.01)
+        if(Time.time - jumpStart >= 0.35F)
         {
-            EndMove();
+            //float t = (Time.time - jumpStart) / 0.2F;
+           // Debug.Log(t);
+            //transform.position += moveVec.normalized * Time.deltaTime * Mathf.SmoothStep(0, 0.7F, t);
+            transform.position += new Vector3( moveVec.normalized.x, 0 , moveVec.normalized.z ) * Time.deltaTime * 1f;
+            Debug.Log(moveVec.sqrMagnitude);
+            if (moveVec.sqrMagnitude <= 0.02)
+            {
+                EndMove();
+            }
         }
+        
        
     }
     public bool EndMove()
@@ -73,7 +87,7 @@ public class PlayerMove : MonoBehaviour
 
         bool ret = false;
 
-        transform.position = nextPlatform.transform.position;
+        //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
         //Update the currentHexagon of the player
