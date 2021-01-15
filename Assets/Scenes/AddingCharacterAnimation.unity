@@ -292,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 3953673358378110996, guid: 2c93f59ea7f7f854a9dd90d1202c3db7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.121
+      value: 0.136
       objectReference: {fileID: 0}
     - target: {fileID: 3953673358378110996, guid: 2c93f59ea7f7f854a9dd90d1202c3db7,
         type: 3}
@@ -363,6 +363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799627118439787645, guid: 2c93f59ea7f7f854a9dd90d1202c3db7,
+        type: 3}
+      propertyPath: surfacePos
+      value: 0.136
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c93f59ea7f7f854a9dd90d1202c3db7, type: 3}
@@ -7471,7 +7476,6 @@ MonoBehaviour:
   currentPlatform: {fileID: 0}
   surfacePos: 4.2
   mainPlayer: 1
-  moved: 0
 --- !u!136 &1974561336
 CapsuleCollider:
   m_ObjectHideFlags: 0
