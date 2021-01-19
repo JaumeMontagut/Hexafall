@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Photon.Pun;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,44 +12,48 @@ public class PlayerMove : MonoBehaviour
     [ShowOnly] public float timeFalling = 0.0f;
 
     private PlayerVars playerVars;
-    private MapManager mapManager;
     private Animator animator;
     private Vector3 destination;
     private GameObject nextPlatform;
     float jumpStart = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    private PhotonView photonView;
+    [SerializeField] private bool debug = false;
+
+    void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+
+    private void Start()
     {
         playerVars = GetComponent<PlayerVars>();
         animator = GetComponent<Animator>();
 
-        mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        if (mapManager == null)
-        {
-            Debug.LogError("Can't find the gameobject 'MapManager', check there is a gameObject with the NAME 'MapManager' to be able to find that gameobject!");
-
-            //Exit the game if can't find the MapManager... Althought, it will crash without it. -shrug-
-#if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-#endif
-            return;
-
-        }
+        Managers.Game.players.Add(gameObject);
+        Managers.Map.SetPlayerToStartPlatform(gameObject);
     }
 
-        // Update is called once per frame
-        void Update()
+    public bool IsMine()
     {
+        return debug || photonView.IsMine;
+    }
 
-        if (playerVars.falling)
+    void Update()
+    {
+        if (IsMine())
         {
-            Fall();
-        }
-        if(playerVars.moving)
-        {
-            Moving();
+            if (playerVars.falling)
+            {
+                Fall();
+            }
+            if (playerVars.moving)
+            {
+                Moving();
+            }
         }
     }
+
     public bool StartMoving(GameObject platform)
     {
         animator.SetTrigger("Jump");
@@ -122,12 +127,7 @@ public class PlayerMove : MonoBehaviour
     public void Respawn()
     {
         //Move to the starting platform and assign it as the current platform.
-        GameObject startingPlatform = mapManager.startingPlatform;
-        transform.position = new Vector3(startingPlatform.transform.position.x, playerVars.surfacePos, startingPlatform.transform.position.z);
-        playerVars.currentPlatform = startingPlatform;
+        transform.position = new Vector3(Managers.Map.startingPlatform.transform.position.x, playerVars.surfacePos, Managers.Map.startingPlatform.transform.position.z);
+        playerVars.currentPlatform = Managers.Map.startingPlatform;
     }
-
-    
-
-
 }

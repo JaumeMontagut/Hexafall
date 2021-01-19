@@ -13,20 +13,19 @@ public class MapManager : MonoBehaviour
     [ShowOnly] public GameObject endingPlatform;
     [ShowOnly] public GameObject star;
 
-
-    private GameObject player;
-    private PlayerVars playerVars;
-
-    public
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        Managers.Map = this;
         SearchStartingAndEndingPlatforms();
-
-        SetPlayersToStart();
-        
         SetStar();
+    }
+
+    public void SetPlayerToStartPlatform(GameObject player)
+    {
+        PlayerVars playerVars = player.GetComponent<PlayerVars>();
+
+        player.transform.position = new Vector3(startingPlatform.transform.position.x, playerVars.surfacePos, startingPlatform.transform.position.z);
+        playerVars.currentPlatform = startingPlatform;
     }
 
     private void SearchStartingAndEndingPlatforms()
@@ -91,37 +90,6 @@ public class MapManager : MonoBehaviour
             return;
 
         }
-    }
-
-    
-
-    private void SetPlayersToStart()
-    {
-        ///Set the player (players when photon imlemented) to the starting platform
-
-
-        //Search by tag because it will be more players and we want all. This wil need to change te FindGameObjectWithTag to FindGameObjectsWithTag (in plural) and change the var to an array.
-        //TODO: do it for all players when Photon is implemented.
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError("Can't find the gameobject 'Player', check there is a player with the TAG 'Player' to be able to find that gameobject!");
-
-            //Exit the game if can't find the player... Althought, it will crash without it. -shrug-
-#if UNITY_EDITOR      
-            EditorApplication.isPlaying = false;
-#endif
-            return;
-
-        }
-
-        playerVars = player.GetComponent<PlayerVars>();
-
-        //move the player to the starting platform.
-        player.transform.position = new Vector3(startingPlatform.transform.position.x, playerVars.surfacePos, startingPlatform.transform.position.z);
-
-        //Set the starting platform to the current platform for the player.
-        playerVars.currentPlatform = startingPlatform;
     }
 
 

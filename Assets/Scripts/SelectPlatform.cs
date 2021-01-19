@@ -7,44 +7,39 @@ public class SelectPlatform : MonoBehaviour
     private PlayerVars playerVars;
     private PlayerMove playerMove;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerVars = GetComponent<PlayerVars>();
         playerMove = GetComponent<PlayerMove>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Idea: Need a manager of turns that activate this component when the turns start.
         //      Desactivate this component when select a new Hexagon and move
+        //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
 
-        if (!playerVars.falling && !playerVars.moving) //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
+        if (playerMove.IsMine()
+            && !playerVars.falling
+            && !playerVars.moving
+            && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0)) // Maybe this may be GetMouseButtonUp ??
+            //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
+            //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
+            RaycastHit hitInfo = new RaycastHit();
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo)
+                && hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Platform"))
             {
-                RaycastHit hitInfo = new RaycastHit();
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
+                foreach (GameObject adjacentHexagon in playerVars.currentPlatform.GetComponent<Platform>().adjacentPlatforms)
                 {
-                    if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Platform"))
+                    if (adjacentHexagon == hitInfo.transform.gameObject)
                     {
-                        //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
-                        //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
-
-
-                        foreach (GameObject adjacentHexagon in playerVars.currentPlatform.GetComponent<Platform>().adjacentPlatforms)
+                        //Try to move the player to the new hexagon.
+                        if (!playerMove.StartMoving(adjacentHexagon))
                         {
-                            if (adjacentHexagon == hitInfo.transform.gameObject)
-                            {
-                                //Try to move the player to the new hexagon.
-                                if(!playerMove.StartMoving(adjacentHexagon))
-                                    print("ERROR: Problem when trying to move the player to the new platform!");
-
-                                break;
-
-                            }
+                            print("ERROR: Problem when trying to move the player to the new platform!");
                         }
+                        break;
                     }
                 }
             }

@@ -8,7 +8,6 @@ public class PlayerVars : MonoBehaviour
     [ShowOnly] public GameObject currentPlatform;
 
     public float surfacePos;
-    public bool mainPlayer; // If the player Game object is the current player of this machine.
 
     private PlayerMove playerMove;
 
@@ -16,22 +15,16 @@ public class PlayerVars : MonoBehaviour
     {
         get; private set; 
     }
+
    public bool moving
     {
-    get; private set;
+        get; private set;
     }
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         moving = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ActivateFalling()
@@ -42,8 +35,6 @@ public class PlayerVars : MonoBehaviour
         currentPlatform.GetComponent<Platform>().ReduceAlpha();
         currentPlatform.GetComponent<Platform>().StartRestoringAlphaWithFade();
     }
-
-
 
     public void DesactivateFalling()
     {

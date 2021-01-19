@@ -13,26 +13,6 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private float TimeReduced = 0.0f;                                //How much time it will be reduced to the time between turns.
     [SerializeField] private float minTimeBetweeTurns = 0.0f;                         //The minimum time posible for the turns.
 
-    private GameObject player;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Search for the player. TODO: This will be in plural when photon is imlpemented.
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError("Can't find the gameobject 'Player', check there is a player with the TAG 'Player' to be able to find that gameobject!");
-
-            //Exit the game if can't find the player... Althought, it will crash without it. -shrug-
-#if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-#endif
-            return;
-
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
