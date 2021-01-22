@@ -7,6 +7,7 @@ public class HexagonalTile : MonoBehaviour
 {
     public Vector2Int gridPosition;
     public HexagonalTile[] neighborTiles;
+    public float cost = 0f;
 
     private void Awake()
     {
