@@ -67,21 +67,26 @@ public class PlayerMove : MonoBehaviour
         jumpStart = Time.time;
         return true;
     }
+    bool doElasticAnimation = true;
     public void Moving()
     {
         
         Vector3 moveVec = nextPlatform.transform.position - transform.position;
         if(Time.time - jumpStart >= 0.35F)
         {
-            //float t = (Time.time - jumpStart) / 0.2F;
-           // Debug.Log(t);
-            //transform.position += moveVec.normalized * Time.deltaTime * Mathf.SmoothStep(0, 0.7F, t);
             transform.position += new Vector3( moveVec.normalized.x, 0 , moveVec.normalized.z ) * Time.deltaTime * 1f;
-            Debug.Log(moveVec.sqrMagnitude);
-            if (moveVec.sqrMagnitude <= 0.02)
+
+            if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
+            {
+                gameObject.GetComponent<ElasticMove>().StartMoving();
+                nextPlatform.GetComponent<ElasticMove>().StartMoving();
+                doElasticAnimation = false;
+            }
+            if (moveVec.sqrMagnitude <= 0.03)
             {
                 EndMove();
             }
+            
         }
         
        
@@ -91,12 +96,13 @@ public class PlayerMove : MonoBehaviour
         ///Move the player to the new hexagon.
 
         bool ret = false;
-
+        doElasticAnimation = true;
         //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
         //Update the currentHexagon of the player
         playerVars.currentPlatform = nextPlatform;
+        
 
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.GetComponent<Platform>().isPath)
