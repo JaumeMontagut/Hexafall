@@ -15,8 +15,8 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   mode:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 2
 --- !u!114 &-4042225869489208820
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -33,11 +33,11 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1.98
+    m_Value: 7.18
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.06
     min: 0
   scatter:
     m_OverrideState: 0
@@ -78,3 +78,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -4042225869489208820}
+  - {fileID: -5129285093515563480}
