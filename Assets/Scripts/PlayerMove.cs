@@ -78,7 +78,6 @@ public class PlayerMove : MonoBehaviour
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
             {
-                gameObject.GetComponent<ElasticMove>().StartMoving();
                 nextPlatform.GetComponent<ElasticMove>().StartMoving();
                 doElasticAnimation = false;
             }

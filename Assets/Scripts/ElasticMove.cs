@@ -20,8 +20,6 @@ public class ElasticMove : MonoBehaviour
 
     public void StartMoving()
     {
-        startPosition = transform.position;
-        maxDownPos = new Vector3(startPosition.x, startPosition.y - maxDownValue, startPosition.z);
         doAnimation = true;
     }
 
