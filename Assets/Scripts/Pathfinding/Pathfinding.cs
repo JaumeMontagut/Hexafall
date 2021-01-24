@@ -31,7 +31,7 @@ public class Pathfinding
             // Neighbors will return a List of valid tile Locations
             // that are next to, diagonal to, above or below current
 
-            List<HexagonalTile> neighbors = current.GetAdjacentTiles();
+            List<HexagonalTile> neighbors = current.GetNeighbors();
 
 
             foreach (var neighbor in neighbors)

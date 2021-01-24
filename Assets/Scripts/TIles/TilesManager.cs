@@ -39,31 +39,31 @@ public class TilesManager : MonoBehaviour
 
         UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
 
-        Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
-        AddRandomPaths(5, 0.3f, colors);
+        //Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
+        //AddRandomPaths(5 , colors);
     }
 
     #region HardcodedTest
     struct infos
     {
         public Color color;
-        public float height;
         public HexagonalTile tile;
     }
 
     List<infos> gizmos = new List<infos>();
+    float costIncrement = 4f;
 
-    public void AddRandomPaths(int numPaths , float height,  Color[] colors)
+    public void AddRandomPaths(int numPaths,  Color[] colors)
     {
         HexagonalTile currentTile = center;
 
         for (int i = 1; i < numPaths; i++)
         {
-            currentTile = AddRandomPath(currentTile, colors[i], height * i);
+            currentTile = AddRandomPath(currentTile, colors[i]);
         }
     }
 
-    public HexagonalTile AddRandomPath(HexagonalTile last, Color color, float height)
+    public HexagonalTile AddRandomPath(HexagonalTile last, Color color)
     {
         HexagonalTile randomTile;
 
@@ -74,20 +74,18 @@ public class TilesManager : MonoBehaviour
         while (randomTile.cost != 0f);
 
         List<HexagonalTile> list = (Pathfinding.GeneratePath(last, randomTile));
-        list.Add(last);
 
         foreach (HexagonalTile item in list)
         {
-            List<HexagonalTile> neighbors = item.GetAdjacentTiles();
-            item.cost += 1f;
+            List<HexagonalTile> neighbors = item.GetNeighbors();
+            item.cost += costIncrement * 2f;
             foreach (HexagonalTile tile in neighbors)
             {
-                tile.cost += 1f;
+                tile.cost += costIncrement;
             }
 
             infos i;
             i.color = color;
-            i.height = height;
             i.tile = item;
             gizmos.Add(i);
         }
@@ -100,7 +98,7 @@ public class TilesManager : MonoBehaviour
         foreach (var item in gizmos)
         {
             Gizmos.color = item.color;
-            Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, item.height, 0), 0.3f);
+            Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, 1f, 0), 0.3f);
         }
     }
     #endregion

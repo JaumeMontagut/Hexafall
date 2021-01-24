@@ -14,7 +14,7 @@ public class HexagonalTile : MonoBehaviour
         neighborTiles = new HexagonalTile[6];
     }
 
-    public List<HexagonalTile> GetAdjacentTiles()
+    public List<HexagonalTile> GetNeighbors()
     {
         List<HexagonalTile> ret = new List<HexagonalTile>();
 
