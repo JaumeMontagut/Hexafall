@@ -28,7 +28,7 @@ public class SelectPlatform : MonoBehaviour
             //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
             //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.
             RaycastHit hitInfo = new RaycastHit();
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, LayerMask.NameToLayer("Platform")))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, 30f, LayerMask.NameToLayer("Platform")))
             {
                 List<HexagonalTile> neighbors = playerVars.currentPlatform.GetNeighbors();
 

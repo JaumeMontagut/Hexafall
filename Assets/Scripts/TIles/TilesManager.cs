@@ -2,53 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Photon.Pun;
 
 // Clockwise Hexagon Directions https://catlikecoding.com/unity/tutorials/hex-map/part-2/cell-neighbors/directions.png
 // Cordinate Hexagonal Grid https://media.discordapp.net/attachments/795280554890231861/798741491991707678/unknown.png
 public enum HexagonDirections { N = 0, NE = 1, SE = 2, S = 3, SW = 4, NW = 5, MAX = 6 };
 public class TilesManager : MonoBehaviour
 {
+    #region Atributes
     public GameObject tilePrefab;
     public float tileMargin = 0.1f;
-    [Range(1, 10)] public int magnitude = 1;
-
-    public HexagonalTile start { get; private set; }
-    public HexagonalTile end { get; private set; }
-
-    private Dictionary<Vector2Int, HexagonalTile> grid;
-    private Vector2Int[] neighborOffsets;
+    [Range(1, 10)] 
+    public int magnitude = 1;
     private float tileHeight = 0f, tileWidth = 0f;
+    private static Vector2Int[] neighborOffsets = { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(1, -1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(-1, 1) };
+
+    #endregion
+    private PhotonView photonView;
+    private Dictionary<Vector2Int, HexagonalTile> grid;
+
+    [HideInInspector] public HexagonalTile start { get; private set; }
+    [HideInInspector] public HexagonalTile end { get; private set; }
 
     void Awake()
     {
-        Managers.Tiles = this;
+        photonView = GetComponent<PhotonView>();
 
+        Managers.Tiles = this;
         grid = new Dictionary<Vector2Int, HexagonalTile>();
-        neighborOffsets = new Vector2Int [(int)HexagonDirections.MAX];
-        neighborOffsets[(int)HexagonDirections.N ] = new Vector2Int(0, 1);
-        neighborOffsets[(int)HexagonDirections.NE] = new Vector2Int(1, 0);
-        neighborOffsets[(int)HexagonDirections.SE] = new Vector2Int(1, -1);
-        neighborOffsets[(int)HexagonDirections.S ] = new Vector2Int(0, -1);
-        neighborOffsets[(int)HexagonDirections.SW] = new Vector2Int(-1, 0);
-        neighborOffsets[(int)HexagonDirections.NW] = new Vector2Int(-1, 1);
     }
 
     void Start()
     {
+        // Set Tile Dimmension
         Vector3 tileSize = tilePrefab.GetComponent<Renderer>().bounds.size;
         tileWidth = tileSize.x + tileMargin; 
         tileHeight = tileSize.z + tileMargin;
         GenerateTiles();
-        
-#if UNITY_EDITOR
-        UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
-#endif
 
         start = grid[Vector2Int.zero];
 
         Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
         AddRandomPaths(5, colors);
-
 
         foreach (infos info in path)
         {
@@ -56,6 +51,8 @@ public class TilesManager : MonoBehaviour
         }
 
         end = path[path.Count - 1].tile;
+
+
     }
 
     #region HardcodedTest
@@ -119,7 +116,7 @@ public class TilesManager : MonoBehaviour
     }
     #endregion
 
-    void GenerateTiles()
+    private void GenerateTiles()
     {
         int topLimit = 0;
         int botLimit = magnitude;
@@ -144,7 +141,6 @@ public class TilesManager : MonoBehaviour
         hexagonalTile.gridPosition = gridPosition;
         grid.Add(gridPosition, hexagonalTile);
     }
-
     public void FillNeighborTiles(HexagonalTile tile)
     {
         for (HexagonDirections direction = 0; direction < HexagonDirections.MAX; ++direction)
@@ -157,7 +153,6 @@ public class TilesManager : MonoBehaviour
             }
         }
     }
-
     public Vector3 GridToWorld(Vector2Int gridPosition)
     {
         int column = gridPosition.x, row = gridPosition.y;
