@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerVars : MonoBehaviour
 {
     [ShowOnly] public GameObject currentPlatform;
