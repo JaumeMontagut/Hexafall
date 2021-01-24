@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerVars : MonoBehaviour
 {
-    [ShowOnly] public GameObject currentPlatform;
+    [ShowOnly] public HexagonalTile currentPlatform;
 
     public float surfacePos;
 
@@ -31,15 +31,15 @@ public class PlayerVars : MonoBehaviour
         playerMove.timeFalling = 0.0f;
         falling = true;
 
-        currentPlatform.GetComponent<Platform>().ReduceAlpha();
-        currentPlatform.GetComponent<Platform>().StartRestoringAlphaWithFade();
+        //currentPlatform.GetComponent<Platform>().ReduceAlpha();
+        //currentPlatform.GetComponent<Platform>().StartRestoringAlphaWithFade();
     }
 
     public void DesactivateFalling()
     {
         playerMove.timeFalling = 0.0f;
         falling = false;
-        
+
     }
 
     public void ActiveMoving()

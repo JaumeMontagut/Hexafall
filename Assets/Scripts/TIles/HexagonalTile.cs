@@ -5,9 +5,20 @@ using UnityEngine;
 // Clockwise Hexagon Directions https://catlikecoding.com/unity/tutorials/hex-map/part-2/cell-neighbors/directions.png
 public class HexagonalTile : MonoBehaviour
 {
+    // Grid ------------------
+
     public Vector2Int gridPosition;
     public HexagonalTile[] neighborTiles;
     public float cost = 0f;
+
+    // Game -------------------
+
+    public bool isPath = false;
+
+    // Movements --------------
+
+    public ElasticMove elasticMove;
+
 
     private void Awake()
     {
@@ -33,4 +44,10 @@ public class HexagonalTile : MonoBehaviour
     {
         return neighborTiles[(int)direction];
     }
+
+    public void StartStaggerMovement()
+    {
+        elasticMove.StartMoving();
+    }
+
 }

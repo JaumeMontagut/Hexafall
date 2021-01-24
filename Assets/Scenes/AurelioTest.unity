@@ -311,7 +311,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 9110464528824428176, guid: 8f8052c926fa09c44b96976c9c748f54,
     type: 3}
   tileMargin: 0.1
-  magnitude: 5
+  magnitude: 9
 --- !u!4 &1530574334
 Transform:
   m_ObjectHideFlags: 0

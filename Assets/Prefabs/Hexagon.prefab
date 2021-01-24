@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 4794877857939534735}
   - component: {fileID: 7308818037645231941}
   - component: {fileID: -5440774962428742769}
-  m_Layer: 0
+  - component: {fileID: 1112461254435127963}
+  - component: {fileID: 464720205754377979}
+  m_Layer: 8
   m_Name: Hexagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,4 +95,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPosition: {x: 0, y: 0}
-  adjacentTiles: []
+  neighborTiles: []
+  cost: 0
+  isPath: 0
+  elasticMove: {fileID: 464720205754377979}
+--- !u!64 &1112461254435127963
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9110464528824428176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1522865456008400428, guid: 5b8495b3b3844ce44bbdc718032642da, type: 3}
+--- !u!114 &464720205754377979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9110464528824428176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8fffb36db64814188e3d18d9569eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalSpeed: 0.5

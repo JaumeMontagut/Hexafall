@@ -13,8 +13,7 @@ public class PlayerMove : MonoBehaviour
 
     private PlayerVars playerVars;
     private Animator animator;
-    private Vector3 destination;
-    private GameObject nextPlatform;
+    private HexagonalTile nextPlatform;
     float jumpStart = 0;
 
     private PhotonView photonView;
@@ -54,15 +53,16 @@ public class PlayerMove : MonoBehaviour
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        playerVars = GetComponent<PlayerVars>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        playerVars = GetComponent<PlayerVars>();
-        animator = GetComponent<Animator>();
+        transform.position = Managers.Tiles.start.transform.position;
+        playerVars.currentPlatform = Managers.Tiles.start;
 
         Managers.Game.players.Add(gameObject);
-        Managers.Map.SetPlayerToStartPlatform(gameObject);
     }
 
     public bool IsMine()
@@ -85,7 +85,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public bool StartMoving(GameObject platform)
+    public bool StartMoving(HexagonalTile platform)
     {
         availableMovements--;
         animator.SetTrigger("Jump");
@@ -134,9 +134,8 @@ public class PlayerMove : MonoBehaviour
         //Update the currentHexagon of the player
         playerVars.currentPlatform = nextPlatform;
         
-
         //check if its path and if it's not, active the player falling.
-        if (!nextPlatform.GetComponent<Platform>().isPath)
+        if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
         }
@@ -164,7 +163,7 @@ public class PlayerMove : MonoBehaviour
     public void Respawn()
     {
         //Move to the starting platform and assign it as the current platform.
-        transform.position = new Vector3(Managers.Map.startingPlatform.transform.position.x, playerVars.surfacePos, Managers.Map.startingPlatform.transform.position.z);
-        playerVars.currentPlatform = Managers.Map.startingPlatform;
+        transform.position = Managers.Tiles.start.transform.position;
+        playerVars.currentPlatform = Managers.Tiles.start;
     }
 }
