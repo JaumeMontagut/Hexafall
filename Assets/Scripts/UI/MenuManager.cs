@@ -31,4 +31,9 @@ public class MenuManager : MonoBehaviour
             menu.SetActive(true);
         }
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

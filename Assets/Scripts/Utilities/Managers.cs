@@ -8,4 +8,6 @@ public class Managers
     public static AudioManager Audio; 
     public static TilesManager Tiles;
     public static MapManager Map;
+    public static TurnManager Turn;
+    public static NetworkManager Network;
 }

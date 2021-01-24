@@ -37,7 +37,9 @@ public class TilesManager : MonoBehaviour
         GenerateTiles();
         center = grid[Vector2Int.zero];
 
+#if UNITY_EDITOR
         UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
+#endif
 
         Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
         AddRandomPaths(5, 0.3f, colors);

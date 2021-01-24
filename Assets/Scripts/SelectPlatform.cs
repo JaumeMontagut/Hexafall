@@ -22,7 +22,8 @@ public class SelectPlatform : MonoBehaviour
         if (playerMove.IsMine()
             && !playerVars.falling
             && !playerVars.moving
-            && Input.GetMouseButtonDown(0))
+            && Input.GetMouseButtonDown(0)
+            && playerMove.AvailableMovements > 0)
         {
             //TODO: if a character or something is between the mouse and the hexagon, it wil select that object and not the hexagon, not entering here!
             //          - posible solution: pick all the game objects that intersect with the ray and compare with all of them.

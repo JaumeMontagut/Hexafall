@@ -18,7 +18,38 @@ public class PlayerMove : MonoBehaviour
     float jumpStart = 0;
 
     private PhotonView photonView;
-    [SerializeField] private bool debug = false;
+
+    private int availableMovements = 0;
+
+    public int AvailableMovements
+    {
+        get
+        {
+            return availableMovements;
+        }
+        set
+        {
+            const float onIntensity = 7f;
+            const float offIntensity = 5f;
+
+            availableMovements = value;
+            if (availableMovements > 0)
+            {
+                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
+                {
+                    material.SetVector("_EmissionColor", material.color * onIntensity);
+                }
+            }
+            else
+            {
+                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
+                {
+                    material.SetVector("_EmissionColor", material.color * offIntensity);
+                }
+            }
+        }
+    }
+
 
     void Awake()
     {
@@ -36,7 +67,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool IsMine()
     {
-        return debug || photonView.IsMine;
+        return Managers.Game.playLocal || photonView.IsMine;
     }
 
     void Update()
@@ -56,6 +87,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool StartMoving(GameObject platform)
     {
+        availableMovements--;
         animator.SetTrigger("Jump");
         nextPlatform = platform;
         playerVars.ActiveMoving();
