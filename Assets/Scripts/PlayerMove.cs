@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -52,6 +53,15 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+       
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening(MyEventType.PlayerJumpTop, SetToMove);
+    }
 
     void Awake()
     {
@@ -59,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         playerVars = GetComponent<PlayerVars>();
         animator = GetComponent<Animator>();
     }
-
+    
     private void Start()
     {
         //Set the starting emission color on playerVars
@@ -75,6 +85,9 @@ public class PlayerMove : MonoBehaviour
         playerVars.currentPlatform = Managers.Tiles.start;
 
         Managers.Game.players.Add(gameObject);
+     
+        EventManager.StartListening(MyEventType.PlayerJumpTop, SetToMove);
+        EventManager.StartListening(MyEventType.PlayerEndJump, EndMove);
     }
 
     public bool IsMine()
@@ -106,6 +119,7 @@ public class PlayerMove : MonoBehaviour
 
         // Set rotation
         Vector3 moveVec = nextPlatform.transform.position - transform.position;
+        moveSpeed = (float) moveVec.magnitude / 0.6F* 2;
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
         jumpStart = Time.time;
@@ -113,33 +127,39 @@ public class PlayerMove : MonoBehaviour
 
         return true;
     }
+
+    
     bool doElasticAnimation = true;
+    bool move = false;
     public void Moving()
     {
-        
-        Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position;
-        if(Time.time - jumpStart >= 0.35F)
+        if(move)
         {
-            transform.position += new Vector3( moveVec.normalized.x, 0 , moveVec.normalized.z ) * Time.deltaTime * moveSpeed;
+            Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position;
+            transform.position += new Vector3(moveVec.normalized.x, 0, moveVec.normalized.z) * Time.deltaTime * moveSpeed;
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
             {
                 nextPlatform.GetComponent<ElasticMove>().StartMoving();
                 doElasticAnimation = false;
             }
-            if (moveVec.sqrMagnitude <= 0)
-            {
-                EndMove();
-            }
-            
         }
-        
     }
-    public bool EndMove()
-    {
-        ///Move the player to the new hexagon.
 
-        bool ret = false;
+    void SetToMove(dynamic info)
+    {
+        if ((GameObject)info == gameObject)
+            move = true;
+    }
+   
+
+    public void EndMove(dynamic info)
+    {
+        if (info != gameObject)
+            return;
+        ///Move the player to the new hexagon.
+        transform.position = nextPlatform.transform.position;
+        move = false;
         doElasticAnimation = true;
         //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
@@ -151,9 +171,8 @@ public class PlayerMove : MonoBehaviour
         if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
+           
         }
-
-        ret = true;
 
 
         if (playerVars.currentPlatform == Managers.Tiles.end)
@@ -164,7 +183,7 @@ public class PlayerMove : MonoBehaviour
             
         }
 
-        return ret;
+        return ;
     }
 
     public void Fall()
@@ -178,6 +197,7 @@ public class PlayerMove : MonoBehaviour
         {
             Respawn();
             playerVars.DesactivateFalling();
+            animator.SetTrigger("FallToPlatform");
         }
     }
 
@@ -186,5 +206,6 @@ public class PlayerMove : MonoBehaviour
         //Move to the starting platform and assign it as the current platform.
         transform.position = Managers.Tiles.start.transform.position + playerVars.offset;
         playerVars.currentPlatform = Managers.Tiles.start;
+       
     }
 }

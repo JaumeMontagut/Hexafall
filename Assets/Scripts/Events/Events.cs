@@ -11,7 +11,7 @@ namespace MyEvents
         PlayerJumpTop,
 
         #endregion
-
+        PlayerEndJump,
         #region Game
 
 

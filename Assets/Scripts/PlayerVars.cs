@@ -25,7 +25,7 @@ public class PlayerVars : MonoBehaviour
     {
         playerMove = GetComponent<PlayerMove>();
         moving = false;
-        offset = new Vector3(0.0f, 0, 0.0f);
+        offset = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     public void ActivateFalling()
