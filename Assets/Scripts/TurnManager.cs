@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
+    public bool stopTimer = false;
     [SerializeField] private float turnDuration = 0f;                                     //How long does a turn last.
     [ShowOnly] private float turnTimer = 0f;                                              //Timer for every turn.
 
@@ -28,6 +29,8 @@ public class TurnManager : MonoBehaviour
         timerPlane2 = timerUI.transform.Find("Plane2").GetComponent<RectTransform>();
 
         foregroundPlane = timerPlane2;
+
+        stopTimer = false;
     }
 
     public float TurnTimer
@@ -52,7 +55,7 @@ public class TurnManager : MonoBehaviour
     {
         TurnTimer -= Time.deltaTime;
 
-        if (TurnTimer <= 0f)
+        if (TurnTimer <= 0f && !stopTimer)
         {
             //End of the turn
             
