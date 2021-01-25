@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyEvents;
 using Photon.Pun;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,32 +25,40 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 
-        //EventManager.TriggerEvent(MyEventType.PlayerReachGoal, null);      //don't know how to use srry.
         foreach (GameObject player in players)
         {
             if (player.GetComponent<PlayerVars>().currentPlatform == Managers.Tiles.end)
             {
                 //This player wins!!
+                EventManager.TriggerEvent(MyEventType.PlayerReachGoal, players[0]);
 
-                //Desactivate game flow
-                Managers.Turn.stopTimer = true;
-                foreach (GameObject player2 in players)
-                {
-                    player2.GetComponent<PlayerMove>().AvailableMovements = 0;
-                }
-
-                //Move Camera
-                GameObject camera = GameObject.Find("Main Camera");
-
-                GameObject endPlatform = Managers.Tiles.end.gameObject;
-                camera.transform.position = new Vector3(endPlatform.transform.position.x + 2, endPlatform.transform.position.y + 0.5f, endPlatform.transform.position.z);
-                camera.transform.rotation = Quaternion.Euler(0, -90, 0);
             }
         }
 
 
 
     }
+
+    private void OnEnable()
+    {
+        Action<dynamic> function = DisableMovementPlayers;
+        EventManager.StartListening(MyEventType.PlayerReachGoal, DisableMovementPlayers);
+    }
+
+    private void OnDisable()
+    {
+        Action<dynamic> function = DisableMovementPlayers;
+        EventManager.StopListening(MyEventType.PlayerReachGoal, function);
+    }
+
+    private void DisableMovementPlayers(dynamic info)
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMove>().AvailableMovements = 0;
+        }
+    }
+
 
     public PhotonView GetCurrentPhotonView()
     {

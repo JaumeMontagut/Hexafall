@@ -6,22 +6,15 @@ using Photon.Pun;
 
 public class ClientManager : MonoBehaviour
 {
-    PhotonView photonView;
+    public PhotonView photonView;
 
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
     }
 
-    private void Start()
-    {
-        if (photonView.IsMine)
-        {
-            CreateController();
-        }
-    }
-
-    private void CreateController()
+    [PunRPC]
+    private void SpawnPlayer()
     {
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), Vector3.zero, Quaternion.identity);
     }
