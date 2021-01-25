@@ -9,4 +9,5 @@ public class Managers
     public static TilesManager Tiles;
     public static TurnManager Turn;
     public static NetworkManager Network;
+    public static UIManager ui;
 }

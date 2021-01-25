@@ -37,18 +37,18 @@ public class SelectPlatform : MonoBehaviour
             {
                 List<HexagonalTile> neighbors = playerVars.currentPlatform.GetNeighbors();
 
-                foreach (HexagonalTile neighbor in neighbors)
-                {
-                    if (neighbor.gameObject == hitInfo.transform.gameObject)
-                    {
+               // foreach (HexagonalTile neighbor in neighbors)
+               // {
+                  //  if (neighbor.gameObject == hitInfo.transform.gameObject)
+                  //  {
                         //Try to move the player to the new hexagon.
-                        if (!playerMove.StartMoving(neighbor))
+                        if (!playerMove.StartMoving(/*neighbor*/hitInfo.transform.gameObject.GetComponent<HexagonalTile>()))
                         {
                             print("ERROR: Problem when trying to move the player to the new platform!");
                         }
-                        break;
-                    }
-                }
+                      //  break;
+                 //   }
+               // }
             }
         }
     }
