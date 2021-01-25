@@ -35,6 +35,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     private void Start()
     {
         Debug.Log("Connecting to Master 1");
+        MenuManager.Instance.OpenMenu("LoadingMenu");
         PhotonNetwork.ConnectUsingSettings();
     }
 

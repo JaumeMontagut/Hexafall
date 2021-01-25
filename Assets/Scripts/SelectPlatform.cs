@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SelectPlatform : MonoBehaviour
 {
     private PlayerVars playerVars;
     private PlayerMove playerMove;
+    private PhotonView photonView;
 
     void Start()
     {
         playerVars = GetComponent<PlayerVars>();
         playerMove = GetComponent<PlayerMove>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -19,7 +22,7 @@ public class SelectPlatform : MonoBehaviour
         //      Desactivate this component when select a new Hexagon and move
         //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
 
-        if (playerMove.IsMine()
+        if (photonView.IsMine
             && !playerVars.falling
             && !playerVars.moving
             && Input.GetMouseButtonDown(0)
@@ -34,18 +37,18 @@ public class SelectPlatform : MonoBehaviour
             {
                 List<HexagonalTile> neighbors = playerVars.currentPlatform.GetNeighbors();
 
-                foreach (HexagonalTile neighbor in neighbors)
-                {
-                    if (neighbor.gameObject == hitInfo.transform.gameObject)
-                    {
+               // foreach (HexagonalTile neighbor in neighbors)
+               // {
+                  //  if (neighbor.gameObject == hitInfo.transform.gameObject)
+                  //  {
                         //Try to move the player to the new hexagon.
-                        if (!playerMove.StartMoving(neighbor))
+                        if (!playerMove.StartMoving(/*neighbor*/hitInfo.transform.gameObject.GetComponent<HexagonalTile>()))
                         {
                             print("ERROR: Problem when trying to move the player to the new platform!");
                         }
-                        break;
-                    }
-                }
+                      //  break;
+                 //   }
+               // }
             }
         }
     }

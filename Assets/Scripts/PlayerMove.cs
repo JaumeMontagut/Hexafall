@@ -90,14 +90,9 @@ public class PlayerMove : MonoBehaviour
         EventManager.StartListening(MyEventType.PlayerEndJump, EndMove);
     }
 
-    public bool IsMine()
-    {
-        return Managers.Game.playLocal || photonView.IsMine;
-    }
-
     void Update()
     {
-        if (IsMine())
+        if (photonView.IsMine)
         {
             if (playerVars.falling)
             {
