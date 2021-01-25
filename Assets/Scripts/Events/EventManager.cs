@@ -8,7 +8,7 @@ namespace MyEvents
     public static class EventManager
     {
         private static Dictionary<MyEventType, Action<dynamic>> eventListeners;
-
+        
         public static void StartListening(MyEventType eventType, Action<dynamic> listener)
         {
             if (eventListeners == null)
