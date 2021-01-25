@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
+using System.IO;
 
 // Clockwise Hexagon Directions https://catlikecoding.com/unity/tutorials/hex-map/part-2/cell-neighbors/directions.png
 // Cordinate Hexagonal Grid https://media.discordapp.net/attachments/795280554890231861/798741491991707678/unknown.png
@@ -27,7 +28,6 @@ public class TilesManager : MonoBehaviour
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
-
         Managers.Tiles = this;
         grid = new Dictionary<Vector2Int, HexagonalTile>();
     }
@@ -38,21 +38,40 @@ public class TilesManager : MonoBehaviour
         Vector3 tileSize = tilePrefab.GetComponent<Renderer>().bounds.size;
         tileWidth = tileSize.x + tileMargin; 
         tileHeight = tileSize.z + tileMargin;
-        GenerateTiles();
 
-        start = grid[Vector2Int.zero];
-
-        Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
-        AddRandomPaths(5, colors);
-
-        foreach (infos info in path)
+        if (PhotonNetwork.IsMasterClient || Managers.Game.playLocal)
         {
-            info.tile.isPath = true;
+            GenerateTiles();
+
+            start = grid[Vector2Int.zero];
+
+            Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
+            AddRandomPaths(start, 5, colors);
+
+            end = path[path.Count - 1].tile;
+
+            List<int> pathIds = new List<int>();
+
+            foreach( infos info in path)
+            {
+                if(!pathIds.Contains(info.tile.photonView.ViewID))
+                    pathIds.Add(info.tile.photonView.ViewID);
+            }
+
+            photonView.RPC("SetPath", RpcTarget.All, start.photonView.ViewID, end.photonView.ViewID,   pathIds.ToArray());
         }
+    }
+    
+    [PunRPC]
+    void SetPath(int startId, int endPos, int[] pathIds)
+    {
+        start = PhotonNetwork.GetPhotonView(startId).GetComponent<HexagonalTile>();
+        end =  PhotonNetwork.GetPhotonView(endPos).GetComponent<HexagonalTile>();
 
-        end = path[path.Count - 1].tile;
-
-
+        foreach (int id in pathIds)
+        {
+            PhotonNetwork.GetPhotonView(id).GetComponent<HexagonalTile>().isPath = true;
+        }
     }
 
     #region HardcodedTest
@@ -66,11 +85,11 @@ public class TilesManager : MonoBehaviour
     List<infos> path = new List<infos>();
     float costIncrement = 4f;
 
-    public void AddRandomPaths(int numPaths,  Color[] colors)
+    public void AddRandomPaths(HexagonalTile start, int numPaths,  Color[] colors)
     {
         HexagonalTile currentTile = start;
 
-        for (int i = 1; i < numPaths; i++)
+        for (int i = 0; i < numPaths; i++)
         {
             currentTile = AddRandomPath(currentTile, colors[i]);
         }
@@ -111,7 +130,7 @@ public class TilesManager : MonoBehaviour
         foreach (var item in path)
         {
             Gizmos.color = item.color;
-            Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, 1f, 0), 0.3f);
+            Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, 0.2f, 0), 0.16f);
         }
     }
     #endregion
@@ -136,7 +155,11 @@ public class TilesManager : MonoBehaviour
     }
     private void InstantiateTile(Vector2Int gridPosition)
     {
-        GameObject intance = Instantiate(tilePrefab, GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up), transform);
+        GameObject intance = (Managers.Game.playLocal)
+        ? Instantiate(tilePrefab, GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up))
+        : PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
+
+        //GameObject 
         HexagonalTile hexagonalTile = intance.GetComponent<HexagonalTile>();
         hexagonalTile.gridPosition = gridPosition;
         grid.Add(gridPosition, hexagonalTile);

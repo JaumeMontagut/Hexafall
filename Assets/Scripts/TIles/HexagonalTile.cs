@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Clockwise Hexagon Directions https://catlikecoding.com/unity/tutorials/hex-map/part-2/cell-neighbors/directions.png
 public class HexagonalTile : MonoBehaviour
 {
+    public PhotonView photonView;
+    public ElasticMove elasticMove;
+
     // Grid ------------------
 
     public Vector2Int gridPosition;
@@ -15,16 +19,15 @@ public class HexagonalTile : MonoBehaviour
 
     public bool isPath = false;
 
-    // Movements --------------
-
-    public ElasticMove elasticMove;
-
-
     private void Awake()
     {
         neighborTiles = new HexagonalTile[6];
     }
 
+    private void Start()
+    {
+        transform.parent = Managers.Tiles.transform;
+    }
     public List<HexagonalTile> GetNeighbors()
     {
         List<HexagonalTile> ret = new List<HexagonalTile>();
