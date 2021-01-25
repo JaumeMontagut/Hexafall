@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using Photon.Pun;
 using UnityEngine.UI;
+using MyEvents;
+using System;
+using Random = UnityEngine.Random;
+
 
 public class TurnManager : MonoBehaviour
 {
@@ -69,6 +73,23 @@ public class TurnManager : MonoBehaviour
         }
 
         //ReduceTurnDuration();
+    }
+
+    private void OnEnable()
+    {
+        Action<dynamic> function = StopTimer;
+        EventManager.StartListening(MyEventType.PlayerReachGoal, StopTimer);
+    }
+
+    private void OnDisable()
+    {
+        Action<dynamic> function = StopTimer;
+        EventManager.StopListening(MyEventType.PlayerReachGoal, function);
+    }
+
+    private void StopTimer(dynamic info)
+    {
+        stopTimer = true;
     }
 
     void ReduceTurnDuration()

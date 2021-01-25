@@ -10,7 +10,7 @@ public class PlayerVars : MonoBehaviour
 
     private PlayerMove playerMove;
     [HideInInspector] public Color emissiveColor;
-
+    [HideInInspector] public Vector3 offset;
     public bool falling 
     {
         get; private set; 
@@ -25,6 +25,7 @@ public class PlayerVars : MonoBehaviour
     {
         playerMove = GetComponent<PlayerMove>();
         moving = false;
+        offset = new Vector3(0.0f, 0, 0.0f);
     }
 
     public void ActivateFalling()
