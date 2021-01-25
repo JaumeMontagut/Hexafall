@@ -60,12 +60,7 @@ public class TurnManager : MonoBehaviour
             //End of the turn
             
             // player.GetComponent<PlayerVars>().moving = false;
-
-            if (Managers.Game.playLocal)
-            {
-                Managers.Network.TimerReset();
-            }
-            else if (PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
             {
                 //We get the MasterClient's PhotonView and call a function in all the other clients
                 PhotonView photonView = Managers.Network.GetComponent<PhotonView>();
@@ -116,8 +111,7 @@ public class TurnManager : MonoBehaviour
         {
             backgroundHue = Random.Range(0f, 1f);
         } while (Mathf.Abs(backgroundHue - nextForegroundHue) < (minHueDifference / 360f));
-        Color backgroundColor = Color.HSVToRGB(backgroundHue, 1f, 1f);
-        backgroundColor.a = 0.5f;
+        Color backgroundColor = Color.HSVToRGB(backgroundHue, 1f, 0.25f);
         foregroundPlane.GetComponent<Image>().color = backgroundColor;
     }
 }

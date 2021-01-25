@@ -13,7 +13,7 @@ public class TilesManager : MonoBehaviour
     #region Atributes
     public GameObject tilePrefab;
     public float tileMargin = 0.1f;
-    [Range(1, 10)] 
+    [Range(1, 10)]
     public int magnitude = 1;
     private float tileHeight = 0f, tileWidth = 0f;
     private static Vector2Int[] neighborOffsets = { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(1, -1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(-1, 1) };
@@ -21,6 +21,8 @@ public class TilesManager : MonoBehaviour
     #endregion
     private PhotonView photonView;
     private Dictionary<Vector2Int, HexagonalTile> grid;
+
+    public bool hasSetupPath  { private set; get; }
 
     [HideInInspector] public HexagonalTile start { get; private set; }
     [HideInInspector] public HexagonalTile end { get; private set; }
@@ -39,36 +41,44 @@ public class TilesManager : MonoBehaviour
         tileWidth = tileSize.x + tileMargin; 
         tileHeight = tileSize.z + tileMargin;
 
-        if (PhotonNetwork.IsMasterClient || Managers.Game.playLocal)
+        if (PhotonNetwork.IsMasterClient)
         {
-            GenerateTiles();
-
-            start = grid[Vector2Int.zero];
-
-            Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
-            AddRandomPaths(start, 3, colors);
-
-            end = path[path.Count - 1].tile;
-
-            List<int> pathIds = new List<int>();
-
-            foreach( infos info in path)
-            {
-                if(!pathIds.Contains(info.tile.photonView.ViewID))
-                    pathIds.Add(info.tile.photonView.ViewID);
-            }
-
-            photonView.RPC("SetPath", RpcTarget.AllBuffered, start.photonView.ViewID, end.photonView.ViewID,   pathIds.ToArray());
-
-            ClientManager[] clients = FindObjectsOfType<ClientManager>();
-
-            foreach (ClientManager client in clients)
-            {
-                client.photonView.RPC("SpawnPlayer", RpcTarget.AllBuffered);
-            }
+            GenerateAll();
         }
     }
-    
+
+    public void GenerateAll()
+    {
+        hasSetupPath = true;
+
+        GenerateTiles();
+
+        start = grid[Vector2Int.zero];
+
+        Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
+        AddRandomPaths(start, 3, colors);
+
+        end = path[path.Count - 1].tile;
+
+        List<int> pathIds = new List<int>();
+
+        foreach (infos info in path)
+        {
+            if (!pathIds.Contains(info.tile.photonView.ViewID))
+                pathIds.Add(info.tile.photonView.ViewID);
+        }
+
+        photonView.RPC("SetPath", RpcTarget.AllBuffered, start.photonView.ViewID, end.photonView.ViewID, pathIds.ToArray());
+
+        ClientManager[] clients = FindObjectsOfType<ClientManager>();
+
+        foreach (ClientManager client in clients)
+        {
+            client.photonView.RPC("SpawnPlayer", RpcTarget.AllBuffered);
+        }
+    }
+
+
     [PunRPC]
     void SetPath(int startId, int endPos, int[] pathIds)
     {
@@ -167,9 +177,7 @@ public class TilesManager : MonoBehaviour
     }
     private void InstantiateTile(Vector2Int gridPosition)
     {
-        GameObject intance = (Managers.Game.playLocal)
-        ? Instantiate(tilePrefab, GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up))
-        : PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
+        GameObject intance = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
 
         //GameObject 
         HexagonalTile hexagonalTile = intance.GetComponent<HexagonalTile>();

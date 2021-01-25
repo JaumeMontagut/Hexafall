@@ -76,14 +76,9 @@ public class PlayerMove : MonoBehaviour
         Managers.Game.players.Add(gameObject);
     }
 
-    public bool IsMine()
-    {
-        return Managers.Game.playLocal || photonView.IsMine;
-    }
-
     void Update()
     {
-        if (IsMine())
+        if (photonView.IsMine)
         {
             if (playerVars.falling)
             {

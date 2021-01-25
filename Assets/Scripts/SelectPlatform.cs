@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SelectPlatform : MonoBehaviour
 {
     private PlayerVars playerVars;
     private PlayerMove playerMove;
+    private PhotonView photonView;
 
     void Start()
     {
         playerVars = GetComponent<PlayerVars>();
         playerMove = GetComponent<PlayerMove>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -19,7 +22,7 @@ public class SelectPlatform : MonoBehaviour
         //      Desactivate this component when select a new Hexagon and move
         //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
 
-        if (playerMove.IsMine()
+        if (photonView.IsMine
             && !playerVars.falling
             && !playerVars.moving
             && Input.GetMouseButtonDown(0)

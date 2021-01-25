@@ -7,17 +7,16 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public List<GameObject> players;
-    
-    [Tooltip("Check this bool if you're developing the game, using only one player to move around the squares")]
-    public bool playLocal;
 
     void Awake()
     {
         Managers.Game = this;
 
-        if (playLocal)
+        //RoomManager is an object that comes from the MainMenuScene and doesn't destroy on the loading of the scene
+        //We check if it exists to see if you started playing from the GameScene
+        if (FindObjectOfType<RoomManager>() == null)
         {
-            PhotonNetwork.OfflineMode = true;
+            gameObject.AddComponent<DebugEnterRoom>();
         }
     }
 
@@ -46,9 +45,6 @@ public class GameManager : MonoBehaviour
                 camera.transform.rotation = Quaternion.Euler(0, -90, 0);
             }
         }
-
-
-
     }
 
     public PhotonView GetCurrentPhotonView()
