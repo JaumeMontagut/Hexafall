@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Photon.Pun;
+using MyEvents;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -153,7 +154,15 @@ public class PlayerMove : MonoBehaviour
 
         ret = true;
 
-       
+
+        if (playerVars.currentPlatform == Managers.Tiles.end)
+        {
+
+            //This player wins!!
+            EventManager.TriggerEvent(MyEventType.PlayerReachGoal, gameObject/*the player*/);
+            
+        }
+
         return ret;
     }
 

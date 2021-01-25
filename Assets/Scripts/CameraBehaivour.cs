@@ -5,8 +5,13 @@ using System;
 using MyEvents;
 
 
+
+
 public class CameraBehaivour : MonoBehaviour
 {
+    public float timeInTransition;
+    [ShowOnly] public float transitionTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +41,24 @@ public class CameraBehaivour : MonoBehaviour
         //Move Camera
 
         GameObject endPlatform = Managers.Tiles.end.gameObject;
-        Camera.main.transform.position = new Vector3(endPlatform.transform.position.x + 2, endPlatform.transform.position.y + 0.5f, endPlatform.transform.position.z);
-        Camera.main.transform.rotation = Quaternion.Euler(0, -90, 0);
+        Vector3 finalPos = new Vector3(endPlatform.transform.position.x + 2, endPlatform.transform.position.y + 0.5f, endPlatform.transform.position.z);
+        Quaternion finalRot = Quaternion.Euler(0, -90, 0);
+
+        StartCoroutine(TransitionCamera(transform.position, finalPos, transform.rotation, finalRot));
+    }
+
+    IEnumerator TransitionCamera(Vector3 initialPos, Vector3 finalPos, Quaternion initialRot, Quaternion finalRot)
+    {
+        while(transitionTimer < timeInTransition)
+        {
+            float ratio = transitionTimer / timeInTransition;
+
+            transform.position = Vector3.Lerp(initialPos, finalPos, ratio);
+            transform.rotation = Quaternion.Lerp(initialRot, finalRot,ratio);
+
+            transitionTimer += Time.deltaTime;
+            yield return null;
+        }
+        
     }
 }

@@ -8,7 +8,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public List<GameObject> players;
-    
+    bool finished = false;
     [Tooltip("Check this bool if you're developing the game, using only one player to move around the squares")]
     public bool playLocal;
 
@@ -24,19 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
-        foreach (GameObject player in players)
-        {
-            if (player.GetComponent<PlayerVars>().currentPlatform == Managers.Tiles.end)
-            {
-                //This player wins!!
-                EventManager.TriggerEvent(MyEventType.PlayerReachGoal, players[0]);
-
-            }
-        }
-
-
-
     }
 
     private void OnEnable()
