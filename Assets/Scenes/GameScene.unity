@@ -874,6 +874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f992ceb951f50c349a85c21d278e36e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeInTransition: 2
+  transitionTimer: 0
 --- !u!1 &1047757011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,12 +1583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.9481132, b: 0.9481132, a: 1}
-  glowBrightness: 3.73
-  outlineWidth: 3
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!212 &1933739868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1744,6 +1740,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1118788463456870984, guid: 88f350cedb2a2994c8df5640836e770c,
+        type: 3}
+      propertyPath: magnitude
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1118788463456870985, guid: 88f350cedb2a2994c8df5640836e770c,
         type: 3}
       propertyPath: m_Name
