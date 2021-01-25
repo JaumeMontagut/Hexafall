@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
     private HexagonalTile nextPlatform;
     float jumpStart = 0;
-
+    float moveSpeed = 2f;
     PhotonView photonView;
 
     int availableMovements = 1;
@@ -108,30 +108,31 @@ public class PlayerMove : MonoBehaviour
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
         jumpStart = Time.time;
+        
+
         return true;
     }
     bool doElasticAnimation = true;
     public void Moving()
     {
         
-        Vector3 moveVec = nextPlatform.transform.position - transform.position;
+        Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position;
         if(Time.time - jumpStart >= 0.35F)
         {
-            transform.position += new Vector3( moveVec.normalized.x, 0 , moveVec.normalized.z ) * Time.deltaTime * 1f;
+            transform.position += new Vector3( moveVec.normalized.x, 0 , moveVec.normalized.z ) * Time.deltaTime * moveSpeed;
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
             {
                 nextPlatform.GetComponent<ElasticMove>().StartMoving();
                 doElasticAnimation = false;
             }
-            if (moveVec.sqrMagnitude <= 0.03)
+            if (moveVec.sqrMagnitude <= 0)
             {
                 EndMove();
             }
             
         }
         
-       
     }
     public bool EndMove()
     {
@@ -174,7 +175,7 @@ public class PlayerMove : MonoBehaviour
     public void Respawn()
     {
         //Move to the starting platform and assign it as the current platform.
-        transform.position = Managers.Tiles.start.transform.position;
+        transform.position = Managers.Tiles.start.transform.position + playerVars.offset;
         playerVars.currentPlatform = Managers.Tiles.start;
     }
 }

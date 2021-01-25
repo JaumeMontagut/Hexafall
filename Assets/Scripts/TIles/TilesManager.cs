@@ -50,6 +50,8 @@ public class TilesManager : MonoBehaviour
 
             end = path[path.Count - 1].tile;
 
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Star"), end.transform.position, Quaternion.identity);
+
             List<int> pathIds = new List<int>();
 
             foreach( infos info in path)

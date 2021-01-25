@@ -984,6 +984,7 @@ MonoBehaviour:
   currentPlatform: {fileID: 0}
   surfacePos: 0.136
   emissiveColor: {r: 0, g: 0, b: 0, a: 0}
+  offset: {x: 0.3, y: 0, z: 0.3}
 --- !u!136 &1743059218
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1071,6 +1072,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Jump
+  - Type: 9
+    SynchronizeType: 0
+    Name: FallToPlatform
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
