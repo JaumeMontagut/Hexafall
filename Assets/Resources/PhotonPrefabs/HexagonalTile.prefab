@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: -5440774962428742769}
   - component: {fileID: 1112461254435127963}
   - component: {fileID: 464720205754377979}
+  - component: {fileID: 4730832278460601692}
   m_Layer: 8
-  m_Name: Hexagon
+  m_Name: HexagonalTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,11 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53449bbbf3324874787a9718cc411d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 4730832278460601692}
+  elasticMove: {fileID: 464720205754377979}
   gridPosition: {x: 0, y: 0}
   neighborTiles: []
   cost: 0
   isPath: 0
-  elasticMove: {fileID: 464720205754377979}
 --- !u!64 &1112461254435127963
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -126,3 +128,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 0.5
+--- !u!114 &4730832278460601692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9110464528824428176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 0
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
