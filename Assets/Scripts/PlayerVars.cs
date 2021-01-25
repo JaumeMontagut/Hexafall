@@ -9,6 +9,7 @@ public class PlayerVars : MonoBehaviour
     public float surfacePos;
 
     private PlayerMove playerMove;
+    [HideInInspector] public Color emissiveColor;
 
     public bool falling 
     {

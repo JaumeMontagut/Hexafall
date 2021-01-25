@@ -113,6 +113,8 @@ public class TurnManager : MonoBehaviour
         {
             backgroundHue = Random.Range(0f, 1f);
         } while (Mathf.Abs(backgroundHue - nextForegroundHue) < (minHueDifference / 360f));
-        foregroundPlane.GetComponent<Image>().color = Color.HSVToRGB(backgroundHue, 1f, 1f);
+        Color backgroundColor = Color.HSVToRGB(backgroundHue, 1f, 1f);
+        backgroundColor.a = 0.5f;
+        foregroundPlane.GetComponent<Image>().color = backgroundColor;
     }
 }

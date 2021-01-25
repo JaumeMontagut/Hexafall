@@ -16,9 +16,12 @@ public class PlayerMove : MonoBehaviour
     private HexagonalTile nextPlatform;
     float jumpStart = 0;
 
-    private PhotonView photonView;
+    PhotonView photonView;
 
-    private int availableMovements = 0;
+    int availableMovements = 1;
+
+    const float onIntensity = 21f;
+    const float offIntensity = 7f;
 
     public int AvailableMovements
     {
@@ -28,22 +31,21 @@ public class PlayerMove : MonoBehaviour
         }
         set
         {
-            const float onIntensity = 7f;
-            const float offIntensity = 5f;
-
             availableMovements = value;
             if (availableMovements > 0)
             {
                 foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
                 {
-                    material.SetVector("_EmissionColor", material.color * onIntensity);
+                    material.EnableKeyword("_EMISSION");
+                    material.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
                 }
             }
             else
             {
                 foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
                 {
-                    material.SetVector("_EmissionColor", material.color * offIntensity);
+                    material.EnableKeyword("_EMISSION");
+                    material.SetVector("_EmissionColor", playerVars.emissiveColor * offIntensity);
                 }
             }
         }
@@ -59,6 +61,15 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        //Set the starting emission color on playerVars
+        Material[] playerMaterials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        playerVars.emissiveColor = playerMaterials[0].GetColor("_EmissionColor");
+        foreach (Material mat in playerMaterials)
+        {
+            mat.EnableKeyword("_EMISSION");
+            mat.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
+        }
+
         transform.position = Managers.Tiles.start.transform.position;
         playerVars.currentPlatform = Managers.Tiles.start;
 
@@ -87,7 +98,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool StartMoving(HexagonalTile platform)
     {
-        availableMovements--;
+        AvailableMovements--;
         animator.SetTrigger("Jump");
         nextPlatform = platform;
         playerVars.ActiveMoving();
