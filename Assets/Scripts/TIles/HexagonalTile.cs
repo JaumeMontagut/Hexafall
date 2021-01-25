@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Clockwise Hexagon Directions https://catlikecoding.com/unity/tutorials/hex-map/part-2/cell-neighbors/directions.png
-public class HexagonalTile : MonoBehaviour
+public class HexagonalTile : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public PhotonView photonView;
     public ElasticMove elasticMove;
 
     // Grid ------------------
@@ -21,7 +20,7 @@ public class HexagonalTile : MonoBehaviour
 
     private void Awake()
     {
-        neighborTiles = new HexagonalTile[6];
+        neighborTiles = new HexagonalTile[(int)HexagonDirections.MAX];
     }
 
     private void Start()
@@ -53,4 +52,29 @@ public class HexagonalTile : MonoBehaviour
         elasticMove.StartMoving();
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Neighbors
+            for (int i = 0; i < 6; i++)
+            {
+                int id = (neighborTiles[i]) ? neighborTiles[i].photonView.ViewID : -1;
+                stream.SendNext(id);
+            }
+            stream.SendNext(isPath);
+        }
+        else
+        {
+            // Neighbors
+            for (int i = 0; i < 6; i++)
+            {
+                int id = (int)stream.ReceiveNext();
+                if (id == -1) continue;
+                if (neighborTiles[i] != null && neighborTiles[i].photonView.ViewID == id) continue;
+                neighborTiles[i] = PhotonNetwork.GetPhotonView(id).gameObject.GetComponent<HexagonalTile>();
+            }
+            isPath = (bool)stream.ReceiveNext();
+        }
+    }
 }

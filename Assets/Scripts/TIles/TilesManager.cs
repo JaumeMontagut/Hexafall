@@ -46,7 +46,7 @@ public class TilesManager : MonoBehaviour
             start = grid[Vector2Int.zero];
 
             Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
-            AddRandomPaths(start, 5, colors);
+            AddRandomPaths(start, 3, colors);
 
             end = path[path.Count - 1].tile;
 
@@ -58,7 +58,14 @@ public class TilesManager : MonoBehaviour
                     pathIds.Add(info.tile.photonView.ViewID);
             }
 
-            photonView.RPC("SetPath", RpcTarget.All, start.photonView.ViewID, end.photonView.ViewID,   pathIds.ToArray());
+            photonView.RPC("SetPath", RpcTarget.AllBuffered, start.photonView.ViewID, end.photonView.ViewID,   pathIds.ToArray());
+
+            ClientManager[] clients = FindObjectsOfType<ClientManager>();
+
+            foreach (ClientManager client in clients)
+            {
+                client.photonView.RPC("SpawnPlayer", RpcTarget.AllBuffered);
+            }
         }
     }
     
@@ -83,7 +90,7 @@ public class TilesManager : MonoBehaviour
     }
 
     List<infos> path = new List<infos>();
-    float costIncrement = 4f;
+    float costIncrement = 100f;
 
     public void AddRandomPaths(HexagonalTile start, int numPaths,  Color[] colors)
     {
@@ -95,26 +102,21 @@ public class TilesManager : MonoBehaviour
         }
     }
 
-    public HexagonalTile AddRandomPath(HexagonalTile last, Color color)
+    public HexagonalTile AddRandomPath(HexagonalTile startPath, Color color)
     {
+        AddCostAround(startPath);
         HexagonalTile randomTile;
-
         do
         {
             randomTile = grid.ElementAt(Random.Range(0, grid.Count)).Value;
         }
-        while (randomTile.cost != 0f);
+        while (randomTile.cost != 0f /*&& (randomTile.transform.position - last.transform.position).sqrMagnitude > 3f*/ ) ;
 
-        List<HexagonalTile> list = (Pathfinding.GeneratePath(last, randomTile));
+        List<HexagonalTile> list = (Pathfinding.GeneratePath(startPath, randomTile));
 
         foreach (HexagonalTile item in list)
         {
-            List<HexagonalTile> neighbors = item.GetNeighbors();
-            item.cost += costIncrement * 2f;
-            foreach (HexagonalTile tile in neighbors)
-            {
-                tile.cost += costIncrement;
-            }
+            AddCostAround(item);
 
             infos i;
             i.color = color;
@@ -123,6 +125,16 @@ public class TilesManager : MonoBehaviour
         }
 
         return randomTile;
+    }
+
+    void AddCostAround(HexagonalTile toAddCost)
+    {
+        toAddCost.cost += costIncrement * 2f;
+        List<HexagonalTile> neighbors = toAddCost.GetNeighbors();
+        foreach (HexagonalTile tile in neighbors)
+        {
+            tile.cost += costIncrement;
+        }
     }
 
     public void OnDrawGizmos()

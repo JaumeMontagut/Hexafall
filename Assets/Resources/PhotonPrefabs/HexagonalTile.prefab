@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53449bbbf3324874787a9718cc411d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 4730832278460601692}
   elasticMove: {fileID: 464720205754377979}
   gridPosition: {x: 0, y: 0}
   neighborTiles: []
@@ -144,10 +143,10 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 0
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: -5440774962428742769}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
