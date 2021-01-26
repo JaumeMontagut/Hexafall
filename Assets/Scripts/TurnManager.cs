@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using Photon.Pun;
-using UnityEngine.UI;
 using MyEvents;
-using System;
-using Random = UnityEngine.Random;
+using System.IO;
 
+using Random = UnityEngine.Random;
 
 public class TurnManager : MonoBehaviour
 {
@@ -20,46 +18,66 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private float TimeReduced = 0.0f;                                //How much time it will be reduced to the time between turns.
     [SerializeField] private float minTimeBetweeTurns = 0.0f;                         //The minimum time posible for the turns.
 
-    [SerializeField] private GameObject timerUI;
-    private RectTransform timerPlane1;
-    private RectTransform timerPlane2;
-    private RectTransform foregroundPlane;
+    [SerializeField] private float skyboxSaturation;
+    [SerializeField] private float skyboxValue;
+    private float skyboxRotateSpeed = 20f;
 
-    private void Start()
-    {
-        turnTimer = turnDuration;
-
-        timerPlane1 = timerUI.transform.Find("Plane1").GetComponent<RectTransform>();
-        timerPlane2 = timerUI.transform.Find("Plane2").GetComponent<RectTransform>();
-
-        foregroundPlane = timerPlane2;
-
-        stopTimer = false;
-    }
-
-    public float TurnTimer
-    {
-        get
-        {
-            return turnTimer;
-        }
-        set
-        {
-            turnTimer = value;
-            foregroundPlane.localScale = new Vector3(Mathf.Max(turnTimer / turnDuration, 0f), 1f, 1f);
-        }
-    }
+    [SerializeField] private GameObject buildingPrefab;
 
     private void Awake()
     {
         Managers.Turn = this;
     }
 
+    private void Start()
+    {
+        turnTimer = turnDuration;
+        stopTimer = false;
+        GenerateBuildings();
+    }
+
+    public void GenerateBuildings()
+    {
+        int magnitude = 5;
+
+        int topLimit = 0;
+        int botLimit = magnitude;
+
+        float tileMargin = 0f;
+
+        Vector3 tileSize = buildingPrefab.GetComponentInChildren<Renderer>().bounds.size;
+        float tileWidth = tileSize.z + tileMargin;
+        float tileHeight = tileSize.x + tileMargin;
+
+        for (int column = -magnitude; column <= magnitude; ++column)
+        {
+            for (int row = topLimit; row <= botLimit; ++row)
+            {
+                Vector2Int gridPosition = new Vector2Int(column, row);
+                Vector3 worldPosition = Managers.Tiles.GridToWorld(gridPosition, tileHeight, tileWidth);
+                worldPosition.y = -13.9f;
+
+                GameObject instance = Instantiate(
+                    buildingPrefab,
+                    worldPosition,
+                    Quaternion.Euler(0f, 90f, 0f));
+            }
+            if (column < 0)
+            {
+                --topLimit;
+            }
+            else
+            {
+                --botLimit;
+            }
+        }
+    }
+
     void Update()
     {
-        TurnTimer -= Time.deltaTime;
+        turnTimer -= Time.deltaTime;
 
-        if (TurnTimer <= 0f && !stopTimer)
+        if (turnTimer <= 0f && !stopTimer)
         {
             //End of the turn
             
@@ -71,6 +89,8 @@ public class TurnManager : MonoBehaviour
                 photonView.RPC("TimerReset", RpcTarget.All);
             }
         }
+
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotateSpeed);
 
         //ReduceTurnDuration();
     }
@@ -110,27 +130,20 @@ public class TurnManager : MonoBehaviour
     public void NewTurn()
     {
         Debug.Log("New turn time");
-        TurnTimer = turnDuration;
-
-        //Change the planes
-        foregroundPlane.transform.SetAsFirstSibling();
-        SelectBackgroundColor();
-        foregroundPlane.localScale = Vector3.one;
-        foregroundPlane = (foregroundPlane == timerPlane1 ? timerPlane2 : timerPlane1);
+        turnTimer = turnDuration;
+        Color nextColor = GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 15f);
+        RenderSettings.skybox.SetColor("_Tint", nextColor);
     }
 
-    private void SelectBackgroundColor()
+    private Color GetRandomColorDifferentHue(Color prevColor, float minHueDifference)
     {
-        Color nextForegroundColor = (foregroundPlane == timerPlane1 ? timerPlane1 : timerPlane2).GetComponent<Image>().color;
-        float nextForegroundHue, nextForegroundSaturation, nextForegroundValue;
-        Color.RGBToHSV(nextForegroundColor, out nextForegroundHue, out nextForegroundSaturation, out nextForegroundValue);
-        float backgroundHue;
-        const float minHueDifference = 15f;
+        float prevHue, prevSaturation, prevValue;
+        Color.RGBToHSV(prevColor, out prevHue, out prevSaturation, out prevValue);
+        float nextHue;
         do
         {
-            backgroundHue = Random.Range(0f, 1f);
-        } while (Mathf.Abs(backgroundHue - nextForegroundHue) < (minHueDifference / 360f));
-        Color backgroundColor = Color.HSVToRGB(backgroundHue, 1f, 0.25f);
-        foregroundPlane.GetComponent<Image>().color = backgroundColor;
+            nextHue = Random.Range(0f, 1f);
+        } while (Mathf.Abs(nextHue - prevHue) < (minHueDifference / 360f));
+        return Color.HSVToRGB(nextHue, skyboxSaturation, skyboxValue);
     }
 }

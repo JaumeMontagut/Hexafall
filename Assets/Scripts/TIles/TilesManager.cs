@@ -177,7 +177,10 @@ public class TilesManager : MonoBehaviour
     }
     private void InstantiateTile(Vector2Int gridPosition)
     {
-        GameObject intance = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
+        GameObject intance = PhotonNetwork.InstantiateRoomObject(
+            Path.Combine("PhotonPrefabs", "HexagonalTile"),
+            GridToWorld(gridPosition, tileHeight, tileWidth),
+            Quaternion.AngleAxis(60, Vector3.up));
 
         //GameObject 
         HexagonalTile hexagonalTile = intance.GetComponent<HexagonalTile>();
@@ -196,7 +199,7 @@ public class TilesManager : MonoBehaviour
             }
         }
     }
-    public Vector3 GridToWorld(Vector2Int gridPosition)
+    public Vector3 GridToWorld(Vector2Int gridPosition, float tileHeight, float tileWidth)
     {
         int column = gridPosition.x, row = gridPosition.y;
         Vector3 worldPosition = new Vector3(0f, 0f, 0f);

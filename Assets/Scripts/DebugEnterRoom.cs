@@ -46,6 +46,7 @@ public class DebugEnterRoom : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
             Managers.Tiles.GenerateAll();
+            Managers.Turn.GenerateBuildings();
         }
     }
 }
