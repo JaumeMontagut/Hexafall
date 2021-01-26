@@ -85,13 +85,12 @@ public class GameManager : MonoBehaviour
     private void GoToMainMenu()
     {
         PhotonNetwork.LoadLevel(mainMenu);
-        HexafallLauncher.Instance.LeaveRoom();
+        PhotonNetwork.LeaveRoom();
     }
 
     private void GoToRoom()
     {
         PhotonNetwork.LoadLevel(mainMenu);
-        HexafallLauncher.Instance.OnJoinedRoom();
     }
 }
 

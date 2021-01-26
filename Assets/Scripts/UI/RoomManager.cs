@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Photon.Realtime;
+using System.Linq;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -37,5 +39,42 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
         }
+
+        else if (scene.buildIndex == HexafallLauncher.mainMenu)
+        {
+            MenuManager.Instance.OpenMenu("LoadingMenu");
+
+            if (PhotonNetwork.InRoom)
+            {
+                MenuManager.Instance.OpenMenu("RoomMenu");
+                if(!AllPlayersExistInRoom())
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    Instantiate(HexafallLauncher.Instance.playerListItemPrefab, HexafallLauncher.Instance.playerListContent.transform).GetComponent<PlayerListItem>().SetUp(player);
+                }
+            }
+        }
+    }
+
+    public bool AllPlayersExistInRoom()
+    {
+        var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlayerListItem(Clone)");
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            bool ret = false;
+            foreach(GameObject g in objects)
+            {
+                if(g.GetComponent<PlayerListItem>().player == player)
+                {
+                    ret = true;
+                }
+                
+            }
+            if (!ret)
+                return ret;
+        }
+
+        return true;
     }
 }

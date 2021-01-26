@@ -14,10 +14,11 @@ public class MenuManager : MonoBehaviour
         Instance = this;
     }
 
-    public void OpenMenu (string menuName)
+    public void OpenMenu(string menuName)
     {
         foreach (GameObject m in menus)
         {
+            Debug.Log(m.name);
             m.SetActive(false);
         }
 
@@ -35,5 +36,22 @@ public class MenuManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public bool AllCanvasDesactivated()
+    {
+        bool ret = true;
+
+        foreach (GameObject m in menus)
+        {
+            if(m.activeSelf)
+            {
+                ret = false;
+                return ret;
+            }
+        }
+
+        return ret;
+
     }
 }
