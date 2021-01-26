@@ -26,7 +26,7 @@ public class ChangeColor : MonoBehaviour
     }
     public void ChangePlayerColor()
     {
-        materials[0].SetColor("_EmissionColor",myColor * intensity);
-        materials[1].SetColor("_EmissionColor",myColor * intensity);
+        materials[0].SetColor("_EmissionColor", myColor * intensity);
+        materials[1].SetColor("_EmissionColor", myColor * intensity);
     }
 }

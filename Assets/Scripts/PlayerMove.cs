@@ -86,9 +86,8 @@ public class PlayerMove : MonoBehaviour
         transform.position = Managers.Tiles.start.transform.position;
         playerVars.currentPlatform = Managers.Tiles.start;
 
-        Managers.Game.players.Add(gameObject);
-     
        
+     
     }
 
     void Update()
@@ -142,10 +141,8 @@ public class PlayerMove : MonoBehaviour
 
   public void SetToMove(object info)
     {
-        Debug.LogError("Entered TO SEt TO MOve!!!!!"); 
         if ((GameObject)info == gameObject)
         {
-            Debug.LogError("set move to TRUE");
             move = true;
 
         }
