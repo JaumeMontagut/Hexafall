@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 //Used to send game-related data (not specific to any players)
 //Each player has one
 
-public class NetworkManager : MonoBehaviour
+public class NetworkManager : MonoBehaviourPunCallbacks
 {
     private void Awake()
     {
@@ -22,5 +23,16 @@ public class NetworkManager : MonoBehaviour
             playerMovement.AvailableMovements = 1;
         }
         Managers.Turn.NewTurn();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        for (int i = Managers.Game.players.Count - 1; i >= 0; --i)
+        {
+            if (Managers.Game.players[i].GetComponent<PhotonView>().OwnerActorNr == otherPlayer.ActorNumber)
+            {
+                Managers.Game.players.RemoveAt(i);
+            }
+        }
     }
 }

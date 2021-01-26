@@ -82,27 +82,6 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    //Works both when you stop playing in the editor and when you close the game in build
-    private void OnApplicationQuit()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (PhotonNetwork.PlayerList.Length > 1)
-            {
-                foreach (Player player in PhotonNetwork.PlayerList)
-                {
-                    if (player != PhotonNetwork.LocalPlayer)
-                    {
-                        PhotonNetwork.SetMasterClient(PhotonNetwork.PlayerList[0]);
-                        break;
-                    }
-                }
-            }
-        }
-
-        //PhotonNetwork.LeaveRoom();
-    }
-
     private void GoToMainMenu()
     {
         PhotonNetwork.LoadLevel(mainMenu);
