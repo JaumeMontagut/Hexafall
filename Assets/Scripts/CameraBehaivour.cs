@@ -26,17 +26,15 @@ public class CameraBehaivour : MonoBehaviour
 
     private void OnEnable()
     {
-        Action<dynamic> function = MoveToWinPos;
         EventManager.StartListening(MyEventType.PlayerReachGoal, MoveToWinPos);
     }
 
     private void OnDisable()
     {
-        Action<dynamic> function = MoveToWinPos;
-        EventManager.StopListening(MyEventType.PlayerReachGoal, function);
+        EventManager.StopListening(MyEventType.PlayerReachGoal, MoveToWinPos);
     }
 
-    private void MoveToWinPos(dynamic info)
+    private void MoveToWinPos(object info)
     {
         //Move Camera
 

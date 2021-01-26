@@ -20,7 +20,7 @@ public class InGameState : State
         EventManager.TriggerEvent(MyEventType.StateInGameExit, null);
     }
 
-    public void FinishGame(dynamic info)
+    public void FinishGame(object info)
     {
         ChangeState( new ResultsState());
     }

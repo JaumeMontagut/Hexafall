@@ -77,17 +77,15 @@ public class TurnManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Action<dynamic> function = StopTimer;
         EventManager.StartListening(MyEventType.PlayerReachGoal, StopTimer);
     }
 
     private void OnDisable()
     {
-        Action<dynamic> function = StopTimer;
-        EventManager.StopListening(MyEventType.PlayerReachGoal, function);
+        EventManager.StopListening(MyEventType.PlayerReachGoal, StopTimer);
     }
 
-    private void StopTimer(dynamic info)
+    private void StopTimer(object info)
     {
         stopTimer = true;
     }

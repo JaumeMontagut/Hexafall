@@ -142,14 +142,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void SetToMove(dynamic info)
+    void SetToMove(object info)
     {
         if ((GameObject)info == gameObject)
             move = true;
     }
    
 
-    public void EndMove(dynamic info)
+    public void EndMove(object info)
     {
         if (info != gameObject)
             return;

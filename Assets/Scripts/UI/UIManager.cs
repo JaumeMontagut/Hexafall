@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
         EventManager.StopListening(MyEventType.PlayerReachGoal, EnableWinButtons);
     }
 
-    private void EnableWinButtons(dynamic info)
+    private void EnableWinButtons(object info)
     {
         CanvasResult.SetActive(true);
 
