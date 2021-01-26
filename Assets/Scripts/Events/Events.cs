@@ -14,6 +14,16 @@ namespace MyEvents
         PlayerEndJump,
         #region Game
 
+        StateWaitingEnter,
+        StateWaitingExit,
+        StateInGameEnter,
+        StateInGameExit,
+        StateResultsEnter,
+        StateResultsExit,
+
+        PlayerReachGoal,
+        PlayerExploded,
+        PlayerSelectInResults,
 
         #endregion
 
@@ -22,7 +32,7 @@ namespace MyEvents
 
         #endregion
 
-        PlayerReachGoal
+
     }
 }
 

@@ -7,8 +7,11 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    #region GameData
     [HideInInspector] public List<GameObject> players;
-    bool finished = false;
+    public StateMachine stateMachine;
+    public float timeWaitingToStart;
+    #endregion
 
     void Awake()
     {
@@ -20,10 +23,8 @@ public class GameManager : MonoBehaviour
         {
             gameObject.AddComponent<DebugEnterRoom>();
         }
-    }
 
-    private void Update()
-    {
+        stateMachine.ChangeState(new WaitingState());
     }
 
     private void OnEnable()
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerMove>().AvailableMovements = 0;
         }
     }
-
 
     public PhotonView GetCurrentPhotonView()
     {

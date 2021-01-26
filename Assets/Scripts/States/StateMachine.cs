@@ -3,7 +3,6 @@ using System.Collections;
 public class StateMachine : MonoBehaviour
 {
     [HideInInspector] public State currentState { get; private set; }
-    [HideInInspector] public State nextState { get; private set; }
 
     public void Initialize(State initState)
     {
@@ -25,7 +24,6 @@ public class StateMachine : MonoBehaviour
             return;
         }
 
-        StopCoroutine("UpdateState");
         currentState.Exit();
         currentState = null;
     }
@@ -37,27 +35,33 @@ public class StateMachine : MonoBehaviour
     }
     public void ChangeState(State newState)
     {
+        if (newState == null)
+        {
+            Debug.Log(this.ToString() + " cannot ChangeStateDelayed; nextState is null");
+        }
+        else
+        {
+            newState.SetStateMachine(this);
+        }
+ 
         Finish();
         Initialize(newState);
     }
-    public void ChangeState(State nextState, float time)
+    public void ChangeState(State newState, float time)
     {
-        if (nextState == null)
+        if (newState == null)
         {
             Debug.Log(this.ToString() + " cannot ChangeStateDelayed; nextState is null");
             return;
         }
 
-        this.nextState = nextState;
-        Invoke("ChangeStateD", time);
+        StartCoroutine(ChangeStateDelayed(newState, time));
     }
 
-    private void ChangeStateD ()
+    IEnumerator ChangeStateDelayed(State newState, float time)
     {
-        Finish();
-        Initialize(nextState);
-        nextState = null;
+        yield return new WaitForSeconds(time);
+        ChangeState(newState);
     }
-
 }
 

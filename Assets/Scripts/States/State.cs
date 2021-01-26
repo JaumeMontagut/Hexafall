@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class State
 {
     protected StateMachine stateMachine;
-    protected State(StateMachine stateMachine)
+    public void SetStateMachine(StateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }
