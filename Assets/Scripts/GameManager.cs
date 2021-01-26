@@ -4,6 +4,7 @@ using UnityEngine;
 using MyEvents;
 using Photon.Pun;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public List<GameObject> players;
     public StateMachine stateMachine;
     public float timeWaitingToStart;
+    [HideInInspector] public const int mainMenu = 0;
+    [SerializeField] private GameObject ButtonMainMenu, ButtonPlayAgain;
+
     #endregion
 
     void Awake()
@@ -26,7 +30,11 @@ public class GameManager : MonoBehaviour
 
         stateMachine.ChangeState(new WaitingState());
     }
-
+    private void Start()
+    {
+        ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
+        ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
+    }
     private void OnEnable()
     {
         Action<dynamic> function = DisableMovementPlayers;
@@ -80,4 +88,17 @@ public class GameManager : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
     }
+
+    private void GoToMainMenu()
+    {
+        PhotonNetwork.LoadLevel(mainMenu);
+        HexafallLauncher.Instance.LeaveRoom();
+    }
+
+    private void GoToRoom()
+    {
+        PhotonNetwork.LoadLevel(mainMenu);
+        HexafallLauncher.Instance.OnJoinedRoom();
+    }
 }
+
