@@ -10,6 +10,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float timeMainMenuButton;
     [SerializeField] private float timePlayAgainButton;
 
+    [SerializeField] private GameObject ButtonMainMenu;
+    [SerializeField] private GameObject ButtonPlayAgain;
+
+
     private GameObject CanvasResult;
     void Awake()
     {
@@ -41,15 +45,11 @@ public class UIManager : MonoBehaviour
 
     private void EnableWinButtons(object info)
     {
+
+        ChangeButtonAlpha(ButtonMainMenu,  0);
+        ChangeButtonAlpha(ButtonPlayAgain, 0);
+
         CanvasResult.SetActive(true);
-
-
-        GameObject ButtonMainMenu = GameObject.Find("ButtonMainMenu");
-        ChangeButtonColor(ButtonMainMenu, new Color(ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, 0));
-
-        GameObject ButtonPlayAgain = GameObject.Find("ButtonPlayAgain");
-        ChangeButtonColor(ButtonPlayAgain, new Color(ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, 0));
-
 
         StartCoroutine(EnableTransitionButon(ButtonMainMenu, timeMainMenuButton));
         StartCoroutine(EnableTransitionButon(ButtonPlayAgain, timePlayAgainButton));
@@ -58,31 +58,37 @@ public class UIManager : MonoBehaviour
     IEnumerator EnableTransitionButon(GameObject button, float time)
     {
         yield return new WaitForSeconds(time);
-        ChangeButtonColor(button, new Color(button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, 0));
+        ChangeButtonAlpha(button, 0);
         float timer = 0.0f;
         while (timer < timeInTransition)
         {
             timer += Time.deltaTime;
             float alpha = timer / timeInTransition;
-            ChangeButtonColor(button, new Color(button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, alpha));
+            ChangeButtonAlpha(button, alpha);
             yield return null;
         }
     }
 
-    public void ChangeButtonColor(GameObject button, Color color)
+    public void ChangeButtonAlpha(GameObject button, float alpha)
     {
         var colors = button.GetComponent<Button>().colors;
-        colors.normalColor = color;
+
+        //Set alpha for all states of the buttons
+        colors.normalColor = new Color(colors.normalColor.r, colors.normalColor.r, colors.normalColor.r, alpha);
+        colors.highlightedColor = new Color(colors.highlightedColor.r, colors.highlightedColor.r, colors.highlightedColor.r, alpha);
+        colors.pressedColor = new Color(colors.pressedColor.r, colors.pressedColor.r, colors.pressedColor.r, alpha);
+        colors.selectedColor = new Color(colors.selectedColor.r, colors.selectedColor.r, colors.selectedColor.r, alpha);
+        colors.disabledColor = new Color(colors.disabledColor.r, colors.disabledColor.r, colors.disabledColor.r, alpha);
+
         button.GetComponent<Button>().colors = colors;
 
-        GameObject text = button.transform.GetChild(0).gameObject;
-        ChangeTextColor(text, new Color(text.GetComponent<Text>().color.r, text.GetComponent<Text>().color.g, text.GetComponent<Text>().color.b, color.a));
+        ChangeTextAlpha(button.transform.GetChild(0).GetComponent<Text>(), alpha);
 
     }
 
-    public void ChangeTextColor(GameObject text, Color color)
+    public void ChangeTextAlpha(Text text, float alpha)
     {
-        text.GetComponent<Text>().color = color;
+        text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
     }
 
 

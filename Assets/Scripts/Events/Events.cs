@@ -25,6 +25,9 @@ namespace MyEvents
         PlayerExploded,
         PlayerSelectInResults,
 
+        DesactivateInput,
+        ActivateInput,
+
         #endregion
 
         #region Tiles

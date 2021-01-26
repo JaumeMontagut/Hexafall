@@ -11,6 +11,7 @@ public class CameraBehaivour : MonoBehaviour
 {
     public float timeInTransition;
     [ShowOnly] public float transitionTimer;
+    private bool thisFrame = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,10 @@ public class CameraBehaivour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //        Debug.Log("NEW FRAMEE");
+
+        Debug.Log("NEW FRAMEE");
+        thisFrame = true;
     }
 
     private void OnEnable()
@@ -47,16 +51,28 @@ public class CameraBehaivour : MonoBehaviour
 
     IEnumerator TransitionCamera(Vector3 initialPos, Vector3 finalPos, Quaternion initialRot, Quaternion finalRot)
     {
+        //Debug.Log("new change");
+
+        Debug.Log("new change");
         while(transitionTimer < timeInTransition)
         {
-            float ratio = transitionTimer / timeInTransition;
+            if (thisFrame)
+            {
+                float ratio = transitionTimer / timeInTransition;
 
-            transform.position = Vector3.Lerp(initialPos, finalPos, ratio);
-            transform.rotation = Quaternion.Lerp(initialRot, finalRot,ratio);
+                transform.position = Vector3.Lerp(initialPos, finalPos, ratio);
+                transform.rotation = Quaternion.Lerp(initialRot, finalRot, ratio);
 
-            transitionTimer += Time.deltaTime;
+                transitionTimer += Time.deltaTime;
+                Debug.Log(Time.deltaTime);
+                Debug.Log(transitionTimer);
+            }
+            thisFrame = false;
+
             yield return null;
+
+
         }
-        
+
     }
 }

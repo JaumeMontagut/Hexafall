@@ -38,14 +38,21 @@ public class GameManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventManager.StartListening(MyEventType.PlayerReachGoal, DisableMovementPlayers);
+        EventManager.StartListening(MyEventType.PlayerReachGoal, WinResult);
+        EventManager.StartListening(MyEventType.DesactivateInput, DisableMovementPlayers);
+
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(MyEventType.PlayerReachGoal, DisableMovementPlayers);
-    }
+        EventManager.StopListening(MyEventType.PlayerReachGoal, WinResult);
+        EventManager.StopListening(MyEventType.DesactivateInput, DisableMovementPlayers);
 
+    }
+    private void WinResult(object info)
+    {
+        EventManager.TriggerEvent(MyEventType.DesactivateInput, info);
+    }
     private void DisableMovementPlayers(object info)
     {
         foreach (GameObject player in players)
@@ -85,13 +92,12 @@ public class GameManager : MonoBehaviour
     private void GoToMainMenu()
     {
         PhotonNetwork.LoadLevel(mainMenu);
-        HexafallLauncher.Instance.LeaveRoom();
+        PhotonNetwork.LeaveRoom();
     }
 
     private void GoToRoom()
     {
         PhotonNetwork.LoadLevel(mainMenu);
-        HexafallLauncher.Instance.OnJoinedRoom();
     }
 }
 

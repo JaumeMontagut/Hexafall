@@ -16,8 +16,8 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
 
     //RoomMenu
     [SerializeField] Text roomText;
-    [SerializeField] GameObject playerListContent;
-    [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] public GameObject playerListContent;
+    [SerializeField] public GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
 
     //FindRoomMenu
@@ -26,6 +26,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
 
     //Game Scene
     [HideInInspector] public const int gameScene = 1;//Matches the build number in the build panel
+    [HideInInspector] public const int mainMenu = 0;//Matches the build number in the build panel
 
     private void Awake()
     {
@@ -35,7 +36,12 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     private void Start()
     {
         Debug.Log("Connecting to Master 1");
-        MenuManager.Instance.OpenMenu("LoadingMenu");
+
+        if(MenuManager.Instance.AllCanvasDesactivated())
+        {
+            MenuManager.Instance.OpenMenu("LoadingMenu");
+        }
+
         PhotonNetwork.ConnectUsingSettings();
     }
 
