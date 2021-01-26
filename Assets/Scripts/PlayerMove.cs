@@ -55,7 +55,8 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
-       
+        EventManager.StartListening(MyEventType.PlayerJumpTop, SetToMove);
+        EventManager.StartListening(MyEventType.PlayerEndJump, EndMove);
     }
 
     private void OnDisable()
@@ -87,30 +88,29 @@ public class PlayerMove : MonoBehaviour
 
         Managers.Game.players.Add(gameObject);
      
-        EventManager.StartListening(MyEventType.PlayerJumpTop, SetToMove);
-        EventManager.StartListening(MyEventType.PlayerEndJump, EndMove);
+       
     }
 
     void Update()
     {
-        if (photonView.IsMine)
+        if (playerVars.falling)
         {
-            if (playerVars.falling)
-            {
-                Fall();
-            }
-            if (playerVars.moving)
-            {
-                Moving();
-            }
+            Fall();
+        }
+        if (playerVars.moving)
+        {
+            Moving();
         }
     }
 
-    public bool StartMoving(HexagonalTile platform)
+    [PunRPC]
+    public void StartMoving(int platformID)
     {
+        PhotonView photonTile = PhotonView.Find(platformID);
+
         AvailableMovements--;
         animator.SetTrigger("Jump");
-        nextPlatform = platform;
+        nextPlatform = photonTile.gameObject.GetComponent<HexagonalTile>();
         playerVars.ActiveMoving();
 
         // Set rotation
@@ -119,9 +119,7 @@ public class PlayerMove : MonoBehaviour
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
         jumpStart = Time.time;
-        
-
-        return true;
+        return;
     }
 
     
@@ -142,10 +140,15 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void SetToMove(object info)
+  public void SetToMove(object info)
     {
+        Debug.LogError("Entered TO SEt TO MOve!!!!!"); 
         if ((GameObject)info == gameObject)
+        {
+            Debug.LogError("set move to TRUE");
             move = true;
+
+        }
     }
    
 
