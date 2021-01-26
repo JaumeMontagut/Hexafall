@@ -41,17 +41,18 @@ public class HexagonalTile : MonoBehaviourPunCallbacks, IPunObservable
 
         return ret;
     }
-
-    public HexagonalTile GetAdjacentTile(HexagonDirections direction)
+    public HexagonalTile GetNeighbor(HexagonDirections direction)
     {
         return neighborTiles[(int)direction];
     }
-
     public void StartStaggerMovement()
     {
         elasticMove.StartMoving();
     }
-
+    public int GetPhotonID()
+    {
+        return photonView.ViewID;
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

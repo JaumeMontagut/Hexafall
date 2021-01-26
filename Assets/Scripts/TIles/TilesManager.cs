@@ -15,69 +15,28 @@ public class TilesManager : MonoBehaviour
     public float tileMargin = 0.1f;
     [Range(1, 10)]
     public int magnitude = 1;
-    private float tileHeight = 0f, tileWidth = 0f;
+    private float tileHeight = 1f, tileWidth = 1f;
     private static Vector2Int[] neighborOffsets = { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(1, -1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(-1, 1) };
 
     #endregion
-    private PhotonView photonView;
+    [HideInInspector] public PhotonView photonView;
     private Dictionary<Vector2Int, HexagonalTile> grid;
 
     public bool hasSetupPath  { private set; get; }
-
-    [HideInInspector] public HexagonalTile start { get; private set; }
-    [HideInInspector] public HexagonalTile end { get; private set; }
+    public HexagonalTile start { get; private set; }
+    public HexagonalTile end { get; private set; }
 
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
         Managers.Tiles = this;
         grid = new Dictionary<Vector2Int, HexagonalTile>();
-    }
 
-    void Start()
-    {
         // Set Tile Dimmension
         Vector3 tileSize = tilePrefab.GetComponent<Renderer>().bounds.size;
-        tileWidth = tileSize.x + tileMargin; 
+        tileWidth = tileSize.x + tileMargin;
         tileHeight = tileSize.z + tileMargin;
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            GenerateAll();
-        }
     }
-
-    public void GenerateAll()
-    {
-        hasSetupPath = true;
-
-        GenerateTiles();
-
-        start = grid[Vector2Int.zero];
-        
-        Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
-        AddRandomPaths(start, 3, colors);
-        end = path[path.Count - 1].tile;
-        PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Star"), end.transform.position, Quaternion.identity);
-
-        List<int> pathIds = new List<int>();
-
-        foreach (infos info in path)
-        {
-            if (!pathIds.Contains(info.tile.photonView.ViewID))
-                pathIds.Add(info.tile.photonView.ViewID);
-        }
-
-        photonView.RPC("SetPath", RpcTarget.AllBuffered, start.photonView.ViewID, end.photonView.ViewID, pathIds.ToArray());
-
-        ClientManager[] clients = FindObjectsOfType<ClientManager>();
-
-        foreach (ClientManager client in clients)
-        {
-            client.photonView.RPC("SpawnPlayer", RpcTarget.AllBuffered);
-        }
-    }
-
 
     [PunRPC]
     void SetPath(int startId, int endPos, int[] pathIds)
@@ -91,73 +50,16 @@ public class TilesManager : MonoBehaviour
         }
     }
 
-    #region HardcodedTest
-
-    struct infos
-    {
-        public Color color;
-        public HexagonalTile tile;
-    }
-
-    List<infos> path = new List<infos>();
-    float costIncrement = 100f;
-
-    public void AddRandomPaths(HexagonalTile start, int numPaths,  Color[] colors)
-    {
-        HexagonalTile currentTile = start;
-
-        for (int i = 0; i < numPaths; i++)
-        {
-            currentTile = AddRandomPath(currentTile, colors[i]);
-        }
-    }
-
-    public HexagonalTile AddRandomPath(HexagonalTile startPath, Color color)
-    {
-        AddCostAround(startPath);
-        HexagonalTile randomTile;
-        do
-        {
-            randomTile = grid.ElementAt(Random.Range(0, grid.Count)).Value;
-        }
-        while (randomTile.cost != 0f /*&& (randomTile.transform.position - last.transform.position).sqrMagnitude > 3f*/ ) ;
-
-        List<HexagonalTile> list = (Pathfinding.GeneratePath(startPath, randomTile));
-
-        foreach (HexagonalTile item in list)
-        {
-            AddCostAround(item);
-
-            infos i;
-            i.color = color;
-            i.tile = item;
-            path.Add(i);
-        }
-
-        return randomTile;
-    }
-
-    void AddCostAround(HexagonalTile toAddCost)
-    {
-        toAddCost.cost += costIncrement * 2f;
-        List<HexagonalTile> neighbors = toAddCost.GetNeighbors();
-        foreach (HexagonalTile tile in neighbors)
-        {
-            tile.cost += costIncrement;
-        }
-    }
-
     public void OnDrawGizmos()
     {
-        foreach (var item in path)
-        {
-            Gizmos.color = item.color;
-            Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, 0.2f, 0), 0.16f);
-        }
+        //foreach (var item in path)
+        //{
+        //    Gizmos.color = item.color;
+        //    Gizmos.DrawSphere(item.tile.transform.position + new Vector3(0, 0.2f, 0), 0.16f);
+        //}
     }
-    #endregion
 
-    private void GenerateTiles()
+    public void GenerateTiles()
     {
         int topLimit = 0;
         int botLimit = magnitude;
@@ -207,5 +109,20 @@ public class TilesManager : MonoBehaviour
         worldPosition.z += tileHeight * 0.5f * column;
         worldPosition.x += ( (tileWidth * 3f ) / 4f ) * column;
         return worldPosition;
+    }
+    public HexagonalTile GetTileAtPosition(Vector2Int position)
+    {
+        return grid[position];
+    }
+    public HexagonalTile GetRandomTile()
+    {
+        return grid.ElementAt(Random.Range(0, grid.Count)).Value;
+    }
+    public void ClearTilesCost()
+    {
+        foreach(HexagonalTile tile in grid.Values)
+        {
+            tile.cost = 0f;
+        }
     }
 }
