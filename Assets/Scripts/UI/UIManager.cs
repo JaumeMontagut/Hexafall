@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
@@ -46,21 +46,19 @@ public class UIManager : MonoBehaviour
 
         GameObject ButtonMainMenu = GameObject.Find("ButtonMainMenu");
         ChangeButtonColor(ButtonMainMenu, new Color(ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, ButtonMainMenu.GetComponent<Button>().colors.normalColor.r, 0));
-        
+
         GameObject ButtonPlayAgain = GameObject.Find("ButtonPlayAgain");
         ChangeButtonColor(ButtonPlayAgain, new Color(ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, ButtonPlayAgain.GetComponent<Button>().colors.normalColor.r, 0));
 
 
         StartCoroutine(EnableTransitionButon(ButtonMainMenu, timeMainMenuButton));
         StartCoroutine(EnableTransitionButon(ButtonPlayAgain, timePlayAgainButton));
-
-
     }
 
     IEnumerator EnableTransitionButon(GameObject button, float time)
     {
         yield return new WaitForSeconds(time);
-        ChangeButtonColor( button, new Color(button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, 0));
+        ChangeButtonColor(button, new Color(button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, 0));
         float timer = 0.0f;
         while (timer < timeInTransition)
         {
@@ -68,7 +66,6 @@ public class UIManager : MonoBehaviour
             float alpha = timer / timeInTransition;
             ChangeButtonColor(button, new Color(button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, button.GetComponent<Button>().colors.normalColor.r, alpha));
             yield return null;
-
         }
     }
 
@@ -80,11 +77,13 @@ public class UIManager : MonoBehaviour
 
         GameObject text = button.transform.GetChild(0).gameObject;
         ChangeTextColor(text, new Color(text.GetComponent<Text>().color.r, text.GetComponent<Text>().color.g, text.GetComponent<Text>().color.b, color.a));
-        
+
     }
 
     public void ChangeTextColor(GameObject text, Color color)
     {
         text.GetComponent<Text>().color = color;
     }
+
+
 }

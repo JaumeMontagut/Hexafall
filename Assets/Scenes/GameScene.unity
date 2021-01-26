@@ -440,7 +440,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents: []
-  viewIdField: 1000
+  viewIdField: 998
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &184701872
@@ -1373,6 +1373,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7390664466933335190, guid: 6dc82322910a9664a97fd4e574177a8b,
+        type: 3}
+      propertyPath: ButtonMainMenu
+      value: 
+      objectReference: {fileID: 1799978935}
+    - target: {fileID: 7390664466933335190, guid: 6dc82322910a9664a97fd4e574177a8b,
+        type: 3}
+      propertyPath: ButtonPlayAgain
+      value: 
+      objectReference: {fileID: 360029017}
     - target: {fileID: 7390664466933335191, guid: 6dc82322910a9664a97fd4e574177a8b,
         type: 3}
       propertyPath: m_Name

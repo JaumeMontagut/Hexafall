@@ -61,6 +61,7 @@ public class PlayerMove : MonoBehaviour
     private void OnDisable()
     {
         EventManager.StopListening(MyEventType.PlayerJumpTop, SetToMove);
+        EventManager.StopListening(MyEventType.PlayerEndJump, EndMove);
     }
 
     void Awake()

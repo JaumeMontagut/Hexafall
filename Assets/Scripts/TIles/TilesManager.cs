@@ -58,7 +58,7 @@ public class TilesManager : MonoBehaviour
         Color[] colors = { Color.red, Color.yellow, Color.blue, Color.green, Color.white, Color.cyan };
         AddRandomPaths(start, 3, colors);
         end = path[path.Count - 1].tile;
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Star"), end.transform.position, Quaternion.identity);
+        PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Star"), end.transform.position, Quaternion.identity);
 
         List<int> pathIds = new List<int>();
 
@@ -177,7 +177,7 @@ public class TilesManager : MonoBehaviour
     }
     private void InstantiateTile(Vector2Int gridPosition)
     {
-        GameObject intance = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
+        GameObject intance = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "HexagonalTile"), GridToWorld(gridPosition), Quaternion.AngleAxis(60, Vector3.up));
 
         //GameObject 
         HexagonalTile hexagonalTile = intance.GetComponent<HexagonalTile>();
