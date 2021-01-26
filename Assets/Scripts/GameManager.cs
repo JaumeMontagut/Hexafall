@@ -74,4 +74,10 @@ public class GameManager : MonoBehaviour
         Debug.LogError("Local player not found.");
         return null;
     }
+
+    //Works both when you stop playing in the editor and when you close the game in build
+    private void OnApplicationQuit()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
 }
