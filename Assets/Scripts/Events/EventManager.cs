@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace MyEvents
 {
-    public static class EventManager
+    public class EventManager
     {
-        private static Dictionary<MyEventType, Action<dynamic>> eventListeners;
+        private static Dictionary<MyEventType, Action<object>> eventListeners;
         
-        public static void StartListening(MyEventType eventType, Action<dynamic> listener)
+        public static void StartListening(MyEventType eventType, Action<object> listener)
         {
             if (eventListeners == null)
             {
-                eventListeners = new Dictionary<MyEventType, Action<dynamic>>();
+                eventListeners = new Dictionary<MyEventType, Action<object>>();
             }
 
             if (!eventListeners.ContainsKey(eventType))
@@ -26,7 +26,7 @@ namespace MyEvents
             }
         }
 
-        public static void StopListening(MyEventType eventType, Action<dynamic> listener)
+        public static void StopListening(MyEventType eventType, Action<object> listener)
         {
             if (eventListeners.ContainsKey(eventType))
             {
@@ -39,7 +39,7 @@ namespace MyEvents
             }
         }
 
-        public static void TriggerEvent(MyEventType eventType, dynamic info, float delay = 0f )
+        public static void TriggerEvent(MyEventType eventType, object info, float delay = 0f )
         {
             if (delay != 0f)
             {
@@ -55,7 +55,7 @@ namespace MyEvents
 
         }
 
-        private static IEnumerator TriggerEventDelay(MyEventType eventType, dynamic info, float delay)
+        private static IEnumerator TriggerEventDelay(MyEventType eventType, object info, float delay)
         {
             yield return new WaitForSeconds(delay);
             TriggerEvent(eventType, info, delay);

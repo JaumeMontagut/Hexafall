@@ -29,17 +29,15 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Action<dynamic> function = DisableMovementPlayers;
         EventManager.StartListening(MyEventType.PlayerReachGoal, DisableMovementPlayers);
     }
 
     private void OnDisable()
     {
-        Action<dynamic> function = DisableMovementPlayers;
-        EventManager.StopListening(MyEventType.PlayerReachGoal, function);
+        EventManager.StopListening(MyEventType.PlayerReachGoal, DisableMovementPlayers);
     }
 
-    private void DisableMovementPlayers(dynamic info)
+    private void DisableMovementPlayers(object info)
     {
         foreach (GameObject player in players)
         {

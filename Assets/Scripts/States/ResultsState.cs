@@ -19,7 +19,7 @@ public class ResultsState : State
         EventManager.TriggerEvent(MyEventType.StateResultsExit, null);
     }
 
-    public void PlayerSelectOption(dynamic info )
+    public void PlayerSelectOption(object info )
     {
         string option = (string)info;
         if (option == "ReturnLobby")
