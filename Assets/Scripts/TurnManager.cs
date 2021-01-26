@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 public class TurnManager : MonoBehaviour
 {
-    public bool stopTimer = false;
+    private bool stopTimer = false;
     [SerializeField] private float turnDuration = 0f;                                     //How long does a turn last.
     [ShowOnly] private float turnTimer = 0f;                                              //Timer for every turn.
 
@@ -77,12 +77,20 @@ public class TurnManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(MyEventType.PlayerReachGoal, StopTimer);
+        EventManager.StartListening(MyEventType.ActivateInput, ResumeTimer);
+        EventManager.StartListening(MyEventType.DesactivateInput, StopTimer);
+
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(MyEventType.PlayerReachGoal, StopTimer);
+        EventManager.StopListening(MyEventType.ActivateInput, ResumeTimer);
+        EventManager.StopListening(MyEventType.DesactivateInput, StopTimer);
+
+    }
+    private void ResumeTimer(object info)
+    {
+        stopTimer = false;
     }
 
     private void StopTimer(object info)
