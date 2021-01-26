@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerListItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Text text;
-    Player player;
+    [SerializeField] public Text text;
+    public Player player;
 
     public void SetUp(Player player)
     {

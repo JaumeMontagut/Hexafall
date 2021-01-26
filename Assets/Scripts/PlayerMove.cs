@@ -144,7 +144,6 @@ public class PlayerMove : MonoBehaviour
         if ((GameObject)info == gameObject)
         {
             move = true;
-
         }
     }
    
