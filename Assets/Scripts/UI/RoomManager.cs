@@ -37,7 +37,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == HexafallLauncher.gameScene)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
+            if(!ClientManagerExist())
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
         }
 
         else if (scene.buildIndex == HexafallLauncher.mainMenu)
@@ -74,6 +75,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (!ret)
                 return ret;
         }
+
+        return true;
+    }
+
+    public bool ClientManagerExist()
+    {
+        var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "ClientManager(Clone)");
+        if(objects != null)
+            return false;
 
         return true;
     }

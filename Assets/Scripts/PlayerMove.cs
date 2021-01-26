@@ -142,12 +142,9 @@ public class PlayerMove : MonoBehaviour
 
   public void SetToMove(object info)
     {
-        Debug.LogError("Entered TO SEt TO MOve!!!!!"); 
         if ((GameObject)info == gameObject)
         {
-            Debug.LogError("set move to TRUE");
             move = true;
-
         }
     }
    
