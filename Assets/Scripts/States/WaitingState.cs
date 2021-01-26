@@ -14,5 +14,4 @@ public class WaitingState : State
     {
         EventManager.TriggerEvent(MyEventType.StateWaitingExit, null);
     }
-
 }
