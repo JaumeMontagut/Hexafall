@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyEvents;
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -78,6 +79,21 @@ public class GameManager : MonoBehaviour
     //Works both when you stop playing in the editor and when you close the game in build
     private void OnApplicationQuit()
     {
-        PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (PhotonNetwork.PlayerList.Length > 1)
+            {
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    if (player != PhotonNetwork.LocalPlayer)
+                    {
+                        PhotonNetwork.SetMasterClient(PhotonNetwork.PlayerList[0]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        //PhotonNetwork.LeaveRoom();
     }
 }
