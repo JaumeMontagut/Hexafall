@@ -59,11 +59,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void TimerReset()
     {
+        //foreach (GameObject player in Managers.Game.players)
+        //{
+        //    PlayerMove playerMovement = player.GetComponent<PlayerMove>();
+        //    playerMovement.AvailableMovements = 1;
+        //}
+
         foreach (GameObject player in Managers.Game.players)
         {
-            PlayerMove playerMovement = player.GetComponent<PlayerMove>();
-            playerMovement.AvailableMovements = 1;
+            PhotonView playerPhotonView = player.GetComponent<PhotonView>();
+            if (playerPhotonView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                playerPhotonView.RPC(
+                    "StartMoving",
+                    RpcTarget.All,
+                    player.GetComponent<SelectPlatform>().SelectedPlatform.GetComponent<PhotonView>().ViewID);
+            }
         }
+
         Managers.Turn.NewTurn();
     }
 

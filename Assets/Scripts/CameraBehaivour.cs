@@ -13,18 +13,8 @@ public class CameraBehaivour : MonoBehaviour
     [ShowOnly] public float transitionTimer;
     private bool thisFrame = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        //        Debug.Log("NEW FRAMEE");
-
-        Debug.Log("NEW FRAMEE");
         thisFrame = true;
     }
 

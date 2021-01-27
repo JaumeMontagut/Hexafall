@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     [ShowOnly] public float timeFalling = 0.0f;
 
     private PlayerVars playerVars;
+    private SelectPlatform selectPlatform;
     private Animator animator;
     private HexagonalTile nextPlatform;
     float jumpStart = 0;
@@ -70,6 +71,7 @@ public class PlayerMove : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         playerVars = GetComponent<PlayerVars>();
+        selectPlatform = GetComponent<SelectPlatform>();
         animator = GetComponent<Animator>();
     }
     
@@ -106,7 +108,10 @@ public class PlayerMove : MonoBehaviour
     {
         PhotonView photonTile = PhotonView.Find(platformID);
 
-        AvailableMovements--;
+        //TODO: Get the closest one to the mouse
+        List<HexagonalTile> neighbourTiles = selectPlatform.SelectedPlatform.GetComponentInChildren<HexagonalTile>().GetNeighbors();
+        selectPlatform.SelectedPlatform = neighbourTiles[UnityEngine.Random.Range(0, neighbourTiles.Count)].gameObject;
+
         animator.SetTrigger("Jump");
         nextPlatform = photonTile.gameObject.GetComponent<HexagonalTile>();
         playerVars.ActiveMoving();
@@ -138,7 +143,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-  public void SetToMove(object info)
+    public void SetToMove(object info)
     {
         if ((GameObject)info == gameObject)
         {
@@ -198,6 +203,5 @@ public class PlayerMove : MonoBehaviour
         //Move to the starting platform and assign it as the current platform.
         transform.position = Managers.Tiles.start.transform.position + playerVars.offset;
         playerVars.currentPlatform = Managers.Tiles.start;
-       
     }
 }
