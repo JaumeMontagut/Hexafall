@@ -1,2 +1,11 @@
 # Hexafall
-A repository made for the Networks Subject on our 4th year at UPC's Videogame Design and Development  degree.
+Hexafall is a Multiplayer game made for the Networks assignment.
+
+## Credits
+- Yessica Servin Dominguez
+- Alejandro Gamarra Niño
+- Jorge Gemas Herencia
+- Jaume Montagut Guix
+
+## Find the repository
+https://github.com/JaumeMontagut/Hexafall
