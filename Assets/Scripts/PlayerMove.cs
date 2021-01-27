@@ -9,7 +9,7 @@ using MyEvents;
 public class PlayerMove : MonoBehaviour
 {
     public bool enableInput = false;
-    public float timeToFall = 1.0f;
+    float timeToFall = 0.2f;
     public float fallDistance = 2.0f;
 
     [ShowOnly] public float timeFalling = 0.0f;
@@ -109,8 +109,9 @@ public class PlayerMove : MonoBehaviour
         PhotonView photonTile = PhotonView.Find(platformID);
 
         //TODO: Get the closest one to the mouse
-        List<HexagonalTile> neighbourTiles = selectPlatform.SelectedPlatform.GetComponentInChildren<HexagonalTile>().GetNeighbors();
-        selectPlatform.SelectedPlatform = neighbourTiles[UnityEngine.Random.Range(0, neighbourTiles.Count)].gameObject;
+
+        //List<HexagonalTile> neighbourTiles = selectPlatform.SelectedPlatform.GetComponentInChildren<HexagonalTile>().GetNeighbors();
+        //selectPlatform.SelectedPlatform = neighbourTiles[UnityEngine.Random.Range(0, neighbourTiles.Count)].gameObject;
 
         animator.SetTrigger("Jump");
         nextPlatform = photonTile.gameObject.GetComponent<HexagonalTile>();
@@ -163,22 +164,28 @@ public class PlayerMove : MonoBehaviour
         doElasticAnimation = true;
 
         //Update the currentHexagon of the player
-        playerVars.currentPlatform = nextPlatform;
+       
 
         //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
-        
+        playerVars.currentPlatform = nextPlatform;
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
         }
+        else
+        {
+           
+        }
+
         if (playerVars.currentPlatform == Managers.Tiles.end)
         {
             //This player wins!!
             EventManager.TriggerEvent(MyEventType.PlayerReachGoal, gameObject/*the player*/);
+
         }
 
         return ;

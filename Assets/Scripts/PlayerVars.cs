@@ -83,9 +83,6 @@ public class PlayerVars : MonoBehaviour
     {
         playerMove.timeFalling = 0.0f;
         falling = true;
-
-        //currentPlatform.GetComponent<Platform>().ReduceAlpha();
-        //currentPlatform.GetComponent<Platform>().StartRestoringAlphaWithFade();
     }
 
     public void DesactivateFalling()

@@ -1012,7 +1012,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableInput: 0
-  timeToFall: 1
   fallDistance: 2
   timeFalling: 0
 --- !u!114 &1743059215

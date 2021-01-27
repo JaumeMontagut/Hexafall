@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d53c0a5c4a5c264881e9d40ad875642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnDuration: 0.46153846
+  turnDuration: 1
   timerToReduceTime: 0
   timeToReduceTimeBetweenTurns: 20
   TimeReduced: 0.5

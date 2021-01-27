@@ -51,7 +51,7 @@ public class SelectPlatform : MonoBehaviour
                     if (neighbor.gameObject == hitInfo.transform.gameObject)
                     {
                         SelectedPlatform = hitInfo.transform.gameObject;
-                        break;
+                        return;
                     }
                 }
             }
