@@ -14,8 +14,8 @@ public class HexaBuilding : MonoBehaviour
     const float maxHeight = 3.75f;
     //const float minHeightChange = 0.75f;
 
-    const float minInterpolationDuration = 1.7021276595744680851063829787234f;
-    const float maxInterpolationDuration = 1.7021276595744680851063829787234f;
+    const float minInterpolationDuration = 0.92307692307692307692307692307692F;
+    const float maxInterpolationDuration = 0.92307692307692307692307692307692F;
 
     void Start()
     {

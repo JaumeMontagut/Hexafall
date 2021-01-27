@@ -33,7 +33,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         stopTimer = false;
-        GenerateBuildings();
+        //GenerateBuildings();
     }
 
     public void GenerateBuildings()
