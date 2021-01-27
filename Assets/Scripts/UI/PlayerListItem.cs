@@ -9,11 +9,14 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 {
     [SerializeField] public Text text;
     public Player player;
+    public bool ready = false;
 
-    public void SetUp(Player player)
+    public GameObject SetUp(Player player)
     {
         this.player = player;
         text.text = player.NickName;
+
+        return gameObject;
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

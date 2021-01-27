@@ -96,12 +96,14 @@ public class GameManager : MonoBehaviour
 
     private void GoToMainMenu()
     {
+        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
         PhotonNetwork.LeaveRoom();
     }
 
     private void GoToRoom()
     {
+        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
     }
 }
