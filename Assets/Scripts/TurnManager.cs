@@ -146,7 +146,6 @@ public class TurnManager : MonoBehaviour
 
     public void NewTurn()
     {
-        Debug.Log("New turn time");
         Color nextColor = GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f);
         RenderSettings.skybox.SetColor("_Tint", nextColor);
     }

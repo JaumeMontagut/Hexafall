@@ -9,15 +9,16 @@ using MyEvents;
 public class PlayerMove : MonoBehaviour
 {
     public bool enableInput = false;
-    public float timeToFall = 1.0f;
+    float timeToFall = 0.2f;
     public float fallDistance = 2.0f;
+    [HideInInspector] public SelectPlatform selectPlatform;
 
     [ShowOnly] public float timeFalling = 0.0f;
 
     private PlayerVars playerVars;
+    
     private Animator animator;
     private HexagonalTile nextPlatform;
-    float jumpStart = 0;
     float moveSpeed = 2f;
     PhotonView photonView;
 
@@ -25,6 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     const float onIntensity = 21f;
     const float offIntensity = 7f;
+    float timeJustFall  =0;
 
     public int AvailableMovements
     {
@@ -35,6 +37,7 @@ public class PlayerMove : MonoBehaviour
         set
         {
             availableMovements = value;
+            
             if (availableMovements > 0)
             {
                 foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
@@ -70,6 +73,7 @@ public class PlayerMove : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         playerVars = GetComponent<PlayerVars>();
+        selectPlatform = GetComponent<SelectPlatform>();
         animator = GetComponent<Animator>();
     }
     
@@ -108,9 +112,13 @@ public class PlayerMove : MonoBehaviour
     [PunRPC]
     public void StartMoving(int platformID)
     {
+        if(timeJustFall > Time.time)
+        {
+            return;
+        }
         PhotonView photonTile = PhotonView.Find(platformID);
 
-        AvailableMovements--;
+        //TODO: Get the closest one to the mouse
         animator.SetTrigger("Jump");
         nextPlatform = photonTile.gameObject.GetComponent<HexagonalTile>();
         playerVars.ActiveMoving();
@@ -120,8 +128,9 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = (float) moveVec.magnitude / 0.6F* 2;
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
-        jumpStart = Time.time;
+        timeJustFall = Time.time;
         return;
+
     }
 
     
@@ -142,7 +151,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-  public void SetToMove(object info)
+    public void SetToMove(object info)
     {
         if ((GameObject)info == gameObject)
         {
@@ -162,22 +171,31 @@ public class PlayerMove : MonoBehaviour
         doElasticAnimation = true;
 
         //Update the currentHexagon of the player
-        playerVars.currentPlatform = nextPlatform;
+       
 
         //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
-        
+      
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
+            timeJustFall = Time.time + 0.50F;
+            selectPlatform.SelectedPlatform = null;
+            playerVars.currentPlatform = Managers.Tiles.start;
         }
+        else
+        {
+            playerVars.currentPlatform = nextPlatform;
+        }
+
         if (playerVars.currentPlatform == Managers.Tiles.end)
         {
             //This player wins!!
             EventManager.TriggerEvent(MyEventType.PlayerReachGoal, gameObject/*the player*/);
+
         }
 
         return ;
@@ -193,7 +211,7 @@ public class PlayerMove : MonoBehaviour
         {
             Respawn();
             playerVars.DesactivateFalling();
-            animator.SetTrigger("FallToPlatform");
+            //animator.SetTrigger("FallToPlatform");
         }
     }
 
@@ -202,6 +220,5 @@ public class PlayerMove : MonoBehaviour
         //Move to the starting platform and assign it as the current platform.
         transform.position = Managers.Tiles.start.transform.position + playerVars.offset + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
-       
     }
 }

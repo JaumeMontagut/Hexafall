@@ -3033,7 +3033,7 @@ MonoBehaviour:
   - {fileID: 213622253}
   - {fileID: 1993865570}
   - {fileID: 826428752}
-  MainMenuskybox: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
+  MainMenuskybox: {fileID: 2100000, guid: 1f39a1734b82a7b4c8f308d7c16623c8, type: 2}
 --- !u!114 &1416129449
 MonoBehaviour:
   m_ObjectHideFlags: 0
