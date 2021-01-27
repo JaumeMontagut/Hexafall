@@ -48,64 +48,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (PhotonNetwork.InRoom)
             {
                 MenuManager.Instance.OpenMenu("RoomMenu");
-                //s
                 if (!AllPlayersExistInRoom())
                 {
-                    //ActiveReady(PhotonNetwork.LocalPlayer);
+
+                    HexafallLauncher.Instance.roomText.text = PhotonNetwork.CurrentRoom.Name;
 
                     foreach (Player player in PhotonNetwork.PlayerList)
                     {
-                        //if (IsReady(player))
                             Instantiate(HexafallLauncher.Instance.playerListItemPrefab, HexafallLauncher.Instance.playerListContent.transform).GetComponent<PlayerListItem>().SetUp(player);
                     }
                 }
-
-                PhotonNetwork.AutomaticallySyncScene = true;
                 GameObject startGameButton = GameObject.Find("StartGameButton");
 
                 startGameButton?.SetActive(PhotonNetwork.IsMasterClient);
             }
         }
-    }
-    public bool IsReady(Player player)
-    {
-        bool ret = false;
-
-        var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlayerListItem(Clone)");
-
-        foreach (GameObject g in objects)
-        {
-            if (g.GetComponent<PlayerListItem>().player == player)
-            {
-                if (g.GetComponent<PlayerListItem>().ready)
-                {
-                    ret = true;
-                    break;
-                }
-            }
-
-        }
-
-        return ret;
-    }
-
-    public void ActiveReady(Player player)
-    {
-
-        var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlayerListItem(Clone)");
-
-        foreach (GameObject g in objects)
-        {
-            if (g.GetComponent<PlayerListItem>().player == player)
-            {
-                g.GetComponent<PlayerListItem>().ready = true;
-                return;
-
-            }
-
-        }
-
-        return;
     }
 
     public bool AllPlayersExistInRoom()
