@@ -61,14 +61,14 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FlickerSpeed: 5.8
+    - _FlickerSpeed: 31
     - _Fold: 3
     - _GlitchIntensity: 0.005
-    - _GlitchSpeed: 36.2
+    - _GlitchSpeed: 50
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GlowSpeed: 2.7
+    - _GlowSpeed: 10
     - _GlowTiling: 0.105
     - _Metallic: 0
     - _OcclusionStrength: 1
