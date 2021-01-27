@@ -22,8 +22,11 @@ public class SelectPlatform : MonoBehaviour
                 selectedPlatform.GetComponent<Renderer>().material.SetColor("_EmissionColor", standardColor);
             }
             selectedPlatform = value;
-            selectedPlatform.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-            selectedPlatform.GetComponent<Renderer>().material.SetColor("_EmissionColor", selectedColor);
+            if (value != null)
+            {
+                selectedPlatform.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                selectedPlatform.GetComponent<Renderer>().material.SetColor("_EmissionColor", selectedColor);
+            }
         }
         get
         {
@@ -36,6 +39,7 @@ public class SelectPlatform : MonoBehaviour
         playerVars = GetComponent<PlayerVars>();
         playerMove = GetComponent<PlayerMove>();
         photonView = GetComponent<PhotonView>();
+       
     }
 
     void Update()

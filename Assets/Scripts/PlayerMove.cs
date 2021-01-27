@@ -26,6 +26,8 @@ public class PlayerMove : MonoBehaviour
 
     const float onIntensity = 21f;
     const float offIntensity = 7f;
+    bool justFall = false;
+    float timeJustFall  =0;
 
     public int AvailableMovements
     {
@@ -36,6 +38,7 @@ public class PlayerMove : MonoBehaviour
         set
         {
             availableMovements = value;
+            
             if (availableMovements > 0)
             {
                 foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
@@ -106,13 +109,13 @@ public class PlayerMove : MonoBehaviour
     [PunRPC]
     public void StartMoving(int platformID)
     {
+        if(timeJustFall > Time.time)
+        {
+            return;
+        }
         PhotonView photonTile = PhotonView.Find(platformID);
 
         //TODO: Get the closest one to the mouse
-
-        //List<HexagonalTile> neighbourTiles = selectPlatform.SelectedPlatform.GetComponentInChildren<HexagonalTile>().GetNeighbors();
-        //selectPlatform.SelectedPlatform = neighbourTiles[UnityEngine.Random.Range(0, neighbourTiles.Count)].gameObject;
-
         animator.SetTrigger("Jump");
         nextPlatform = photonTile.gameObject.GetComponent<HexagonalTile>();
         playerVars.ActiveMoving();
@@ -124,6 +127,7 @@ public class PlayerMove : MonoBehaviour
         transform.eulerAngles = new Vector3(0, angle, 0);
         jumpStart = Time.time;
         return;
+
     }
 
     
@@ -169,16 +173,19 @@ public class PlayerMove : MonoBehaviour
         //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
-        playerVars.currentPlatform = nextPlatform;
+      
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
+            timeJustFall = Time.time + 0.50F;
+            selectPlatform.SelectedPlatform = null;
+            playerVars.currentPlatform = Managers.Tiles.start;
         }
         else
         {
-           
+            playerVars.currentPlatform = nextPlatform;
         }
 
         if (playerVars.currentPlatform == Managers.Tiles.end)
@@ -201,7 +208,7 @@ public class PlayerMove : MonoBehaviour
         {
             Respawn();
             playerVars.DesactivateFalling();
-            animator.SetTrigger("FallToPlatform");
+            //animator.SetTrigger("FallToPlatform");
         }
     }
 

@@ -70,10 +70,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonView playerPhotonView = player.GetComponent<PhotonView>();
             if (playerPhotonView.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                playerPhotonView.RPC(
-                    "StartMoving",
-                    RpcTarget.All,
-                    player.GetComponent<SelectPlatform>().SelectedPlatform.GetComponent<PhotonView>().ViewID);
+                GameObject selectedPlatform = player.GetComponent<SelectPlatform>().SelectedPlatform;
+                if(selectedPlatform != null)
+                {
+                    playerPhotonView.RPC(
+                  "StartMoving",
+                  RpcTarget.All,
+                  selectedPlatform.GetComponent<PhotonView>().ViewID);
+                }
+              
             }
         }
 
