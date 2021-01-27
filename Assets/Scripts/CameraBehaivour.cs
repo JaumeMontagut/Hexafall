@@ -23,8 +23,6 @@ public class CameraBehaivour : MonoBehaviour
     void Update()
     {
         //        Debug.Log("NEW FRAMEE");
-
-        Debug.Log("NEW FRAMEE");
         thisFrame = true;
     }
 
@@ -61,8 +59,6 @@ public class CameraBehaivour : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(initialRot, finalRot, ratio);
 
                 transitionTimer += Time.deltaTime;
-                Debug.Log(Time.deltaTime);
-                Debug.Log(transitionTimer);
             }
             thisFrame = false;
 

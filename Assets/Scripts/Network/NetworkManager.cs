@@ -47,7 +47,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void SpawnPlayers()
     {
         ClientManager[] clients = FindObjectsOfType<ClientManager>();
-
         foreach (ClientManager client in clients)
         {
             client.photonView.RPC("SpawnPlayer", RpcTarget.AllBuffered);

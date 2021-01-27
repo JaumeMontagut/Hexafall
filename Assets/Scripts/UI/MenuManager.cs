@@ -20,7 +20,6 @@ public class MenuManager : MonoBehaviour
     {
         foreach (GameObject m in menus)
         {
-            Debug.Log(m.name);
             m.SetActive(false);
         }
 
