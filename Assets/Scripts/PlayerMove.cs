@@ -11,14 +11,14 @@ public class PlayerMove : MonoBehaviour
     public bool enableInput = false;
     float timeToFall = 0.2f;
     public float fallDistance = 2.0f;
+    [HideInInspector] public SelectPlatform selectPlatform;
 
     [ShowOnly] public float timeFalling = 0.0f;
 
     private PlayerVars playerVars;
-    private SelectPlatform selectPlatform;
+    
     private Animator animator;
     private HexagonalTile nextPlatform;
-    float jumpStart = 0;
     float moveSpeed = 2f;
     PhotonView photonView;
 
@@ -26,7 +26,6 @@ public class PlayerMove : MonoBehaviour
 
     const float onIntensity = 21f;
     const float offIntensity = 7f;
-    bool justFall = false;
     float timeJustFall  =0;
 
     public int AvailableMovements
@@ -125,7 +124,7 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = (float) moveVec.magnitude / 0.6F* 2;
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
-        jumpStart = Time.time;
+        timeJustFall = Time.time;
         return;
 
     }

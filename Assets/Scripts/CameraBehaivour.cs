@@ -34,6 +34,13 @@ public class CameraBehaivour : MonoBehaviour
         Vector3 finalPos = new Vector3(endPlatform.transform.position.x + 2, endPlatform.transform.position.y + 0.5f, endPlatform.transform.position.z);
         Quaternion finalRot = Quaternion.Euler(0, -90, 0);
         StartCoroutine(TransitionCamera(transform.position, finalPos, transform.rotation, finalRot));
+        foreach (GameObject player in Managers.Game.players)
+        {
+            PlayerMove movePlayer = player.GetComponent<PlayerMove>();
+            movePlayer.enableInput = false;
+            movePlayer.selectPlatform.SelectedPlatform = null;
+
+        }
     }
 
     IEnumerator TransitionCamera(Vector3 initialPos, Vector3 finalPos, Quaternion initialRot, Quaternion finalRot)

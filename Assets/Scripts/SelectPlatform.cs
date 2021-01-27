@@ -44,6 +44,8 @@ public class SelectPlatform : MonoBehaviour
 
     void Update()
     {
+        if (!playerMove.enableInput)
+            return;
         if (photonView.IsMine)
         {
             RaycastHit hitInfo = new RaycastHit();
