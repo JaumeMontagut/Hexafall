@@ -10,4 +10,5 @@ public class Managers
     public static TurnManager Turn;
     public static NetworkManager Network;
     public static UIManager ui;
+    public static MusicManager Music;
 }

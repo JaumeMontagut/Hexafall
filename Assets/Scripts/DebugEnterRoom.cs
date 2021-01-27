@@ -48,6 +48,6 @@ public class DebugEnterRoom : MonoBehaviourPunCallbacks
         Managers.Tiles.photonView.RPC("SetPath", RpcTarget.AllBuffered, pathId[0], pathId[pathId.Count - 1], pathId.ToArray());
         PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Star"), Managers.Tiles.end.transform.position, Quaternion.identity);
         Managers.Network.SpawnPlayers();
-
+        Managers.Network.photonView.RPC("StartGameStateMachine", RpcTarget.AllBuffered);
     }
 }

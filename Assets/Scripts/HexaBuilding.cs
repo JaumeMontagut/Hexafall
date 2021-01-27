@@ -9,11 +9,10 @@ public class HexaBuilding : MonoBehaviour
     float targetHeight;
 
     float interploationDuration;
-    float startInterpolationTime;
 
     const float minHeight = 1f;
     const float maxHeight = 3.75f;
-    const float minHeightChange = 0.75f;
+    //const float minHeightChange = 0.75f;
 
     const float minInterpolationDuration = 1.7021276595744680851063829787234f;
     const float maxInterpolationDuration = 1.7021276595744680851063829787234f;
@@ -23,8 +22,6 @@ public class HexaBuilding : MonoBehaviour
         initialHeight = Random.Range(minHeight, maxHeight);
         interploationDuration = Random.Range(minInterpolationDuration, maxInterpolationDuration);
 
-        startInterpolationTime = Time.time;
-
         transform.localScale = new Vector3(
             transform.localScale.x,
             initialHeight,
@@ -33,15 +30,15 @@ public class HexaBuilding : MonoBehaviour
 
     private void Update()
     {
-        float yScale = initialHeight + moveCurve.Evaluate((Time.time - startInterpolationTime) / interploationDuration) * (targetHeight - initialHeight);
+        float yScale = initialHeight + moveCurve.Evaluate((Time.time - Managers.Turn.startTurnTime) / interploationDuration) * (targetHeight - initialHeight);
         transform.localScale = new Vector3(
             transform.localScale.x,
             yScale,
             transform.localScale.z);
 
-        if (Time.time > startInterpolationTime + interploationDuration)
+        //Less than ideal
+        if (Mathf.Approximately(Managers.Turn.startTurnTime, Time.time))
         {
-            startInterpolationTime = startInterpolationTime + interploationDuration;
             initialHeight = targetHeight;
 
             if (targetHeight == maxHeight)

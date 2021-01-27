@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using MyEvents;
 using System.IO;
+using MyEvents;
 
 using Random = UnityEngine.Random;
 
@@ -11,7 +12,6 @@ public class TurnManager : MonoBehaviour
 {
     private bool stopTimer = false;
     [SerializeField] private float turnDuration = 0f;                                     //How long does a turn last.
-    [ShowOnly] private float turnTimer = 0f;                                              //Timer for every turn.
 
     [ShowOnly] public float timerToReduceTime = 0.0f;                                 //Timer to reduce the time between turns
     [SerializeField] private float timeToReduceTimeBetweenTurns = 0.0f;               //How much time does it take to reduce the time between turns.
@@ -23,6 +23,7 @@ public class TurnManager : MonoBehaviour
     private float skyboxRotateSpeed = 20f;
 
     [SerializeField] private GameObject buildingPrefab;
+    [HideInInspector] public float startTurnTime;
 
     private void Awake()
     {
@@ -31,7 +32,6 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
-        turnTimer = turnDuration;
         stopTimer = false;
         GenerateBuildings();
     }
@@ -44,6 +44,8 @@ public class TurnManager : MonoBehaviour
         int botLimit = magnitude;
 
         float tileMargin = 0f;
+
+        GameObject hexaBuildingParent = GameObject.Find("HexabuildingParent");
 
         Vector3 tileSize = buildingPrefab.GetComponentInChildren<Renderer>().bounds.size;
         float tileWidth = tileSize.z + tileMargin;
@@ -60,7 +62,8 @@ public class TurnManager : MonoBehaviour
                 GameObject instance = Instantiate(
                     buildingPrefab,
                     worldPosition,
-                    Quaternion.Euler(0f, 90f, 0f));
+                    Quaternion.Euler(0f, 90f, 0f),
+                    hexaBuildingParent.transform);
             }
             if (column < 0)
             {
@@ -73,32 +76,37 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        turnTimer -= Time.deltaTime;
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotateSpeed);
+    }
 
-        if (turnTimer <= 0f && !stopTimer)
+    IEnumerator ExecuteTurns()
+    {
+        while (true)
         {
-            //End of the turn
-            
-            // player.GetComponent<PlayerVars>().moving = false;
+            yield return new WaitForSeconds(turnDuration);
+            startTurnTime = Time.time;
             if (PhotonNetwork.IsMasterClient)
             {
                 //We get the MasterClient's PhotonView and call a function in all the other clients
-                PhotonView photonView = Managers.Network.GetComponent<PhotonView>();
-                photonView.RPC("TimerReset", RpcTarget.All);
+                Managers.Network.photonView.RPC("TimerReset", RpcTarget.All);
             }
         }
+    }
 
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotateSpeed);
-
-        //ReduceTurnDuration();
+    private void SetCorrectTurns(object info)
+    {
+        RenderSettings.skybox.SetColor("_Tint", GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f));
+        StartCoroutine(ExecuteTurns());
+        Managers.Music.StartMusic();
     }
 
     private void OnEnable()
     {
         EventManager.StartListening(MyEventType.ActivateInput, ResumeTimer);
         EventManager.StartListening(MyEventType.DesactivateInput, StopTimer);
+        EventManager.StartListening(MyEventType.StateInGameEnter, SetCorrectTurns);
 
     }
 
@@ -106,6 +114,7 @@ public class TurnManager : MonoBehaviour
     {
         EventManager.StopListening(MyEventType.ActivateInput, ResumeTimer);
         EventManager.StopListening(MyEventType.DesactivateInput, StopTimer);
+        EventManager.StopListening(MyEventType.StateInGameEnter, SetCorrectTurns);
 
     }
     private void ResumeTimer(object info)
@@ -138,8 +147,7 @@ public class TurnManager : MonoBehaviour
     public void NewTurn()
     {
         Debug.Log("New turn time");
-        turnTimer = turnDuration;
-        Color nextColor = GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 15f);
+        Color nextColor = GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f);
         RenderSettings.skybox.SetColor("_Tint", nextColor);
     }
 
