@@ -8,7 +8,7 @@ using MyEvents;
 
 public class PlayerMove : MonoBehaviour
 {
-    public bool enableInput = false;
+    public bool enableInput = true;
     float timeToFall = 0.2f;
     public float fallDistance = 2.0f;
     [HideInInspector] public SelectPlatform selectPlatform;
@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
     private HexagonalTile nextPlatform;
     float moveSpeed = 2f;
     PhotonView photonView;
-
-    float timeJustFall = 0;
+Camera cam;
+float timeJustFall = 0;
 
     private void OnEnable()
     {
@@ -42,6 +42,7 @@ public class PlayerMove : MonoBehaviour
         playerVars = GetComponent<PlayerVars>();
         selectPlatform = GetComponent<SelectPlatform>();
         animator = GetComponent<Animator>();
+        cam = FindObjectOfType<Camera>();
     }
     
     private void Start()
@@ -129,9 +130,6 @@ public class PlayerMove : MonoBehaviour
         doElasticAnimation = true;
 
         //Update the currentHexagon of the player
-       
-
-        //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
       
@@ -148,6 +146,41 @@ public class PlayerMove : MonoBehaviour
         else
         {
             playerVars.currentPlatform = nextPlatform;
+            selectPlatform.SelectedPlatform = null;
+            Vector3 selectVec = Input.mousePosition - cam.WorldToScreenPoint(playerVars.currentPlatform.transform.position);
+            double angle = Mathf.Rad2Deg * Math.Atan2(selectVec.y, selectVec.x);
+            HexagonalTile tile =  null;
+            if (angle < 30 || angle > 240)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.N);
+            }
+            else if(angle < 90)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.NE);
+            }
+            else if (angle < 120)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.SW);
+            }
+            else if (angle < 150)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.S);
+            }
+            else if (angle < 180)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.SE);
+            }
+            else if (angle < 210)
+            {
+                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.NW);
+            }
+
+            if (tile != null)
+            {
+                selectPlatform.SelectedPlatform = tile.gameObject;
+            }
+
+
         }
 
         if (playerVars.currentPlatform == Managers.Tiles.end)
