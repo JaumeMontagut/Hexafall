@@ -85,9 +85,7 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = Managers.Tiles.start.transform.position;
         playerVars.currentPlatform = Managers.Tiles.start;
-
-       
-     
+        Managers.Game.players.Add(gameObject);
     }
 
     void Update()
@@ -146,11 +144,12 @@ public class PlayerMove : MonoBehaviour
             move = true;
         }
     }
-   
 
     public void EndMove(object info)
     {
-        if (info != gameObject)
+        GameObject player = (GameObject)info;
+        if (player != gameObject)
+
             return;
         ///Move the player to the new hexagon.
         transform.position = nextPlatform.transform.position;
@@ -168,14 +167,10 @@ public class PlayerMove : MonoBehaviour
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
         }
-
-
         if (playerVars.currentPlatform == Managers.Tiles.end)
         {
-
             //This player wins!!
             EventManager.TriggerEvent(MyEventType.PlayerReachGoal, gameObject/*the player*/);
-            
         }
 
         return ;
@@ -186,7 +181,6 @@ public class PlayerMove : MonoBehaviour
         timeFalling += Time.deltaTime;
 
         transform.position = new Vector3(transform.position.x, transform.position.y - (fallDistance * Time.deltaTime), transform.position.z);
-
 
         if (timeFalling >= timeToFall)
         {

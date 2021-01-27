@@ -32,12 +32,10 @@ public class CameraBehaivour : MonoBehaviour
     {
         EventManager.StartListening(MyEventType.PlayerReachGoal, MoveToWinPos);
     }
-
     private void OnDisable()
     {
         EventManager.StopListening(MyEventType.PlayerReachGoal, MoveToWinPos);
     }
-
     private void MoveToWinPos(object info)
     {
         //Move Camera
@@ -45,7 +43,6 @@ public class CameraBehaivour : MonoBehaviour
         GameObject endPlatform = Managers.Tiles.end.gameObject;
         Vector3 finalPos = new Vector3(endPlatform.transform.position.x + 2, endPlatform.transform.position.y + 0.5f, endPlatform.transform.position.z);
         Quaternion finalRot = Quaternion.Euler(0, -90, 0);
-
         StartCoroutine(TransitionCamera(transform.position, finalPos, transform.rotation, finalRot));
     }
 

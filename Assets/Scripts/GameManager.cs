@@ -10,11 +10,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     #region GameData
-    [HideInInspector] public List<GameObject> players;
-    public StateMachine stateMachine;
     public float timeWaitingToStart;
+    public Vector2Int startPosition;
+
     [HideInInspector] public const int mainMenu = 0;
     [SerializeField] private GameObject ButtonMainMenu, ButtonPlayAgain;
+    [SerializeField] private StateMachine stateMachine;
+    [HideInInspector] public List<GameObject> players;
 
     #endregion
 
@@ -28,13 +30,13 @@ public class GameManager : MonoBehaviour
         {
             gameObject.AddComponent<DebugEnterRoom>();
         }
-
-        stateMachine.ChangeState(new WaitingState());
     }
+
     private void Start()
     {
         ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
         ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
+
     }
     private void OnEnable()
     {
@@ -42,12 +44,16 @@ public class GameManager : MonoBehaviour
         EventManager.StartListening(MyEventType.DesactivateInput, DisableMovementPlayers);
 
     }
-
     private void OnDisable()
     {
         EventManager.StopListening(MyEventType.PlayerReachGoal, WinResult);
         EventManager.StopListening(MyEventType.DesactivateInput, DisableMovementPlayers);
 
+    }
+
+    public void StartStateMachine()
+    {
+        stateMachine.ChangeState(new WaitingState());
     }
     private void WinResult(object info)
     {
@@ -60,7 +66,6 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerMove>().AvailableMovements = 0;
         }
     }
-
     public PhotonView GetCurrentPhotonView()
     {
         foreach (GameObject player in players)

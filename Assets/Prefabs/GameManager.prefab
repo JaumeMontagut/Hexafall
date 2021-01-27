@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb296120d62e2b64ba3fee75dd725ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playLocal: 0
-  players: []
-  stateMachine: {fileID: 5055486903057190430}
   timeWaitingToStart: 3
+  startPosition: {x: 0, y: 0}
+  ButtonMainMenu: {fileID: 0}
+  ButtonPlayAgain: {fileID: 0}
+  stateMachine: {fileID: 5055486903057190430}
+  players: []
 --- !u!114 &5055486903057190430
 MonoBehaviour:
   m_ObjectHideFlags: 0

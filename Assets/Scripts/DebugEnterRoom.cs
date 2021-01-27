@@ -42,10 +42,12 @@ public class DebugEnterRoom : MonoBehaviourPunCallbacks
         Debug.Log("Joined room.");
         Debug.Log("Ready to play");
 
-        if (!Managers.Tiles.hasSetupPath)
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
-            Managers.Tiles.GenerateAll();
-        }
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ClientManager"), Vector3.zero, Quaternion.identity);
+        Managers.Tiles.GenerateTiles();
+        List<int> pathId = PathGenerator.GeneratePath();
+        Managers.Tiles.photonView.RPC("SetPath", RpcTarget.AllBuffered, pathId[0], pathId[pathId.Count - 1], pathId.ToArray());
+        PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Star"), Managers.Tiles.end.transform.position, Quaternion.identity);
+        Managers.Network.SpawnPlayers();
+
     }
 }
