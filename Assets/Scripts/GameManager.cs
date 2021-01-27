@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
     {
         ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
         ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
-
-
-
     }
     private void OnEnable()
     {

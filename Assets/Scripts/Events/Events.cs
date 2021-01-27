@@ -28,6 +28,8 @@ namespace MyEvents
         DesactivateInput,
         ActivateInput,
 
+        PlaySfx,
+
         #endregion
 
         #region Tiles
