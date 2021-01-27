@@ -138,7 +138,7 @@ public class PlayerMove : MonoBehaviour
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
-            Managers.Audio.PlayAudio("Death");
+            //Managers.Audio.PlayAudio("Death");
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
             timeJustFall = Time.time + 0.50F;
