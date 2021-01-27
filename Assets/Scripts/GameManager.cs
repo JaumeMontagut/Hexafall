@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
     {
         ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
         ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
-
-
-
     }
     private void OnEnable()
     {
@@ -106,14 +103,12 @@ public class GameManager : MonoBehaviour
 
     private void GoToMainMenu()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
         PhotonNetwork.LeaveRoom();
     }
 
     private void GoToRoom()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
     }
 }

@@ -94,7 +94,7 @@ public class PlayerMove : MonoBehaviour
     }
     public Vector3 ReturnOffset()
     {
-        return new Vector3(Managers.Game.offsets[playerVars.identificator].x, 0, Managers.Game.offsets[playerVars.identificator].y);
+        return new Vector3(Managers.Game.offsets[playerVars.identificator].x, 0.1f, Managers.Game.offsets[playerVars.identificator].y);
     }
 
     void Update()
@@ -124,8 +124,8 @@ public class PlayerMove : MonoBehaviour
         playerVars.ActiveMoving();
 
         // Set rotation
-        Vector3 moveVec = nextPlatform.transform.position - transform.position;
-        moveSpeed = (float) moveVec.magnitude / 0.6F* 2;
+        Vector3 moveVec = nextPlatform.transform.position + ReturnOffset() - transform.position;
+        moveSpeed = (float) moveVec.magnitude / 0.6F* 3;
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
         timeJustFall = Time.time;
@@ -140,7 +140,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(move)
         {
-            Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position + ReturnOffset();
+            Vector3 moveVec = nextPlatform.transform.position + ReturnOffset() - transform.position;
             transform.position += new Vector3(moveVec.normalized.x, 0, moveVec.normalized.z) * Time.deltaTime * moveSpeed;
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
@@ -180,6 +180,7 @@ public class PlayerMove : MonoBehaviour
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
+            Managers.Audio.PlayAudio("Death");
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
             timeJustFall = Time.time + 0.50F;

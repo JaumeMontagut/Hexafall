@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    public List<AudioClip> audioClips; 
     private AudioSource audioSource;
 
     void Awake()
@@ -12,8 +13,33 @@ public class MusicManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void StartMusic()
+    public void PlayMusic(string name)
     {
-        audioSource.Play();
+        StopMusic();
+
+        AudioClip audioClip = GetAudioByName(name);
+
+        if (audioClip)
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
+    }
+
+    public void StopMusic()
+    {
+        audioSource.Stop();
+    }
+
+    AudioClip GetAudioByName(string name)
+    {
+        foreach (AudioClip audioClip in audioClips)
+        {
+            if (audioClip.name == name)
+            {
+                return audioClip;
+            }
+        }
+        return null;
     }
 }

@@ -99,7 +99,7 @@ public class TurnManager : MonoBehaviour
     {
         RenderSettings.skybox.SetColor("_Tint", GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f));
         StartCoroutine(ExecuteTurns());
-        Managers.Music.StartMusic();
+        Managers.Music.PlayMusic("Game Music");
     }
 
     private void OnEnable()
