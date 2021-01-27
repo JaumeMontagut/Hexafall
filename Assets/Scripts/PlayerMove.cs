@@ -8,7 +8,7 @@ using MyEvents;
 
 public class PlayerMove : MonoBehaviour
 {
-    public bool enableInput = false;
+    public bool enableInput = true;
     float timeToFall = 0.2f;
     public float fallDistance = 2.0f;
     [HideInInspector] public SelectPlatform selectPlatform;
@@ -22,40 +22,7 @@ public class PlayerMove : MonoBehaviour
     float moveSpeed = 2f;
     PhotonView photonView;
 
-    int availableMovements = 1;
-
-    const float onIntensity = 21f;
-    const float offIntensity = 7f;
-    float timeJustFall  =0;
-
-    public int AvailableMovements
-    {
-        get
-        {
-            return availableMovements;
-        }
-        set
-        {
-            availableMovements = value;
-            
-            if (availableMovements > 0)
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-                }
-            }
-            else
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * offIntensity);
-                }
-            }
-        }
-    }
+    float timeJustFall = 0;
 
     private void OnEnable()
     {
@@ -75,19 +42,11 @@ public class PlayerMove : MonoBehaviour
         playerVars = GetComponent<PlayerVars>();
         selectPlatform = GetComponent<SelectPlatform>();
         animator = GetComponent<Animator>();
+      
     }
     
     private void Start()
     {
-        //Set the starting emission color on playerVars
-        Material[] playerMaterials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
-        playerVars.emissiveColor = playerMaterials[0].GetColor("_EmissionColor");
-        foreach (Material mat in playerMaterials)
-        {
-            mat.EnableKeyword("_EMISSION");
-            mat.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-        }
-
         transform.position = Managers.Tiles.start.transform.position + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
         Managers.Game.players.Add(gameObject);
@@ -171,16 +130,13 @@ public class PlayerMove : MonoBehaviour
         doElasticAnimation = true;
 
         //Update the currentHexagon of the player
-       
-
-        //transform.position = nextPlatform.transform.position;
         playerVars.DesactivateMoving();
 
       
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
-            Managers.Audio.PlayAudio("Death");
+            //Managers.Audio.PlayAudio("Death");
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
             timeJustFall = Time.time + 0.50F;
@@ -190,6 +146,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             playerVars.currentPlatform = nextPlatform;
+     
         }
 
         if (playerVars.currentPlatform == Managers.Tiles.end)
