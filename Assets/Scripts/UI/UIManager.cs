@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyEvents;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,11 +11,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float timeMainMenuButton;
     [SerializeField] private float timePlayAgainButton;
 
-    [SerializeField] private GameObject ButtonMainMenu;
-    [SerializeField] private GameObject ButtonPlayAgain;
+    [SerializeField] private GameObject victoryModel;
+    [SerializeField] private GameObject defeatModel;
+    [SerializeField] private GameObject buttonMainMenu;
+    [SerializeField] private GameObject buttonPlayAgain;
 
-
-    private GameObject CanvasResult;
     void Awake()
     {
         Managers.ui = this;
@@ -23,8 +24,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CanvasResult = GameObject.Find("CanvasResult");
-        CanvasResult.SetActive(false);
+        victoryModel.SetActive(false);
+        defeatModel.SetActive(false);
+        buttonMainMenu.SetActive(false);
+        buttonPlayAgain.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,14 +48,24 @@ public class UIManager : MonoBehaviour
 
     private void EnableWinButtons(object info)
     {
+        GameObject gameObject = (GameObject)info;
 
-        ChangeButtonAlpha(ButtonMainMenu,  0);
-        ChangeButtonAlpha(ButtonPlayAgain, 0);
+        buttonMainMenu.SetActive(true);
+        buttonPlayAgain.SetActive(true);
 
-        CanvasResult.SetActive(true);
+        if (gameObject.GetComponent<PhotonView>().IsMine)
+        {
+            victoryModel.SetActive(true);
+        }
+        else
+        {
+            defeatModel.SetActive(true);
+        }
 
-        StartCoroutine(EnableTransitionButon(ButtonMainMenu, timeMainMenuButton));
-        StartCoroutine(EnableTransitionButon(ButtonPlayAgain, timePlayAgainButton));
+        ChangeButtonAlpha(buttonMainMenu,  0);
+        ChangeButtonAlpha(buttonPlayAgain, 0);
+        StartCoroutine(EnableTransitionButon(buttonMainMenu, timeMainMenuButton));
+        StartCoroutine(EnableTransitionButon(buttonPlayAgain, timePlayAgainButton));
     }
 
     IEnumerator EnableTransitionButon(GameObject button, float time)

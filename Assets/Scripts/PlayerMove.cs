@@ -197,6 +197,10 @@ public class PlayerMove : MonoBehaviour
             //This player wins!!
             EventManager.TriggerEvent(MyEventType.PlayerReachGoal, gameObject/*the player*/);
 
+            if (photonView.IsMine)
+            {
+                animator.Play("Dance");
+            }
         }
 
         return ;
