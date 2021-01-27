@@ -18,14 +18,53 @@ public class HexagonalTile : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isPath = false;
 
+    //Hologram effect ---------
+
+    Renderer hologramTileR;
+    Material material;
+
+
     private void Awake()
     {
         neighborTiles = new HexagonalTile[(int)HexagonDirections.MAX];
+
+        material = gameObject.GetComponent<Renderer>().material;
+        hologramTileR = transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        hologramTileR.enabled = false;
     }
 
     private void Start()
     {
         transform.parent = Managers.Tiles.transform;
+    }
+
+    bool doAnimation = false;
+    public void Update()
+    {
+        if(doAnimation)
+        {
+            
+            Color color = material.color;
+            color.a += Time.deltaTime;
+            if(color.a >1)
+            {
+                color.a = 1;
+                doAnimation = false;
+                hologramTileR.enabled = false;
+            }
+            hologramTileR.material.SetFloat("_Alpha", 1 - color.a);
+            material.color = color;
+
+        }
+    }
+    public void PlayAnimation()
+    {
+        doAnimation = true;
+        Color color = material.color;
+        color.a = 0;
+        material.color = color;
+        hologramTileR.enabled = true;
+        hologramTileR.material.SetFloat("_Alpha", 1);
     }
     public List<HexagonalTile> GetNeighbors()
     {
