@@ -11,7 +11,7 @@ public class SelectPlatform : MonoBehaviour
     private PhotonView photonView;
     
     private GameObject selectedPlatform;
-    Color standardColor = Color.blue;//TODO: Get from the preafab before OnEnable is called (start doesn't work)
+    Color standardColor;
     Color selectedColor = Color.yellow;
 
     public GameObject SelectedPlatform
@@ -72,6 +72,9 @@ public class SelectPlatform : MonoBehaviour
 
     private void OnEnable()
     {
+        GameObject tilePrefab = Resources.Load<GameObject>("PhotonPrefabs/HexagonalTile");
+        tilePrefab.GetComponent<Renderer>().sharedMaterial.EnableKeyword("_EMISSION");
+        standardColor = tilePrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_EmissionColor");
         EventManager.StartListening(MyEventType.StateWaitingEnter, SelectStartingPlatform);
     }
 
