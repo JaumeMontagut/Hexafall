@@ -21,42 +21,8 @@ public class PlayerMove : MonoBehaviour
     private HexagonalTile nextPlatform;
     float moveSpeed = 2f;
     PhotonView photonView;
-
-    int availableMovements = 1;
-
-    const float onIntensity = 21f;
-    const float offIntensity = 7f;
-    float timeJustFall  =0;
-
-    Camera cam;
-    public int AvailableMovements
-    {
-        get
-        {
-            return availableMovements;
-        }
-        set
-        {
-            availableMovements = value;
-            
-            if (availableMovements > 0)
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-                }
-            }
-            else
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * offIntensity);
-                }
-            }
-        }
-    }
+Camera cam;
+float timeJustFall = 0;
 
     private void OnEnable()
     {
@@ -81,22 +47,13 @@ public class PlayerMove : MonoBehaviour
     
     private void Start()
     {
-        //Set the starting emission color on playerVars
-        Material[] playerMaterials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
-        playerVars.emissiveColor = playerMaterials[0].GetColor("_EmissionColor");
-        foreach (Material mat in playerMaterials)
-        {
-            mat.EnableKeyword("_EMISSION");
-            mat.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-        }
-
         transform.position = Managers.Tiles.start.transform.position + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
         Managers.Game.players.Add(gameObject);
     }
     public Vector3 ReturnOffset()
     {
-        return new Vector3(Managers.Game.offsets[playerVars.identificator].x, 0, Managers.Game.offsets[playerVars.identificator].y);
+        return new Vector3(Managers.Game.offsets[playerVars.identificator].x, 0.1f, Managers.Game.offsets[playerVars.identificator].y);
     }
 
     void Update()
@@ -126,8 +83,8 @@ public class PlayerMove : MonoBehaviour
         playerVars.ActiveMoving();
 
         // Set rotation
-        Vector3 moveVec = nextPlatform.transform.position - transform.position;
-        moveSpeed = (float) moveVec.magnitude / 0.6F* 2;
+        Vector3 moveVec = nextPlatform.transform.position + ReturnOffset() - transform.position;
+        moveSpeed = (float) moveVec.magnitude / 0.6F* 3;
         float angle = Mathf.Atan2(moveVec.x, moveVec.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, angle, 0);
         timeJustFall = Time.time;
@@ -142,7 +99,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(move)
         {
-            Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position + ReturnOffset();
+            Vector3 moveVec = nextPlatform.transform.position + ReturnOffset() - transform.position;
             transform.position += new Vector3(moveVec.normalized.x, 0, moveVec.normalized.z) * Time.deltaTime * moveSpeed;
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
@@ -179,6 +136,7 @@ public class PlayerMove : MonoBehaviour
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
         {
+            Managers.Audio.PlayAudio("Death");
             playerVars.ActivateFalling();
             nextPlatform.PlayAnimation();
             timeJustFall = Time.time + 0.50F;

@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class TurnManager : MonoBehaviour
 {
     private bool stopTimer = false;
-    [SerializeField] private float turnDuration = 0f;                                     //How long does a turn last.
+    public float turnDuration;                                                       //How long does a turn last.
 
     [ShowOnly] public float timerToReduceTime = 0.0f;                                 //Timer to reduce the time between turns
     [SerializeField] private float timeToReduceTimeBetweenTurns = 0.0f;               //How much time does it take to reduce the time between turns.
@@ -99,7 +99,7 @@ public class TurnManager : MonoBehaviour
     {
         RenderSettings.skybox.SetColor("_Tint", GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f));
         StartCoroutine(ExecuteTurns());
-        Managers.Music.StartMusic();
+        Managers.Music.PlayMusic("Game Music");
     }
 
     private void OnEnable()
@@ -148,6 +148,11 @@ public class TurnManager : MonoBehaviour
     {
         Color nextColor = GetRandomColorDifferentHue(RenderSettings.skybox.GetColor("_Tint"), 60f);
         RenderSettings.skybox.SetColor("_Tint", nextColor);
+
+        foreach (HexaSpeakers speaker in FindObjectsOfType<HexaSpeakers>())
+        {
+            speaker.DoAnimation();
+        }
     }
 
     private Color GetRandomColorDifferentHue(Color prevColor, float minHueDifference)

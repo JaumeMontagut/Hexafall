@@ -33,6 +33,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         photonView.RPC("EnablePlayerInput", RpcTarget.AllBuffered, enable);
     }
 
+    public void PlayNetworkingAudio(string name)
+    {
+        photonView.RPC("PlayAudio", RpcTarget.AllBuffered, name);
+    }
+
+    [PunRPC]
+    private void PlayAudio(string name)
+    {
+        Managers.Audio.PlayAudio(name);
+    }
+
     [PunRPC]
     private void EnablePlayerInput(bool enable)
     {

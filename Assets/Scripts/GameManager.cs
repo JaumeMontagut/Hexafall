@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
     {
         ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
         ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
-
-
-
     }
     private void OnEnable()
     {
@@ -71,11 +68,9 @@ public class GameManager : MonoBehaviour
     }
     private void DisableMovementPlayers(object info)
     {
-        foreach (GameObject player in players)
-        {
-            player.GetComponent<PlayerMove>().AvailableMovements = 0;
-        }
+        //TODO: Complete this function with the new workflow
     }
+
     public PhotonView GetCurrentPhotonView()
     {
         foreach (GameObject player in players)
@@ -106,14 +101,12 @@ public class GameManager : MonoBehaviour
 
     private void GoToMainMenu()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
         PhotonNetwork.LeaveRoom();
     }
 
     private void GoToRoom()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LoadLevel(mainMenu);
     }
 }

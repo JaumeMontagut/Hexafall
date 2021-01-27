@@ -15,7 +15,7 @@ public class HexafallLauncher : MonoBehaviourPunCallbacks
     [SerializeField] Text errorText;
 
     //RoomMenu
-    [SerializeField] Text roomText;
+    [SerializeField] public Text roomText;
     [SerializeField] public GameObject playerListContent;
     [SerializeField] public GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
