@@ -16,6 +16,6 @@ public class ClientManager : MonoBehaviour
     [PunRPC]
     public void SpawnPlayer()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), Vector3.zero, Quaternion.identity).GetComponent<PlayerVars>();
     }
 }

@@ -28,6 +28,7 @@ public class PlayerVars : MonoBehaviour
     Material[] materials;
 
     PhotonView photonView;
+    public int identificator = -1;
 
    // List<int> colorsTaken = new List<int>();
     public bool falling 
@@ -49,20 +50,28 @@ public class PlayerVars : MonoBehaviour
 
         Managers.Game.players.Add(gameObject);
 
+
+
         moving = false;
         offset = new Vector3(0.0f, 0.0f, 0.0f);
 
-        #region Change Color
-            
-        if(photonView.IsMine)
-        {
-            int index;
-            index = Random.Range(0, colors.Length);
+        PlayerVars[] players = FindObjectsOfType<PlayerVars>();
 
-            photonView.RPC("ChangePlayerColor", RpcTarget.All, index);
+
+        //Debug.Log(photonView.CreatorActorNr);
+        //Debug.Log(PhotonNetwork.PlayerList[identificator].ActorNumber);
+
+        for(int i = 0; i < 4; ++i)
+        {
+            if (PhotonNetwork.PlayerList[i].ActorNumber == photonView.CreatorActorNr)
+            {
+                identificator = i;
+                break;
+            }
         }
-      
-        #endregion
+
+        ChangePlayerColor(identificator);
+
     }
 
     [PunRPC]

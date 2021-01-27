@@ -985,6 +985,7 @@ MonoBehaviour:
   emissiveColor: {r: 0, g: 0, b: 0, a: 0}
   offset: {x: 0.3, y: 0, z: 0.3}
   color: {r: 0, g: 0, b: 0, a: 0}
+  identificator: -1
 --- !u!136 &1743059218
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1013,6 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableInput: 0
   fallDistance: 2
+  selectPlatform: {fileID: 0}
   timeFalling: 0
 --- !u!114 &1743059215
 MonoBehaviour:

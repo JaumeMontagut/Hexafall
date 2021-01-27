@@ -9,16 +9,17 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] GameObject[] menus;
 
+    public Material MainMenuskybox;
     private void Awake()
     {
         Instance = this;
+        RenderSettings.skybox = MainMenuskybox;
     }
 
     public void OpenMenu(string menuName)
     {
         foreach (GameObject m in menus)
         {
-            Debug.Log(m.name);
             m.SetActive(false);
         }
 

@@ -50,6 +50,7 @@ MonoBehaviour:
   ButtonPlayAgain: {fileID: 0}
   stateMachine: {fileID: 5055486903057190430}
   players: []
+  GameSkybox: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
 --- !u!114 &5055486903057190430
 MonoBehaviour:
   m_ObjectHideFlags: 0

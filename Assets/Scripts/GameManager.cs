@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public Material GameSkybox;
     void Awake()
     {
         Managers.Game = this;
+        RenderSettings.skybox = GameSkybox;
 
         //RoomManager is an object that comes from the MainMenuScene and doesn't destroy on the loading of the scene
         //We check if it exists to see if you started playing from the GameScene
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
     {
         ButtonMainMenu.GetComponent<Button>().onClick.AddListener(GoToMainMenu);
         ButtonPlayAgain.GetComponent<Button>().onClick.AddListener(GoToRoom);
+
+
 
     }
     private void OnEnable()
