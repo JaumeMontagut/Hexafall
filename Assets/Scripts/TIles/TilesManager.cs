@@ -22,7 +22,6 @@ public class TilesManager : MonoBehaviour
     [HideInInspector] public PhotonView photonView;
     private Dictionary<Vector2Int, HexagonalTile> grid;
 
-    public bool hasSetupPath  { private set; get; }
     public HexagonalTile start { get; private set; }
     public HexagonalTile end { get; private set; }
 
