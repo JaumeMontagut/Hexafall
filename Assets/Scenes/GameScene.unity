@@ -517,7 +517,10 @@ MonoBehaviour:
   timeToReduceTimeBetweenTurns: 20
   TimeReduced: 0.5
   minTimeBetweeTurns: 0.5
-  timerUI: {fileID: 414108919}
+  skyboxSaturation: 0
+  skyboxValue: 0
+  buildingPrefab: {fileID: 0}
+  startTurnTime: 0
 --- !u!1 &360029017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1387,11 @@ PrefabInstance:
       propertyPath: ButtonPlayAgain
       value: 
       objectReference: {fileID: 360029017}
+    - target: {fileID: 7390664466933335190, guid: 6dc82322910a9664a97fd4e574177a8b,
+        type: 3}
+      propertyPath: GameSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
     - target: {fileID: 7390664466933335191, guid: 6dc82322910a9664a97fd4e574177a8b,
         type: 3}
       propertyPath: m_Name
