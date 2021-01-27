@@ -11,11 +11,7 @@ GameObject:
   - component: {fileID: 6578401812509319248}
   - component: {fileID: 3240404684225993029}
   - component: {fileID: 5866107056985867988}
-  - component: {fileID: 4561066064413345974}
-  - component: {fileID: 1388564304170563578}
-  - component: {fileID: 8000319125734102389}
-  - component: {fileID: 4685199202872534119}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Holo_HexagonalTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,73 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4561066064413345974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447669807010983042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53449bbbf3324874787a9718cc411d40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elasticMove: {fileID: 8000319125734102389}
-  gridPosition: {x: 0, y: 0}
-  neighborTiles: []
-  cost: 0
-  isPath: 0
---- !u!64 &1388564304170563578
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447669807010983042}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1522865456008400428, guid: 5b8495b3b3844ce44bbdc718032642da, type: 3}
---- !u!114 &8000319125734102389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447669807010983042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c8fffb36db64814188e3d18d9569eac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verticalSpeed: 0.5
---- !u!114 &4685199202872534119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447669807010983042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 0
-  Synchronization: 2
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 4561066064413345974}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &9110464528824428176
 GameObject:
   m_ObjectHideFlags: 0
