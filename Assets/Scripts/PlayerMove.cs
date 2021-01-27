@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
     private HexagonalTile nextPlatform;
     float moveSpeed = 2f;
     PhotonView photonView;
-Camera cam;
-float timeJustFall = 0;
+
+    float timeJustFall = 0;
 
     private void OnEnable()
     {
@@ -42,7 +42,7 @@ float timeJustFall = 0;
         playerVars = GetComponent<PlayerVars>();
         selectPlatform = GetComponent<SelectPlatform>();
         animator = GetComponent<Animator>();
-        cam = FindObjectOfType<Camera>();
+      
     }
     
     private void Start()
@@ -146,41 +146,7 @@ float timeJustFall = 0;
         else
         {
             playerVars.currentPlatform = nextPlatform;
-            selectPlatform.SelectedPlatform = null;
-            Vector3 selectVec = Input.mousePosition - cam.WorldToScreenPoint(playerVars.currentPlatform.transform.position);
-            double angle = Mathf.Rad2Deg * Math.Atan2(selectVec.y, selectVec.x);
-            HexagonalTile tile =  null;
-            if (angle < 30 || angle > 240)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.N);
-            }
-            else if(angle < 90)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.NE);
-            }
-            else if (angle < 120)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.SW);
-            }
-            else if (angle < 150)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.S);
-            }
-            else if (angle < 180)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.SE);
-            }
-            else if (angle < 210)
-            {
-                tile = playerVars.currentPlatform.GetNeighbor(HexagonDirections.NW);
-            }
-
-            if (tile != null)
-            {
-                selectPlatform.SelectedPlatform = tile.gameObject;
-            }
-
-
+     
         }
 
         if (playerVars.currentPlatform == Managers.Tiles.end)
