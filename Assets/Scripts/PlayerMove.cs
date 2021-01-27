@@ -166,7 +166,7 @@ public class PlayerMove : MonoBehaviour
         if (!nextPlatform.isPath)
         {
             playerVars.ActivateFalling();
-           
+            nextPlatform.PlayAnimation();
         }
 
 
