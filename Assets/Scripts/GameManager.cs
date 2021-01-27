@@ -68,11 +68,9 @@ public class GameManager : MonoBehaviour
     }
     private void DisableMovementPlayers(object info)
     {
-        foreach (GameObject player in players)
-        {
-            player.GetComponent<PlayerMove>().AvailableMovements = 0;
-        }
+        //TODO: Complete this function with the new workflow
     }
+
     public PhotonView GetCurrentPhotonView()
     {
         foreach (GameObject player in players)

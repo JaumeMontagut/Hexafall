@@ -22,40 +22,7 @@ public class PlayerMove : MonoBehaviour
     float moveSpeed = 2f;
     PhotonView photonView;
 
-    int availableMovements = 1;
-
-    const float onIntensity = 21f;
-    const float offIntensity = 7f;
-    float timeJustFall  =0;
-
-    public int AvailableMovements
-    {
-        get
-        {
-            return availableMovements;
-        }
-        set
-        {
-            availableMovements = value;
-            
-            if (availableMovements > 0)
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-                }
-            }
-            else
-            {
-                foreach (Material material in GetComponentInChildren<SkinnedMeshRenderer>().materials)
-                {
-                    material.EnableKeyword("_EMISSION");
-                    material.SetVector("_EmissionColor", playerVars.emissiveColor * offIntensity);
-                }
-            }
-        }
-    }
+    float timeJustFall = 0;
 
     private void OnEnable()
     {
@@ -79,15 +46,6 @@ public class PlayerMove : MonoBehaviour
     
     private void Start()
     {
-        //Set the starting emission color on playerVars
-        Material[] playerMaterials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
-        playerVars.emissiveColor = playerMaterials[0].GetColor("_EmissionColor");
-        foreach (Material mat in playerMaterials)
-        {
-            mat.EnableKeyword("_EMISSION");
-            mat.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
-        }
-
         transform.position = Managers.Tiles.start.transform.position + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
         Managers.Game.players.Add(gameObject);

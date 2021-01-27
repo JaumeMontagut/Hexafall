@@ -14,15 +14,13 @@ public class PlayerVars : MonoBehaviour
     [HideInInspector] public Color emissiveColor;
     [HideInInspector] public Vector3 offset;
 
-    public static Color [] colors = new Color[5] 
-                        { 
-                          Color.cyan, 
+    public static Color [] colors = {
                           Color.green, 
                           Color.magenta , 
                           Color.red,
-                          Color.blue,
+                          Color.blue
                          };
-    float intersity = 1F;
+    float intensity = 5F;
     public Color color;
 
     Material[] materials;
@@ -83,8 +81,10 @@ public class PlayerVars : MonoBehaviour
         Renderer renderer = gameObject.GetComponentInChildren<Renderer>();
         materials = renderer.materials;
 
-        materials[0].SetColor("_EmissionColor", color * intersity);
-        materials[1].SetColor("_EmissionColor", color * intersity);
+        materials[0].EnableKeyword("_EMISSION");
+        materials[0].SetColor("_EmissionColor", color * intensity);
+        materials[0].EnableKeyword("_EMISSION");
+        materials[1].SetColor("_EmissionColor", color * intensity);
       //  colorsTaken.Add(index);
     }
 
