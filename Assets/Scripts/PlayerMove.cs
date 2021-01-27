@@ -84,9 +84,13 @@ public class PlayerMove : MonoBehaviour
             mat.SetVector("_EmissionColor", playerVars.emissiveColor * onIntensity);
         }
 
-        transform.position = Managers.Tiles.start.transform.position;
+        transform.position = Managers.Tiles.start.transform.position + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
         Managers.Game.players.Add(gameObject);
+    }
+    public Vector3 ReturnOffset()
+    {
+        return new Vector3(Managers.Game.offsets[playerVars.identificator].x, 0, Managers.Game.offsets[playerVars.identificator].y);
     }
 
     void Update()
@@ -127,7 +131,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(move)
         {
-            Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position;
+            Vector3 moveVec = (nextPlatform.transform.position + playerVars.offset) - transform.position + ReturnOffset();
             transform.position += new Vector3(moveVec.normalized.x, 0, moveVec.normalized.z) * Time.deltaTime * moveSpeed;
 
             if (moveVec.sqrMagnitude <= 0.05 && doElasticAnimation)
@@ -153,7 +157,7 @@ public class PlayerMove : MonoBehaviour
 
             return;
         ///Move the player to the new hexagon.
-        transform.position = nextPlatform.transform.position;
+        transform.position = nextPlatform.transform.position + ReturnOffset();
         move = false;
         doElasticAnimation = true;
 
@@ -196,7 +200,7 @@ public class PlayerMove : MonoBehaviour
     public void Respawn()
     {
         //Move to the starting platform and assign it as the current platform.
-        transform.position = Managers.Tiles.start.transform.position + playerVars.offset;
+        transform.position = Managers.Tiles.start.transform.position + playerVars.offset + ReturnOffset();
         playerVars.currentPlatform = Managers.Tiles.start;
        
     }

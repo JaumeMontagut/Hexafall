@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ButtonMainMenu, ButtonPlayAgain;
     [SerializeField] private StateMachine stateMachine;
     [HideInInspector] public List<GameObject> players;
+    public Vector2[] offsets;
 
     #endregion
 
@@ -32,6 +33,11 @@ public class GameManager : MonoBehaviour
         {
             gameObject.AddComponent<DebugEnterRoom>();
         }
+        offsets = new Vector2[4];
+        offsets[0] = new Vector3(-0.15f, -0.15f);
+        offsets[1] = new Vector3(-0.15f, 0.15f);
+        offsets[2] = new Vector3(0.15f, -0.15f);
+        offsets[3] = new Vector3(0.15f, 0.15f);
     }
 
     private void Start()
