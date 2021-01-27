@@ -28,6 +28,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void EnablePlayersInput(bool enable)
+    {
+        photonView.RPC("EnablePlayerInput", RpcTarget.AllBuffered, enable);
+    }
+
+    [PunRPC]
+    private void EnablePlayerInput(bool enable)
+    {
+        Managers.Game.GetCurrentPlayer().GetComponent<PlayerMove>().enableInput = enable;
+    }
+
     [PunRPC]
     public void StartGameStateMachine()
     {

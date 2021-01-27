@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe06a63d398ffc4eb1fe9077d2744a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableInput: 0
   timeToFall: 1
   fallDistance: 2
   timeFalling: 0

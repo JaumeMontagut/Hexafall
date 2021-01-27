@@ -22,6 +22,9 @@ public class SelectPlatform : MonoBehaviour
         //      Desactivate this component when select a new Hexagon and move
         //Temporally to prevent in test to movve if its falling -> this will not be needed when turns manager is implemented.
 
+        if (!playerMove.enableInput)
+            return;
+
         if (photonView.IsMine
             && !playerVars.falling
             && !playerVars.moving

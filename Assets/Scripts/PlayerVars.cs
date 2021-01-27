@@ -68,7 +68,7 @@ public class PlayerVars : MonoBehaviour
     [PunRPC]
     public void ChangePlayerColor(int index)
     {
-        Debug.LogError("Changing colors " + index);
+        //Debug.LogError("Changing colors " + index);
         color = colors[index];
 
         Renderer renderer = gameObject.GetComponentInChildren<Renderer>();

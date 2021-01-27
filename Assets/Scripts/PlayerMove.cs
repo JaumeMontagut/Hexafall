@@ -8,6 +8,7 @@ using MyEvents;
 
 public class PlayerMove : MonoBehaviour
 {
+    public bool enableInput = false;
     public float timeToFall = 1.0f;
     public float fallDistance = 2.0f;
 
@@ -155,11 +156,13 @@ public class PlayerMove : MonoBehaviour
         transform.position = nextPlatform.transform.position;
         move = false;
         doElasticAnimation = true;
-        //transform.position = nextPlatform.transform.position;
-        playerVars.DesactivateMoving();
 
         //Update the currentHexagon of the player
         playerVars.currentPlatform = nextPlatform;
+
+        //transform.position = nextPlatform.transform.position;
+        playerVars.DesactivateMoving();
+
         
         //check if its path and if it's not, active the player falling.
         if (!nextPlatform.isPath)
